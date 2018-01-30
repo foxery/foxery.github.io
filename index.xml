@@ -12,32 +12,39 @@
     
     
     <item>
-      <title>Photography</title>
-      <link>https://foxery.github.io/projects/photography/</link>
+      <title>Life</title>
+      <link>https://foxery.github.io/projects/life/</link>
       <pubDate>Mon, 13 Nov 2017 12:21:21 -0500</pubDate>
       
-      <guid>https://foxery.github.io/projects/photography/</guid>
-      <description>Sometimes I take pictures. This project is about the pictures I take. Sometimes, they are pictures of cats.</description>
+      <guid>https://foxery.github.io/projects/life/</guid>
+      <description>生命原本是不断的受伤和不断的复原，世界仍然是一个温柔的等待我成熟的果园。</description>
     </item>
     
     <item>
-      <title>Design</title>
-      <link>https://foxery.github.io/projects/design/</link>
+      <title>Is</title>
+      <link>https://foxery.github.io/projects/is/</link>
       <pubDate>Mon, 13 Nov 2017 12:21:16 -0500</pubDate>
       
-      <guid>https://foxery.github.io/projects/design/</guid>
-      <description>This theme was designed by Vicky Lai. Go on, explore! 💪
-If you want to use it for your website, check out the section at the bottom of the main page. 👍</description>
+      <guid>https://foxery.github.io/projects/is/</guid>
+      <description>多少值得珍惜的痕迹都消逝在岁月里，消逝在风里和云里。</description>
     </item>
     
     <item>
-      <title>Writing</title>
-      <link>https://foxery.github.io/projects/writing/</link>
+      <title>Wonderful</title>
+      <link>https://foxery.github.io/projects/wonderful/</link>
       <pubDate>Mon, 13 Nov 2017 12:21:11 -0500</pubDate>
       
-      <guid>https://foxery.github.io/projects/writing/</guid>
-      <description>Aromatic aroma con panna, crema so coffee robust coffee barista, café au lait trifecta that strong blue mountain cortado aftertaste. Aroma extraction french press, skinny sweet, blue mountain cup roast barista, beans, extra cappuccino mug crema strong.
-To go viennese cream to go, flavour, so mocha as, carajillo iced et a siphon froth. Aged, eu, cup, brewed aroma kopi-luwak, coffee, id viennese french press brewed grounds acerbic froth. Decaffeinated acerbic, spoon beans seasonal, french press café au lait mazagran roast chicory, pumpkin spice galão as fair trade, dark irish cup ristretto half and half whipped shop.</description>
+      <guid>https://foxery.github.io/projects/wonderful/</guid>
+      <description>生命曾经灿放如花，如一季又复一季永不结束的盛夏。</description>
+    </item>
+    
+    <item>
+      <title>Test</title>
+      <link>https://foxery.github.io/blog/test/</link>
+      <pubDate>Tue, 30 Jan 2018 16:39:11 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/blog/test/</guid>
+      <description>这里是文章测试</description>
     </item>
     
     <item>
@@ -73,7 +80,7 @@ To go viennese cream to go, flavour, so mocha as, carajillo iced et a siphon fro
       <pubDate>Wed, 01 Nov 2017 12:04:16 -0500</pubDate>
       
       <guid>https://foxery.github.io/blog/coffee_ipsum/</guid>
-      <description>Aromatic aroma con panna, crema so coffee robust coffee barista, café au lait trifecta that strong blue mountain cortado aftertaste. Aroma extraction french press, skinny sweet, blue mountain cup roast barista, beans, extra cappuccino mug crema strong. Americano caffeine white, con panna saucer sit, con panna eu, carajillo aftertaste kopi-luwak, body aftertaste cup single origin café au lait saucer. Macchiato java sweet arabica, turkish cup, eu flavour mug extraction white cortado saucer est white brewed instant, rich, barista breve cappuccino barista organic.</description>
+      <description>aaAromatic aroma con panna, crema so coffee robust coffee barista, café au lait trifecta that strong blue mountain cortado aftertaste. Aroma extraction french press, skinny sweet, blue mountain cup roast barista, beans, extra cappuccino mug crema strong. Americano caffeine white, con panna saucer sit, con panna eu, carajillo aftertaste kopi-luwak, body aftertaste cup single origin café au lait saucer. Macchiato java sweet arabica, turkish cup, eu flavour mug extraction white cortado saucer est white brewed instant, rich, barista breve cappuccino barista organic.</description>
     </item>
     
     <item>
@@ -82,8 +89,9 @@ To go viennese cream to go, flavour, so mocha as, carajillo iced et a siphon fro
       <pubDate>Thu, 09 Mar 2017 13:23:28 +0800</pubDate>
       
       <guid>https://foxery.github.io/contact/</guid>
-      <description>In the Contact section of Introduction, you may optionally display the current time in your preferred timezone.
-This lets visitors know what sort of response time to expect when they contact you. The timezone is easily set in the config file.</description>
+      <description>我常揣想，当暮色已降，走过街角的你，会不会忽然停步，忽然之间把我想起。
+而在那拥挤的人群中，有谁会注意你突然阴情的面容有谁能知道你心中刹那的疼痛。
+啊，我亲爱的朋友，有谁能告诉你，我今日的歉疚和忧伤，距离那两个遥远的城市里，灯火一样辉煌。</description>
     </item>
     
     <item>
@@ -92,8 +100,8 @@ This lets visitors know what sort of response time to expect when they contact y
       <pubDate>Thu, 09 Mar 2017 13:19:25 +0800</pubDate>
       
       <guid>https://foxery.github.io/about/</guid>
-      <description> 这里不仅想记录一些工作笔记、技术分享,还会有一些生活感想。
-致辞  所有的结局都已写好 所有的泪水也都已启程 却忽然忘了是怎样的一个开始 在那个古老的不再回来的夏日 无论我如何地去追索 年轻的你只如云影掠过 而你微笑的面容极浅极淡 逐渐隐没在日落后的群岚 遂翻开那发黄的扉页 命运将它装订的极为拙劣 含着泪 我一读再读 却不得不承认 青春 是一本太仓促的书  </description>
+      <description>这里不仅想记录一些工作笔记、技术分享,还会有一些生活感想。
+ 所有的结局都已写好 所有的泪水也都已启程 却忽然忘了是怎样的一个开始 在那个古老的不再回来的夏日 无论我如何地去追索 年轻的你只如云影掠过 而你微笑的面容极浅极淡 逐渐隐没在日落后的群岚 遂翻开那发黄的扉页 命运将它装订的极为拙劣 含着泪 我一读再读 却不得不承认 青春 是一本太仓促的书  </description>
     </item>
     
   </channel>
