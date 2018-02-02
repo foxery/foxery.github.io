@@ -14,10 +14,10 @@
 <title>
 
 
-     Blogs 
+     Hugo博客的创建与运行 
 
 </title>
-<link rel="canonical" href="https://foxery.github.io/blog/">
+<link rel="canonical" href="https://foxery.github.io/blog/blog_run/">
 
 
 
@@ -59,8 +59,6 @@ crossorigin="anonymous"></script>
 
 
 
-  <link href="https://foxery.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Foxery&#39;s Blog" />
-
 
 </head>
 <body>
@@ -71,8 +69,8 @@ crossorigin="anonymous"></script>
     <h1 class="bold-title is-1">少年不知愁滋味。</h1>
     </div>
 
-    
-    <div class="section no-padding  fade-in two ">
+
+<div class="section  fade-in two ">
 
     <div class="container">
     <hr>
@@ -89,11 +87,9 @@ crossorigin="anonymous"></script>
       <span class="nav-item">
         <a href="https://foxery.github.io/#about">About</a> 
       </span>
-    
       <span class="nav-item">
-        <a href="https://foxery.github.io/#projects">Projects</a> 
-      </span>
-    
+        <a href="https://foxery.github.io/blog">Back to blog</a>
+      </span> 
       <span class="nav-item">
         <a href="https://foxery.github.io/#contact">Contact</a>
       </span>
@@ -106,53 +102,76 @@ crossorigin="anonymous"></script>
 </nav>
 <hr>
     </div>
-       
-    <div class="container">
 
-    
-    <h2 class="title is-2 top-pad">Latest Post</h2>
-         
-        <div class="summary">2018/1/30
-            <h3 class="title is-3 strong-post-title"><a href="https://foxery.github.io/blog/blog_run/">Hugo博客的创建与运行</a></h3>
-                <div class="markdown">
-                一、安装  下载地址 去高级系统配置里将运行文件加入环境变量 官方QuickStart  二、创建 1.创建项目 $ hugo new site your_project_name
-2.选择主题 $ cd your_project_name
-$ git init
-$ git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
-# Edit your config.toml configuration file
-# and add the Ananke theme.
-$ echo 'theme = &quot;ananke&quot;' &gt;&gt; config.toml
- 可以从这里选择你想要的主题
-然后 :
-$ cd themes
-$ git clone your_themes_url your_themes_name
- 按照exampleSite里的config.toml进行修改
-  三、运行 $ hugo server -D
-四、创建文章 $ hugo new blog/your-project-name.
-                
-                <a href="https://foxery.github.io/blog/blog_run/">...Read More</a>
-                
-                </div>
-        </div>
-        
-    
+    <div class="container  fade-in two ">
+        <h2 class="title is-1 top-pad strong-post-title"><a href="https://foxery.github.io/blog/blog_run/">Hugo博客的创建与运行</a></h2>
+            <div class="post-data">
+                2018/1/30 |
+                1 minute read
+            </div>
 
-    <h2 class="title is-2 top-pad">All Posts</h2>
-        <ul>
-        
             
-                <li class="post-item">
-    <span><a href="https://foxery.github.io/blog/blog_run/">Hugo博客的创建与运行</a></span> - <span>2018/1/30</span>
-</li>
-            
-        
-        </ul>
 
+    </div>
+
+    <div class="container markdown  fade-in two  top-pad">
+        
+
+<h3 id="一-安装">一、安装</h3>
+
+<ul>
+<li><a href="https://github.com/gohugoio/hugo/releases">下载地址</a></li>
+<li>去高级系统配置里将运行文件加入环境变量</li>
+<li><a href="http://gohugo.io/getting-started/quick-start/">官方QuickStart</a></li>
+</ul>
+
+<h3 id="二-创建">二、创建</h3>
+
+<h4 id="1-创建项目">1.创建项目</h4>
+
+<p><code>$ hugo new site your_project_name</code></p>
+
+<h4 id="2-选择主题">2.选择主题</h4>
+
+<p><code>$ cd your_project_name</code><br />
+<code>$ git init</code><br />
+<code>$ git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke</code><br />
+<code># Edit your config.toml configuration file</code><br />
+<code># and add the Ananke theme.</code><br />
+<code>$ echo 'theme = &quot;ananke&quot;' &gt;&gt; config.toml</code></p>
+
+<ul>
+<li>可以从<a href="https://themes.gohugo.io/">这里</a>选择你想要的主题<br />
+然后 :<br />
+<code>$ cd themes</code><br />
+<code>$ git clone your_themes_url your_themes_name</code><br /></li>
+<li>按照exampleSite里的config.toml进行修改<br /></li>
+</ul>
+
+<h3 id="三-运行">三、运行</h3>
+
+<p><code>$ hugo server -D</code></p>
+
+<h3 id="四-创建文章">四、创建文章</h3>
+
+<p><code>$ hugo new blog/your-project-name.md</code></p>
+
+<h3 id="五-部署">五、部署</h3>
+
+<p><code>$ cd your_project_name</code><br />
+ <code>$ hugo</code></p>
+
+<p>然后会生成一个静态文件夹public,将此文件发布出去即可。</p>
+
+    </div>
+
+    <div class="disqus">
+        
     </div>
 
 <div class="container has-text-centered top-pad">
 <hr>
-<a href="https://foxery.github.io/blog/#top"><i class="fa fa-arrow-up"></i></a>
+<a href="https://foxery.github.io/blog/blog_run/#top"><i class="fa fa-arrow-up"></i></a>
 <hr>
 </div>
 
@@ -169,7 +188,7 @@ $ git clone your_themes_url your_themes_name
 
 
 <script>
-$('a[href^="https:\/\/foxery.github.io\/blog\/#"]').click(function(e) {
+$('a[href^="https:\/\/foxery.github.io\/blog\/blog_run\/#"]').click(function(e) {
     e.preventDefault();
     var target = this.hash;
     $('html, body').animate({

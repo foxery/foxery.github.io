@@ -18,28 +18,8 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/blog/test/</loc>
-    <lastmod>2018-01-30T16:39:11+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/blog/hipster-ipsum/</loc>
-    <lastmod>2017-11-13T11:58:39-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/blog/startup-ipsum/</loc>
-    <lastmod>2017-11-06T12:04:06-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/blog/coffee-ipsum/</loc>
-    <lastmod>2017-11-01T12:04:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/blog/coffee_ipsum/</loc>
-    <lastmod>2017-11-01T12:04:16-05:00</lastmod>
+    <loc>https://foxery.github.io/blog/blog_run/</loc>
+    <lastmod>2018-01-30T17:00:01+08:00</lastmod>
   </url>
   
   <url>
@@ -54,7 +34,7 @@
   
   <url>
     <loc>https://foxery.github.io/blog/</loc>
-    <lastmod>2018-01-30T16:39:11+08:00</lastmod>
+    <lastmod>2018-01-30T17:00:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -64,32 +44,8 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/tags/code/</loc>
-    <lastmod>2017-11-06T12:04:06-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/tags/coffee/</loc>
-    <lastmod>2017-11-01T12:04:16-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://foxery.github.io/</loc>
     <lastmod>2017-11-13T12:21:21-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/tags/images/</loc>
-    <lastmod>2017-11-01T12:04:16-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/tags/ipsum/</loc>
-    <lastmod>2017-11-13T11:58:39-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -101,13 +57,6 @@
   
   <url>
     <loc>https://foxery.github.io/tags/</loc>
-    <lastmod>2017-11-06T12:04:06-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/tags/words/</loc>
-    <lastmod>2017-11-13T11:58:39-05:00</lastmod>
     <priority>0</priority>
   </url>
   
