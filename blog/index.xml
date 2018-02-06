@@ -6,10 +6,21 @@
     <description>Recent content in Blogs on Foxery&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Feb 2018 14:52:26 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 06 Feb 2018 15:59:14 +0800</lastBuildDate>
     
 	<atom:link href="https://foxery.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>记录vue的踩坑之路以及经验分享</title>
+      <link>https://foxery.github.io/blog/vue_ache/</link>
+      <pubDate>Tue, 06 Feb 2018 15:59:14 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/blog/vue_ache/</guid>
+      <description>坑  路由去掉默认的# javascript export default new Router({ mode: &#39;history&#39;,//去掉路由中默认的#/ routes: [ { path: &#39;/&#39;, name: &#39;HelloWorld&#39;, component: HelloWorld } ] });  组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分
+&amp;lt;template&amp;gt; &amp;lt;div v-for=&amp;quot;item in items&amp;quot; :key=&amp;quot;item.Id+&#39;aabbcc&#39;&amp;quot;&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt;  组件 简易下拉列表 ``` javascript   {{selected.Name}} {{item.Name}}    
+   export default { name: &#34;&#34;, data() { return { isActive: false, selected: { Id: 0, Name: this.items[0].Name } }; }, props: { items: { type: Array, required: true } }, methods: { SetActive: function(event) { this.</description>
+    </item>
     
     <item>
       <title>搭建vue脚手架</title>

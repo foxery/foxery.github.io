@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="飞絮飞花何处是，层冰积雪摧残，疏疏一树五更寒。爱他明月好，憔悴也相关。最是繁丝摇落后，转教人忆春山。湔裙梦断续应难。西风多少恨，吹不散眉弯。">
+
+<base href="https://foxery.github.io">
+<title>
+
+
+     记录vue的踩坑之路以及经验分享 
+
+</title>
+<link rel="canonical" href="https://foxery.github.io/blog/vue_ache/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script
+src="https://code.jquery.com/jquery-3.2.1.min.js"
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
+
+
+
+    <link rel="stylesheet" href="css/light-style.css">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="img/fav.ico"
+
+>
+
+
+
+
+
+
+
+</head>
+<body>
+
+<div class="section" id="top">
+
+    <div class="container hero ">
+    <h1 class="bold-title is-1">少年不知愁滋味。</h1>
+    </div>
+
+
+<div class="section ">
+
+    <div class="container">
+    <hr>
+<nav class="nav nav-center">
+    <span id="nav-toggle" class="nav-toggle"  onclick="document.getElementById('nav-menu').classList.toggle('is-active');">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <div id="nav-menu" class="nav-left nav-menu">
+      <span class="nav-item">
+        <a href="https://foxery.github.io/">Main</a>
+      </span>
+      <span class="nav-item">
+        <a href="https://foxery.github.io/#about">About</a> 
+      </span>
+      <span class="nav-item">
+        <a href="https://foxery.github.io/blog">Back to blog</a>
+      </span> 
+      <span class="nav-item">
+        <a href="https://foxery.github.io/#contact">Contact</a>
+      </span>
+    
+      <span class="nav-item">
+        <a href="https://foxery.github.io/index.xml"><i class="fa fa-rss"></i></a>
+      </span>
+    
+    </div>
+</nav>
+<hr>
+    </div>
+
+    <div class="container ">
+        <h2 class="title is-1 top-pad strong-post-title"><a href="https://foxery.github.io/blog/vue_ache/">记录vue的踩坑之路以及经验分享</a></h2>
+            <div class="post-data">
+                2018/2/6 |
+                2 minutes read
+            </div>
+
+            
+
+    </div>
+
+    <div class="container markdown  top-pad">
+        
+
+<h3 id="坑">坑</h3>
+
+<ol>
+<li>路由去掉默认的#
+<code>javascript
+export default new Router({
+mode: 'history',//去掉路由中默认的#/
+routes: [
+{
+  path: '/',
+  name: 'HelloWorld',
+  component: HelloWorld
+}
+]
+});
+</code></li>
+
+<li><p>组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分</p>
+
+<pre><code class="language-javascript">&lt;template&gt;
+&lt;div v-for=&quot;item in items&quot; :key=&quot;item.Id+'aabbcc'&quot;&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+
+<h3 id="组件">组件</h3></li>
+
+<li><p>简易下拉列表
+``` javascript
+<template>
+<div>
+  <div class="dropdown-wrapper">
+    <div class="dropdown-selected" :class="{ show: isActive }" @click="SetActive">{{selected.Name}}</div>
+    <ul class="dropdown-list">
+        <li v-for="item in items" @click="SelectLi(item.Name)" :key="item.Id">{{item.Name}}</li>
+    </ul>
+  </div>
+</div>
+</template></p></li>
+</ol>
+
+<script>
+export default {
+  name: "",
+  data() {
+    return {
+      isActive: false,
+      selected: {
+        Id: 0,
+        Name: this.items[0].Name
+      }
+    };
+  },
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  },
+  methods: {
+    SetActive: function(event) {
+      this.isActive = !this.isActive;
+    },
+    SelectLi: function(val) {
+      this.selected.Name = val;
+      this.SetActive();
+    }
+  },
+  mounted:function(){
+    document.addEventListener('click', (e) => {
+      // $el在created时还不能用
+      console.log(this.$el);
+       if (!this.$el.contains(e.target)){
+         this.isActive = false
+       } 
+   })
+  }
+};
+</script>
+
+<p><style lang="scss" scoped>
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.dropdown-selected {
+  height: 36px;
+  line-height: 34px;
+  width: 120px;
+  border: 1px solid #afafaf;
+  padding-left: 10px;
+  &amp;.show {
+    ~ .dropdown-list {
+      display: block;
+    }
+  }
+}
+.dropdown-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 1;
+  border: 1px solid #afafaf;
+  display: none;
+  &gt; li {
+    height: 36px;
+    line-height: 36px;
+    padding-left: 10px;
+  }
+}
+</style></p>
+
+<pre><code>
+2. 注册全局引用组件方法  
+ 1). 引入组件
+ `import Component from '' `  
+ 2).导出方法
+ ``` javascript
+ const Toast = {};
+
+// 注册Toast
+Toast.install = function (Vue) {
+    // 生成一个Vue的子类
+    // 同时这个子类也就是组件
+    const ToastConstructor = Vue.extend(Component)
+    // 生成一个该子类的实例
+    const instance = new ToastConstructor();
+
+    // 将这个实例挂载在新创建的div上
+    // 并将此div加入全局挂载点内部
+    instance.$mount(document.createElement('div'))
+    document.body.appendChild(instance.$el)
+
+    // 通过Vue的原型注册一个方法
+    // 让所有实例共享这个方法 
+    Vue.prototype.$toast = (msg, duration = 1500) =&gt; {
+        instance.message = msg;
+        instance.visible = true;
+
+        setTimeout(() =&gt; {
+            instance.visible = false;
+        }, duration);
+    }
+}
+
+export default Toast
+</code></pre>
+
+<p>3).在组件内无需import,直接<code>this.$toast(&quot;&quot;)</code>即可</p>
+
+<h3 id="记录">记录</h3>
+
+<ol>
+<li>http请求
+``` javascript
+import axios from &lsquo;axios&rsquo;
+import qs from &lsquo;qs&rsquo;</li>
+</ol>
+
+<p>export class HttpService {</p>
+
+<pre><code>Get(url, data) {
+    return new Promise((resolve, reject) =&gt; {
+        axios.get(url, {
+            params: data
+        }).then((res) =&gt; {
+            if (res) {
+                if (res.Code == 0) {
+                    resolve(res.Data);
+                } else {
+                    reject(res.Message);
+                }
+            }
+        }).catch((error) =&gt; {
+            reject(error);
+        })
+    })
+}
+Post(url, data) {
+    return new Promise((resolve, reject) =&gt; {
+        axios.post(url, qs.stringify(data), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            }
+        }).then((res) =&gt; {
+            if (res) {
+                if (res.Code == 0) {
+                    resolve(res.Data);
+                } else {
+                    reject(res.Message);
+                }
+            }
+        }).catch((error) =&gt; {
+            reject(error);
+        })
+    })
+}
+PostFlie(url, data) {
+    return new Promise((resolve, reject) =&gt; {
+        //根据data对象生成FormData对象
+        var temp = new FormData();
+        for (var t in data) {
+            temp.append(t, data[t]);
+        }
+        axios.post(url, temp).then((res) =&gt; {
+            if (res) {
+                if (res.Code == 0) {
+                    resolve(res.Data);
+                } else {
+                    reject(res.Message);
+                }
+            }
+        }).catch((error) =&gt; {
+            reject(error);
+        })
+    })
+}
+</code></pre>
+
+<p>}</p>
+
+<pre><code>在service层只要引用相对路径就行,注意prototype
+``` javascript
+import { HttpService } from ''
+
+export class Service {
+    
+    Interface(data) {
+        return HttpService.prototype.Get('/url', data);
+    }
+}
+</code></pre>
+
+<p>组件内引用同样只需要相对路径,注意prototype,注意引用名字要与类名相同</p>
+
+<pre><code class="language-javascript">import { Service } from &quot;&quot;;
+
+Service.prototype.Interface(data).then(res =&gt; {});
+</code></pre>
+
+    </div>
+
+    <div class="disqus">
+        
+    </div>
+
+<div class="container has-text-centered top-pad">
+<hr>
+<a href="https://foxery.github.io/blog/vue_ache/#top"><i class="fa fa-arrow-up"></i></a>
+<hr>
+</div>
+
+<div class="section" id="footer">
+    <div class="container has-text-centered">
+        
+            爱他明月好，憔悴也相关。
+        
+    </div>
+</div>
+
+</div>
+</div>
+
+
+<script>
+$('a[href^="https:\/\/foxery.github.io\/blog\/vue_ache\/#"]').click(function(e) {
+    e.preventDefault();
+    var target = this.hash;
+    $('html, body').animate({
+    scrollTop: $(target).offset().top
+    }, 500);
+    return false;
+})
+</script>
+
+</body>
