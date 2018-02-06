@@ -14,10 +14,10 @@
 <title>
 
 
-     Blogs 
+     搭建vue脚手架 
 
 </title>
-<link rel="canonical" href="https://foxery.github.io/blog/">
+<link rel="canonical" href="https://foxery.github.io/blog/vue-cli/">
 
 
 
@@ -59,8 +59,6 @@ crossorigin="anonymous"></script>
 
 
 
-  <link href="https://foxery.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="Foxery&#39;s Blog" />
-
 
 </head>
 <body>
@@ -71,8 +69,8 @@ crossorigin="anonymous"></script>
     <h1 class="bold-title is-1">少年不知愁滋味。</h1>
     </div>
 
-    
-    <div class="section no-padding ">
+
+<div class="section ">
 
     <div class="container">
     <hr>
@@ -89,11 +87,9 @@ crossorigin="anonymous"></script>
       <span class="nav-item">
         <a href="https://foxery.github.io/#about">About</a> 
       </span>
-    
       <span class="nav-item">
-        <a href="https://foxery.github.io/#projects">Projects</a> 
-      </span>
-    
+        <a href="https://foxery.github.io/blog">Back to blog</a>
+      </span> 
       <span class="nav-item">
         <a href="https://foxery.github.io/#contact">Contact</a>
       </span>
@@ -106,53 +102,65 @@ crossorigin="anonymous"></script>
 </nav>
 <hr>
     </div>
-       
-    <div class="container">
 
-    
-    <h2 class="title is-2 top-pad">Latest Post</h2>
-         
-        <div class="summary">2018/2/6
-            <h3 class="title is-3 strong-post-title"><a href="https://foxery.github.io/blog/vue-cli/">搭建vue脚手架</a></h3>
-                <div class="markdown">
-                 一、环境搭建 1.下载 git 2.安装node.js 从官网下载
-3.安装淘宝镜像 打开命令行工具 npm install -g cnpm --registry= https://registry.npm.taobao.org
-4.安装webpack 打开命令行工具 npm install webpack -g
-5.安装vue-cli脚手架构建工具 打开命令行工具 npm install vue-cli -g
-二、构建项目  vue init webpack your_project_name
- cd your_project_name
- cnpm install
-因为自动构建过程中已存在package.json文件，所以这里直接安装依赖就行 cnpm install vue-router vue-resource --save
-安装 vue 路由模块 vue-router 和网络请求模块 vue-resource npm run dev
-启动项目  
-                
-                </div>
-        </div>
-        
-    
+    <div class="container ">
+        <h2 class="title is-1 top-pad strong-post-title"><a href="https://foxery.github.io/blog/vue-cli/">搭建vue脚手架</a></h2>
+            <div class="post-data">
+                2018/2/6 |
+                1 minute read
+            </div>
 
-    <h2 class="title is-2 top-pad">All Posts</h2>
-        <ul>
-        
             
-                <li class="post-item">
-    <span><a href="https://foxery.github.io/blog/blog_run/">Hugo博客的创建与运行</a></span> - <span>2018/1/30</span>
-</li>
-            
-        
-            
-                <li class="post-item">
-    <span><a href="https://foxery.github.io/blog/vue-cli/">搭建vue脚手架</a></span> - <span>2018/2/6</span>
-</li>
-            
-        
-        </ul>
 
+    </div>
+
+    <div class="container markdown  top-pad">
+        
+
+<h3 id="一-环境搭建">一、环境搭建</h3>
+
+<h4 id="1-下载-git-https-git-scm-com-downloads">1.下载 <a href="https://git-scm.com/downloads">git</a></h4>
+
+<h4 id="2-安装node-js">2.安装node.js</h4>
+
+<p>从<a href="https://nodejs.org/en/download/">官网</a>下载</p>
+
+<h4 id="3-安装淘宝镜像">3.安装淘宝镜像</h4>
+
+<p>打开命令行工具
+<code>npm install -g cnpm --registry= https://registry.npm.taobao.org</code></p>
+
+<h4 id="4-安装webpack">4.安装webpack</h4>
+
+<p>打开命令行工具 <code>npm install webpack -g</code></p>
+
+<h4 id="5-安装vue-cli脚手架构建工具">5.安装vue-cli脚手架构建工具</h4>
+
+<p>打开命令行工具 <code>npm install vue-cli -g</code></p>
+
+<h3 id="二-构建项目">二、构建项目</h3>
+
+<ol>
+<li><code>vue init webpack your_project_name</code><br />
+<img src="../../static/img/vue-cli.png" alt="" /><br /></li>
+<li><code>cd your_project_name</code><br /></li>
+<li><code>cnpm install</code><br />
+因为自动构建过程中已存在package.json文件，所以这里直接安装依赖就行</li>
+<li><code>cnpm install vue-router vue-resource --save</code><br />
+安装 vue 路由模块 vue-router 和网络请求模块 vue-resource</li>
+<li><code>npm run dev</code><br />
+启动项目</li>
+</ol>
+
+    </div>
+
+    <div class="disqus">
+        
     </div>
 
 <div class="container has-text-centered top-pad">
 <hr>
-<a href="https://foxery.github.io/blog/#top"><i class="fa fa-arrow-up"></i></a>
+<a href="https://foxery.github.io/blog/vue-cli/#top"><i class="fa fa-arrow-up"></i></a>
 <hr>
 </div>
 
@@ -169,7 +177,7 @@ crossorigin="anonymous"></script>
 
 
 <script>
-$('a[href^="https:\/\/foxery.github.io\/blog\/#"]').click(function(e) {
+$('a[href^="https:\/\/foxery.github.io\/blog\/vue-cli\/#"]').click(function(e) {
     e.preventDefault();
     var target = this.hash;
     $('html, body').animate({
