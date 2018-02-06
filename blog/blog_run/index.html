@@ -65,12 +65,12 @@ crossorigin="anonymous"></script>
 
 <div class="section" id="top">
 
-    <div class="container hero  fade-in one ">
+    <div class="container hero ">
     <h1 class="bold-title is-1">少年不知愁滋味。</h1>
     </div>
 
 
-<div class="section  fade-in two ">
+<div class="section ">
 
     <div class="container">
     <hr>
@@ -103,7 +103,7 @@ crossorigin="anonymous"></script>
 <hr>
     </div>
 
-    <div class="container  fade-in two ">
+    <div class="container ">
         <h2 class="title is-1 top-pad strong-post-title"><a href="https://foxery.github.io/blog/blog_run/">Hugo博客的创建与运行</a></h2>
             <div class="post-data">
                 2018/1/30 |
@@ -114,7 +114,7 @@ crossorigin="anonymous"></script>
 
     </div>
 
-    <div class="container markdown  fade-in two  top-pad">
+    <div class="container markdown  top-pad">
         
 
 <h3 id="一-安装">一、安装</h3>
@@ -122,6 +122,7 @@ crossorigin="anonymous"></script>
 <ul>
 <li><a href="https://github.com/gohugoio/hugo/releases">下载地址</a></li>
 <li>去高级系统配置里将运行文件加入环境变量</li>
+<li><code>$ hugo.exe version</code></li>
 <li><a href="http://gohugo.io/getting-started/quick-start/">官方QuickStart</a></li>
 </ul>
 
@@ -133,12 +134,13 @@ crossorigin="anonymous"></script>
 
 <h4 id="2-选择主题">2.选择主题</h4>
 
-<p><code>$ cd your_project_name</code><br />
-<code>$ git init</code><br />
-<code>$ git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke</code><br />
-<code># Edit your config.toml configuration file</code><br />
-<code># and add the Ananke theme.</code><br />
-<code>$ echo 'theme = &quot;ananke&quot;' &gt;&gt; config.toml</code></p>
+<pre><code class="language-javascript">$ cd your_project_name
+$ git init  
+$ git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke  
+# Edit your config.toml configuration file  
+# and add the Ananke theme.  
+$ echo 'theme = &quot;ananke&quot;' &gt;&gt; config.toml`
+</code></pre>
 
 <ul>
 <li>可以从<a href="https://themes.gohugo.io/">这里</a>选择你想要的主题<br />
