@@ -367,9 +367,10 @@ crossorigin="anonymous"></script>
     <div class="summary">2018/2/6
         <h3 class="title is-3 latest-post-title"><a href="https://foxery.github.io/blog/vue_ache/">记录vue的踩坑之路以及经验分享</a></h3>
             <div class="markdown">
-            坑  路由去掉默认的# javascript export default new Router({ mode: 'history',//去掉路由中默认的#/ routes: [ { path: '/', name: 'HelloWorld', component: HelloWorld } ] });  组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分
-&lt;template&gt; &lt;div v-for=&quot;item in items&quot; :key=&quot;item.Id+'aabbcc'&quot;&gt; &lt;/div&gt; &lt;/template&gt;  组件 简易下拉列表 ``` javascript   {{selected.Name}} {{item.Name}}    
-   export default { name: "", data() { return { isActive: false, selected: { Id: 0, Name: this.items[0].Name } }; }, props: { items: { type: Array, required: true } }, methods: { SetActive: function(event) { this.
+            坑  路由去掉默认的#
+javascript export default new Router({ mode: 'history',//去掉路由中默认的#/ routes: [ { path: '/', name: 'HelloWorld', component: HelloWorld } ] });  组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分 javascript &lt;template&gt; &lt;div v-for=&quot;item in items&quot; :key=&quot;item.Id+'aabbcc'&quot;&gt; &lt;/div&gt; &lt;/template&gt; 
+  组件  简易下拉列表
+  &lt;template&gt; &lt;div&gt; &lt;div class=&quot;dropdown-wrapper&quot;&gt; &lt;div class=&quot;dropdown-selected&quot; :class=&quot;{ show: isActive }&quot; @click=&quot;SetActive&quot;&gt;{{selected.Name}}&lt;/div&gt; &lt;ul class=&quot;dropdown-list&quot;&gt; &lt;li v-for=&quot;item in items&quot; @click=&quot;SelectLi(item.Name)&quot; :key=&quot;item.Id&quot;&gt;{{item.Name}}&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;/div&gt; &lt;/template&gt; &lt;script&gt; export default { name: &quot;&quot;, data() { return { isActive: false, selected: { Id: 0, Name: this.
             
             <a href="https://foxery.github.io/blog/vue_ache/">...Read More</a>
             

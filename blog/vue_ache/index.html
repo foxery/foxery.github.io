@@ -107,7 +107,7 @@ crossorigin="anonymous"></script>
         <h2 class="title is-1 top-pad strong-post-title"><a href="https://foxery.github.io/blog/vue_ache/">记录vue的踩坑之路以及经验分享</a></h2>
             <div class="post-data">
                 2018/2/6 |
-                2 minutes read
+                3 minutes read
             </div>
 
             
@@ -120,8 +120,8 @@ crossorigin="anonymous"></script>
 <h3 id="坑">坑</h3>
 
 <ol>
-<li>路由去掉默认的#
-<code>javascript
+<li>路由去掉默认的#<br />
+<code>javascript  
 export default new Router({
 mode: 'history',//去掉路由中默认的#/
 routes: [
@@ -133,34 +133,35 @@ routes: [
 ]
 });
 </code></li>
-
-<li><p>组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分</p>
-
-<pre><code class="language-javascript">&lt;template&gt;
+<li>组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分
+<code>javascript
+&lt;template&gt;
 &lt;div v-for=&quot;item in items&quot; :key=&quot;item.Id+'aabbcc'&quot;&gt;
 &lt;/div&gt;
 &lt;/template&gt;
-</code></pre>
-
-<h3 id="组件">组件</h3></li>
-
-<li><p>简易下拉列表
-``` javascript
-<template>
-<div>
-  <div class="dropdown-wrapper">
-    <div class="dropdown-selected" :class="{ show: isActive }" @click="SetActive">{{selected.Name}}</div>
-    <ul class="dropdown-list">
-        <li v-for="item in items" @click="SelectLi(item.Name)" :key="item.Id">{{item.Name}}</li>
-    </ul>
-  </div>
-</div>
-</template></p></li>
+</code><br /></li>
 </ol>
 
-<script>
+<h3 id="组件">组件</h3>
+
+<ol>
+<li>简易下拉列表<br /></li>
+</ol>
+
+<pre><code class="language-javascript">&lt;template&gt;
+  &lt;div&gt;
+      &lt;div class=&quot;dropdown-wrapper&quot;&gt;
+        &lt;div class=&quot;dropdown-selected&quot; :class=&quot;{ show: isActive }&quot; @click=&quot;SetActive&quot;&gt;{{selected.Name}}&lt;/div&gt;
+        &lt;ul class=&quot;dropdown-list&quot;&gt;
+            &lt;li v-for=&quot;item in items&quot; @click=&quot;SelectLi(item.Name)&quot; :key=&quot;item.Id&quot;&gt;{{item.Name}}&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
 export default {
-  name: "",
+  name: &quot;&quot;,
   data() {
     return {
       isActive: false,
@@ -186,7 +187,7 @@ export default {
     }
   },
   mounted:function(){
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) =&gt; {
       // $el在created时还不能用
       console.log(this.$el);
        if (!this.$el.contains(e.target)){
@@ -195,9 +196,9 @@ export default {
    })
   }
 };
-</script>
+&lt;/script&gt;
 
-<p><style lang="scss" scoped>
+&lt;style lang=&quot;scss&quot; scoped&gt;
 .dropdown-wrapper {
   position: relative;
   display: inline-block;
@@ -231,121 +232,120 @@ export default {
     padding-left: 10px;
   }
 }
-</style></p>
+&lt;/style&gt;
+</code></pre>
 
-<pre><code>
-2. 注册全局引用组件方法  
- 1). 引入组件
- `import Component from '' `  
- 2).导出方法
- ``` javascript
- const Toast = {};
+<ol>
+<li>注册全局引用组件方法<br />
+1). 引入组件
+<code>import Component from ''</code><br />
+2).导出方法<br />
+``` javascript<br />
+const Toast = {};</li>
+</ol>
 
-// 注册Toast
+<p>// 注册Toast
 Toast.install = function (Vue) {
     // 生成一个Vue的子类
     // 同时这个子类也就是组件
     const ToastConstructor = Vue.extend(Component)
     // 生成一个该子类的实例
-    const instance = new ToastConstructor();
+    const instance = new ToastConstructor();</p>
 
-    // 将这个实例挂载在新创建的div上
-    // 并将此div加入全局挂载点内部
-    instance.$mount(document.createElement('div'))
-    document.body.appendChild(instance.$el)
+<pre><code>// 将这个实例挂载在新创建的div上
+// 并将此div加入全局挂载点内部
+instance.$mount(document.createElement('div'))
+document.body.appendChild(instance.$el)
 
-    // 通过Vue的原型注册一个方法
-    // 让所有实例共享这个方法 
-    Vue.prototype.$toast = (msg, duration = 1500) =&gt; {
-        instance.message = msg;
-        instance.visible = true;
+// 通过Vue的原型注册一个方法
+// 让所有实例共享这个方法 
+Vue.prototype.$toast = (msg, duration = 1500) =&gt; {
+    instance.message = msg;
+    instance.visible = true;
 
-        setTimeout(() =&gt; {
-            instance.visible = false;
-        }, duration);
-    }
-}
-
-export default Toast
-</code></pre>
-
-<p>3).在组件内无需import,直接<code>this.$toast(&quot;&quot;)</code>即可</p>
-
-<h3 id="记录">记录</h3>
-
-<ol>
-<li>http请求
-``` javascript
-import axios from &lsquo;axios&rsquo;
-import qs from &lsquo;qs&rsquo;</li>
-</ol>
-
-<p>export class HttpService {</p>
-
-<pre><code>Get(url, data) {
-    return new Promise((resolve, reject) =&gt; {
-        axios.get(url, {
-            params: data
-        }).then((res) =&gt; {
-            if (res) {
-                if (res.Code == 0) {
-                    resolve(res.Data);
-                } else {
-                    reject(res.Message);
-                }
-            }
-        }).catch((error) =&gt; {
-            reject(error);
-        })
-    })
-}
-Post(url, data) {
-    return new Promise((resolve, reject) =&gt; {
-        axios.post(url, qs.stringify(data), {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json'
-            }
-        }).then((res) =&gt; {
-            if (res) {
-                if (res.Code == 0) {
-                    resolve(res.Data);
-                } else {
-                    reject(res.Message);
-                }
-            }
-        }).catch((error) =&gt; {
-            reject(error);
-        })
-    })
-}
-PostFlie(url, data) {
-    return new Promise((resolve, reject) =&gt; {
-        //根据data对象生成FormData对象
-        var temp = new FormData();
-        for (var t in data) {
-            temp.append(t, data[t]);
-        }
-        axios.post(url, temp).then((res) =&gt; {
-            if (res) {
-                if (res.Code == 0) {
-                    resolve(res.Data);
-                } else {
-                    reject(res.Message);
-                }
-            }
-        }).catch((error) =&gt; {
-            reject(error);
-        })
-    })
+    setTimeout(() =&gt; {
+        instance.visible = false;
+    }, duration);
 }
 </code></pre>
 
 <p>}</p>
 
-<pre><code>在service层只要引用相对路径就行,注意prototype
-``` javascript
-import { HttpService } from ''
+<p>export default Toast</p>
+
+<pre><code>  3).在组件内无需import,直接`this.$toast(&quot;&quot;)`即可
+
+### 记录
+1. http请求  
+``` javascript  
+import axios from 'axios'
+import qs from 'qs'
+
+export class HttpService {
+
+    Get(url, data) {
+        return new Promise((resolve, reject) =&gt; {
+            axios.get(url, {
+                params: data
+            }).then((res) =&gt; {
+                if (res) {
+                    if (res.Code == 0) {
+                        resolve(res.Data);
+                    } else {
+                        reject(res.Message);
+                    }
+                }
+            }).catch((error) =&gt; {
+                reject(error);
+            })
+        })
+    }
+    Post(url, data) {
+        return new Promise((resolve, reject) =&gt; {
+            axios.post(url, qs.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                }
+            }).then((res) =&gt; {
+                if (res) {
+                    if (res.Code == 0) {
+                        resolve(res.Data);
+                    } else {
+                        reject(res.Message);
+                    }
+                }
+            }).catch((error) =&gt; {
+                reject(error);
+            })
+        })
+    }
+    PostFlie(url, data) {
+        return new Promise((resolve, reject) =&gt; {
+            //根据data对象生成FormData对象
+            var temp = new FormData();
+            for (var t in data) {
+                temp.append(t, data[t]);
+            }
+            axios.post(url, temp).then((res) =&gt; {
+                if (res) {
+                    if (res.Code == 0) {
+                        resolve(res.Data);
+                    } else {
+                        reject(res.Message);
+                    }
+                }
+            }).catch((error) =&gt; {
+                reject(error);
+            })
+        })
+    }
+}
+</code></pre>
+
+<p>在service层只要引用相对路径就行,注意prototype</p>
+
+<pre><code class="language-javascript">import { HttpService } from ''
 
 export class Service {
     

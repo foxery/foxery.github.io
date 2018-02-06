@@ -44,9 +44,10 @@
       <pubDate>Tue, 06 Feb 2018 15:59:14 +0800</pubDate>
       
       <guid>https://foxery.github.io/blog/vue_ache/</guid>
-      <description>坑  路由去掉默认的# javascript export default new Router({ mode: &#39;history&#39;,//去掉路由中默认的#/ routes: [ { path: &#39;/&#39;, name: &#39;HelloWorld&#39;, component: HelloWorld } ] });  组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分
-&amp;lt;template&amp;gt; &amp;lt;div v-for=&amp;quot;item in items&amp;quot; :key=&amp;quot;item.Id+&#39;aabbcc&#39;&amp;quot;&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt;  组件 简易下拉列表 ``` javascript   {{selected.Name}} {{item.Name}}    
-   export default { name: &#34;&#34;, data() { return { isActive: false, selected: { Id: 0, Name: this.items[0].Name } }; }, props: { items: { type: Array, required: true } }, methods: { SetActive: function(event) { this.</description>
+      <description>坑  路由去掉默认的#
+javascript export default new Router({ mode: &#39;history&#39;,//去掉路由中默认的#/ routes: [ { path: &#39;/&#39;, name: &#39;HelloWorld&#39;, component: HelloWorld } ] });  组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分 javascript &amp;lt;template&amp;gt; &amp;lt;div v-for=&amp;quot;item in items&amp;quot; :key=&amp;quot;item.Id+&#39;aabbcc&#39;&amp;quot;&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; 
+  组件  简易下拉列表
+  &amp;lt;template&amp;gt; &amp;lt;div&amp;gt; &amp;lt;div class=&amp;quot;dropdown-wrapper&amp;quot;&amp;gt; &amp;lt;div class=&amp;quot;dropdown-selected&amp;quot; :class=&amp;quot;{ show: isActive }&amp;quot; @click=&amp;quot;SetActive&amp;quot;&amp;gt;{{selected.Name}}&amp;lt;/div&amp;gt; &amp;lt;ul class=&amp;quot;dropdown-list&amp;quot;&amp;gt; &amp;lt;li v-for=&amp;quot;item in items&amp;quot; @click=&amp;quot;SelectLi(item.Name)&amp;quot; :key=&amp;quot;item.Id&amp;quot;&amp;gt;{{item.Name}}&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; export default { name: &amp;quot;&amp;quot;, data() { return { isActive: false, selected: { Id: 0, Name: this.</description>
     </item>
     
     <item>
