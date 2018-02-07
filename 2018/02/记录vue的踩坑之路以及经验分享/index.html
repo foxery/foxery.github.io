@@ -1,0 +1,800 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.34 with theme Tranquilpeak 0.4.3-BETA">
+    <title>记录vue的踩坑之路以及经验分享</title>
+    <meta name="author" content="foxery">
+    <meta name="keywords" content="vue">
+
+    <link rel="icon" href="https://foxery.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="记录vue的踩坑之路以及经验分享">
+    <meta property="og:url" content="/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">
+    <meta property="og:site_name" content="小狐狸水水的博客">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="小狐狸水水的博客">
+    <meta name="twitter:description" content="">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://foxery.github.io/img/avatar.jpg">
+    
+
+    
+      <meta property="og:image" content="https://foxery.github.io/img/cover2.jpg">
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://foxery.github.io/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://foxery.github.io/">小狐狸水水的博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://foxery.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://foxery.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">foxery</h4>
+        
+          <h5 class="sidebar-profile-bio">只是一想到你，世界在明亮的光晕里倒退</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/foxery" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      记录vue的踩坑之路以及经验分享
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-02-07T10:14:19&#43;08:00">
+        
+  
+  
+  
+  
+    2018.02.7
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
+    
+      <a class="category-link" href="https://foxery.github.io/categories/vue">vue</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p></p>
+
+<h3 id="坑">坑</h3>
+
+<ol>
+<li>路由去掉默认的#<br /></li>
+</ol>
+
+<pre><code class="language-javascript">export default new Router({  
+  mode: 'history',//去掉路由中默认的#/  
+  routes: [
+    {
+      path: '/',
+      name: 'HelloWorld',
+      component: HelloWorld
+    }
+  ]
+});
+</code></pre>
+
+<ol>
+<li>组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分<br /></li>
+</ol>
+
+<pre><code class="language-javascript">&lt;template&gt;
+    &lt;div v-for=&quot;item in items&quot; :key=&quot;item.Id+'aabbcc'&quot;&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+
+<h3 id="组件">组件</h3>
+
+<ol>
+<li>简易下拉列表<br /></li>
+</ol>
+
+<pre><code class="language-javascript">&lt;template&gt;
+  &lt;div&gt;
+      &lt;div class=&quot;dropdown-wrapper&quot;&gt;
+        &lt;div class=&quot;dropdown-selected&quot; :class=&quot;{ show: isActive }&quot; @click=&quot;SetActive&quot;&gt;{{selected.Name}}&lt;/div&gt;
+        &lt;ul class=&quot;dropdown-list&quot;&gt;
+            &lt;li v-for=&quot;item in items&quot; @click=&quot;SelectLi(item.Name)&quot; :key=&quot;item.Id&quot;&gt;{{item.Name}}&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;&quot;,
+  data() {
+    return {
+      isActive: false,
+      selected: {
+        Id: 0,
+        Name: this.items[0].Name
+      }
+    };
+  },
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  },
+  methods: {
+    SetActive: function(event) {
+      this.isActive = !this.isActive;
+    },
+    SelectLi: function(val) {
+      this.selected.Name = val;
+      this.SetActive();
+    }
+  },
+  mounted:function(){
+    document.addEventListener('click', (e) =&gt; {
+      // $el在created时还不能用
+      console.log(this.$el);
+       if (!this.$el.contains(e.target)){
+         this.isActive = false
+       } 
+   })
+  }
+};
+&lt;/script&gt;
+
+&lt;style lang=&quot;scss&quot; scoped&gt;
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.dropdown-selected {
+  height: 36px;
+  line-height: 34px;
+  width: 120px;
+  border: 1px solid #afafaf;
+  padding-left: 10px;
+  &amp;.show {
+    ~ .dropdown-list {
+      display: block;
+    }
+  }
+}
+.dropdown-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 1;
+  border: 1px solid #afafaf;
+  display: none;
+  &gt; li {
+    height: 36px;
+    line-height: 36px;
+    padding-left: 10px;
+  }
+}
+&lt;/style&gt;
+</code></pre>
+
+<ol>
+<li>注册全局引用组件方法<br />
+1). 引入组件
+<code>import Component from ''</code><br />
+2).导出方法</li>
+</ol>
+
+<pre><code class="language-javascript"> const Toast = {};
+
+// 注册Toast
+Toast.install = function (Vue) {
+    // 生成一个Vue的子类
+    // 同时这个子类也就是组件
+    const ToastConstructor = Vue.extend(Component)
+    // 生成一个该子类的实例
+    const instance = new ToastConstructor();
+
+    // 将这个实例挂载在新创建的div上
+    // 并将此div加入全局挂载点内部
+    instance.$mount(document.createElement('div'))
+    document.body.appendChild(instance.$el)
+
+    // 通过Vue的原型注册一个方法
+    // 让所有实例共享这个方法 
+    Vue.prototype.$toast = (msg, duration = 1500) =&gt; {
+        instance.message = msg;
+        instance.visible = true;
+
+        setTimeout(() =&gt; {
+            instance.visible = false;
+        }, duration);
+    }
+}
+
+export default Toast
+</code></pre>
+
+<p>3).在组件内无需import,直接<code>this.$toast(&quot;&quot;)</code>即可</p>
+
+<h3 id="记录">记录</h3>
+
+<ol>
+<li>http请求</li>
+</ol>
+
+<pre><code class="language-javascript">import axios from 'axios'
+import qs from 'qs'
+
+export class HttpService {
+
+    Get(url, data) {
+        return new Promise((resolve, reject) =&gt; {
+            axios.get(url, {
+                params: data
+            }).then((res) =&gt; {
+                if (res) {
+                    if (res.Code == 0) {
+                        resolve(res.Data);
+                    } else {
+                        reject(res.Message);
+                    }
+                }
+            }).catch((error) =&gt; {
+                reject(error);
+            })
+        })
+    }
+    Post(url, data) {
+        return new Promise((resolve, reject) =&gt; {
+            axios.post(url, qs.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                }
+            }).then((res) =&gt; {
+                if (res) {
+                    if (res.Code == 0) {
+                        resolve(res.Data);
+                    } else {
+                        reject(res.Message);
+                    }
+                }
+            }).catch((error) =&gt; {
+                reject(error);
+            })
+        })
+    }
+    PostFlie(url, data) {
+        return new Promise((resolve, reject) =&gt; {
+            //根据data对象生成FormData对象
+            var temp = new FormData();
+            for (var t in data) {
+                temp.append(t, data[t]);
+            }
+            axios.post(url, temp).then((res) =&gt; {
+                if (res) {
+                    if (res.Code == 0) {
+                        resolve(res.Data);
+                    } else {
+                        reject(res.Message);
+                    }
+                }
+            }).catch((error) =&gt; {
+                reject(error);
+            })
+        })
+    }
+}
+</code></pre>
+
+<p>在service层只要引用相对路径就行,注意prototype</p>
+
+<pre><code class="language-javascript">import { HttpService } from ''
+
+export class Service {
+    Interface(data) {
+        return HttpService.prototype.Get('/url', data);
+    }
+}
+</code></pre>
+
+<p>组件内引用同样只需要相对路径,注意prototype,注意引用名字要与类名相同</p>
+
+<pre><code class="language-javascript">import { Service } from &quot;&quot;;
+
+Service.prototype.Interface(data).then(res =&gt; {});
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/vue/">vue</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E6%90%AD%E5%BB%BAvue%E8%84%9A%E6%89%8B%E6%9E%B6/" data-tooltip="搭建vue脚手架">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 foxery. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E6%90%AD%E5%BB%BAvue%E8%84%9A%E6%89%8B%E6%9E%B6/" data-tooltip="搭建vue脚手架">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">foxery</h4>
+    
+      <div id="about-card-bio">只是一想到你，世界在明亮的光晕里倒退</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        个人博客
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        France
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="搜索" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">
+                <h3 class="media-heading">记录vue的踩坑之路以及经验分享</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/02/%E6%90%AD%E5%BB%BAvue%E8%84%9A%E6%89%8B%E6%9E%B6/">
+                <h3 class="media-heading">搭建vue脚手架</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/02/hugo%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C/">
+                <h3 class="media-heading">Hugo博客的创建与运行</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         3 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://foxery.github.io/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://foxery.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/foxery.github.io\/2018\/02\/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB\/';
+          
+            this.page.identifier = '\/2018\/02\/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+
