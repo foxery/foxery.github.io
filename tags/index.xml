@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 小狐狸水水的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 09 Feb 2018 16:12:34 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 01 Mar 2018 08:43:12 +0800</lastBuildDate>
     
 	<atom:link href="https://foxery.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Jquery</title>
+      <link>https://foxery.github.io/tags/jquery/</link>
+      <pubDate>Thu, 01 Mar 2018 08:43:12 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/tags/jquery/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Object</title>
@@ -17,6 +26,15 @@
       <pubDate>Fri, 09 Feb 2018 16:12:34 +0800</pubDate>
       
       <guid>https://foxery.github.io/tags/object/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Plugin</title>
+      <link>https://foxery.github.io/tags/plugin/</link>
+      <pubDate>Thu, 01 Mar 2018 08:43:12 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/tags/plugin/</guid>
       <description></description>
     </item>
     

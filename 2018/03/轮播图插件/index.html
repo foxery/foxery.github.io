@@ -20,9 +20,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.34 with theme Tranquilpeak 0.4.3-BETA">
-    <title>记录vue的踩坑之路以及经验分享</title>
+    <title>轮播图插件</title>
     <meta name="author" content="foxery">
-    <meta name="keywords" content="vue">
+    <meta name="keywords" content="carousel">
 
     <link rel="icon" href="https://foxery.github.io/favicon.png">
     
@@ -31,8 +31,8 @@
     <meta name="description" content="">
     <meta property="og:description" content="">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="记录vue的踩坑之路以及经验分享">
-    <meta property="og:url" content="/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">
+    <meta property="og:title" content="轮播图插件">
+    <meta property="og:url" content="/2018/03/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6/">
     <meta property="og:site_name" content="小狐狸水水的博客">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="小狐狸水水的博客">
@@ -48,7 +48,7 @@
     
 
     
-      <meta property="og:image" content="https://foxery.github.io/img/cover2.jpg">
+      <meta property="og:image" content="https://foxery.github.io/img/carousel.jpg">
     
     
     
@@ -193,19 +193,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      记录vue的踩坑之路以及经验分享
+      轮播图插件
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-02-07T10:14:19&#43;08:00">
+      <time itemprop="datePublished" datetime="2018-03-01T08:43:12&#43;08:00">
         
   
   
   
   
-    2018.02.7
+    2018.03.1
   
 
       </time>
@@ -217,7 +217,7 @@
     
       <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
     
-      <a class="category-link" href="https://foxery.github.io/categories/vue">vue</a>
+      <a class="category-link" href="https://foxery.github.io/categories/plugin">plugin</a>
     
   
 
@@ -227,255 +227,301 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p></p>
+              <p><br />
+<img src="https://foxery.github.io/img/carousel.png" alt="" /></p>
 
-<h3 id="坑">坑</h3>
+<p>心血来潮,写了一个简单的轮播图插件,带有左右切换功能、底部导航功能、自动循环功能。代码如下:</p>
 
-<ol>
-<li>路由去掉默认的#<br /></li>
-</ol>
+<p>js:</p>
 
-<pre><code class="language-javascript">export default new Router({  
-  mode: 'history',//去掉路由中默认的#/  
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
-});
-</code></pre>
+<pre><code class="language-javascript">(function () {
+    $.Carousel = function (elem, options) {
+        var curr = this;
+        var contanier, navContanier, prevElem, nextElem, imgArry;
+        var curIndex = 0;
+        var autoTimeout = 0;
 
-<ol>
-<li>组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分<br /></li>
-</ol>
+        curr.init = function () {
+            curr.options = $.extend({}, $.Carousel.defaultOptions, options);
+            contanier = $(curr.options.contanier);
+            navContanier = $(curr.options.nav);
+            prevElem = $(curr.options.prev);
+            nextElem = $(curr.options.next);
+            imgArry = curr.options.images;
 
-<pre><code class="language-javascript">&lt;template&gt;
-    &lt;div v-for=&quot;item in items&quot; :key=&quot;item.Id+'aabbcc'&quot;&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
-
-<h3 id="组件">组件</h3>
-
-<ol>
-<li>简易下拉列表<br /></li>
-</ol>
-
-<pre><code class="language-javascript">&lt;template&gt;
-  &lt;div&gt;
-      &lt;div class=&quot;dropdown-wrapper&quot;&gt;
-        &lt;div class=&quot;dropdown-selected&quot; :class=&quot;{ show: isActive }&quot; @click=&quot;SetActive&quot;&gt;{{selected.Name}}&lt;/div&gt;
-        &lt;ul class=&quot;dropdown-list&quot;&gt;
-            &lt;li v-for=&quot;item in items&quot; @click=&quot;SelectLi(item.Name)&quot; :key=&quot;item.Id&quot;&gt;{{item.Name}}&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-export default {
-  name: &quot;&quot;,
-  data() {
-    return {
-      isActive: false,
-      selected: {
-        Id: 0,
-        Name: this.items[0].Name
-      }
-    };
-  },
-  props: {
-    items: {
-      type: Array,
-      required: true
-    }
-  },
-  methods: {
-    SetActive: function(event) {
-      this.isActive = !this.isActive;
-    },
-    SelectLi: function(val) {
-      this.selected.Name = val;
-      this.SetActive();
-    }
-  },
-  mounted:function(){
-    document.addEventListener('click', (e) =&gt; {
-      // $el在created时还不能用
-      console.log(this.$el);
-       if (!this.$el.contains(e.target)){
-         this.isActive = false
-       } 
-   })
-  }
-};
-&lt;/script&gt;
-
-&lt;style lang=&quot;scss&quot; scoped&gt;
-.dropdown-wrapper {
-  position: relative;
-  display: inline-block;
-  margin-top: 20px;
-  margin-left: 20px;
-}
-.dropdown-selected {
-  height: 36px;
-  line-height: 34px;
-  width: 120px;
-  border: 1px solid #afafaf;
-  padding-left: 10px;
-  &amp;.show {
-    ~ .dropdown-list {
-      display: block;
-    }
-  }
-}
-.dropdown-list {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  z-index: 1;
-  border: 1px solid #afafaf;
-  display: none;
-  &gt; li {
-    height: 36px;
-    line-height: 36px;
-    padding-left: 10px;
-  }
-}
-&lt;/style&gt;
-</code></pre>
-
-<ol>
-<li>注册全局引用组件方法<br />
-1). 引入组件
-<code>import Component from ''</code><br />
-2).导出方法</li>
-</ol>
-
-<pre><code class="language-javascript"> const Toast = {};
-
-// 注册Toast
-Toast.install = function (Vue) {
-    // 生成一个Vue的子类
-    // 同时这个子类也就是组件
-    const ToastConstructor = Vue.extend(Component)
-    // 生成一个该子类的实例
-    const instance = new ToastConstructor();
-
-    // 将这个实例挂载在新创建的div上
-    // 并将此div加入全局挂载点内部
-    instance.$mount(document.createElement('div'))
-    document.body.appendChild(instance.$el)
-
-    // 通过Vue的原型注册一个方法
-    // 让所有实例共享这个方法 
-    Vue.prototype.$toast = (msg, duration = 1500) =&gt; {
-        instance.message = msg;
-        instance.visible = true;
-
-        setTimeout(() =&gt; {
-            instance.visible = false;
-        }, duration);
-    }
-}
-
-export default Toast
-</code></pre>
-
-<p>3).在组件内无需import,直接<code>this.$toast(&quot;&quot;)</code>即可</p>
-
-<h3 id="记录">记录</h3>
-
-<ol>
-<li>http请求</li>
-</ol>
-
-<pre><code class="language-javascript">import axios from 'axios'
-import qs from 'qs'
-
-export class HttpService {
-
-    Get(url, data) {
-        return new Promise((resolve, reject) =&gt; {
-            axios.get(url, {
-                params: data
-            }).then((res) =&gt; {
-                if (res) {
-                    if (res.Code == 0) {
-                        resolve(res.Data);
-                    } else {
-                        reject(res.Message);
-                    }
+            if (imgArry.length != 0) {
+                var imgHtml = &quot;&quot;, navHtml = &quot;&quot;;
+                //为解决收尾图片衔接问题,故在首尾两侧克隆一份首尾的图片以做过渡
+                imgHtml += '&lt;li class=&quot;mLastClone&quot; style=&quot;background-image:url(' + imgArry[imgArry.length - 1] + ');opacity:0;&quot;&gt;&lt;/li&gt;';
+                for (var i = 0; i &lt; imgArry.length; i++) {
+                    imgHtml += '&lt;li style=&quot;background-image:url(' + imgArry[i] + ');opacity:0;&quot;&gt;&lt;/li&gt;';
+                    navHtml += '&lt;li&gt;&lt;/li&gt;';
                 }
-            }).catch((error) =&gt; {
-                reject(error);
-            })
-        })
-    }
-    Post(url, data) {
-        return new Promise((resolve, reject) =&gt; {
-            axios.post(url, qs.stringify(data), {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'
+                imgHtml += '&lt;li class=&quot;mFirstClone&quot; style=&quot;background-image:url(' + imgArry[0] + ');opacity:0;&quot;&gt;&lt;/li&gt;';
+                contanier.html(imgHtml);
+                navContanier.html(navHtml);
+
+                // 默认显示第一张图
+                contanier.children().eq(curIndex + 1).css(&quot;opacity&quot;, 1);
+                navContanier.children().removeClass(curr.options.navActiveClass);
+                navContanier.children().eq(curIndex).addClass(curr.options.navActiveClass);
+
+                // 默认自动播放
+                if (curr.options.auto) {
+                    curr.startAuto();
+                    //鼠标进入容器时停止自动播放,离开时继续自动播放
+                    $(curr.options.contanier + &quot;,&quot; + curr.options.nav + &quot;,&quot; + curr.options.prev + &quot;,&quot; + curr.options.next).hover(function () {
+                        curr.stopAuto();
+                    }, function () {
+                        curr.startAuto();
+                    });
                 }
-            }).then((res) =&gt; {
-                if (res) {
-                    if (res.Code == 0) {
-                        resolve(res.Data);
-                    } else {
-                        reject(res.Message);
-                    }
-                }
-            }).catch((error) =&gt; {
-                reject(error);
-            })
-        })
-    }
-    PostFlie(url, data) {
-        return new Promise((resolve, reject) =&gt; {
-            //根据data对象生成FormData对象
-            var temp = new FormData();
-            for (var t in data) {
-                temp.append(t, data[t]);
+
             }
-            axios.post(url, temp).then((res) =&gt; {
-                if (res) {
-                    if (res.Code == 0) {
-                        resolve(res.Data);
-                    } else {
-                        reject(res.Message);
-                    }
+
+            // 下一张
+            nextElem.click(function () {
+                curr.next();
+            });
+
+            // 上一张
+            prevElem.click(function () {
+                curr.prev();
+            });
+
+            // 跳转
+            navContanier.children().click(function () {
+                if ($(this).hasClass(curr.options.navActiveClass)) {
+                    return;
                 }
-            }).catch((error) =&gt; {
-                reject(error);
-            })
-        })
-    }
-}
+                curr.index($(this).index());
+            });
+
+        };
+
+        curr.reset = function () {
+            contanier.children().css(&quot;opacity&quot;, 0);
+            contanier.children().css(&quot;left&quot;, 0);
+            navContanier.children().removeClass(curr.options.navActiveClass);
+        };
+
+        curr.next = function () {
+            curr.reset();
+            contanier.children().eq(curIndex + 1).css(&quot;left&quot;, &quot;-100%&quot;);
+            curIndex++;
+            if (curIndex == imgArry.length) {
+                curIndex = 0;
+            }
+            contanier.children().eq(curIndex + 1).css(&quot;opacity&quot;, 1);
+            navContanier.children().eq(curIndex).addClass(curr.options.navActiveClass);
+        };
+
+        curr.prev = function () {
+            curr.reset();
+            contanier.children().eq(curIndex + 1).css(&quot;left&quot;, &quot;100%&quot;);
+            if (curIndex == 0) {
+                curIndex = imgArry.length;
+            }
+            curIndex--;
+            contanier.children().eq(curIndex + 1).css(&quot;opacity&quot;, 1);
+            navContanier.children().eq(curIndex).addClass(curr.options.navActiveClass);
+        };
+
+        curr.index = function (index) {
+            curr.reset();
+            if (curIndex &gt; index) {
+                contanier.children().eq(curIndex + 1).css(&quot;left&quot;, &quot;100%&quot;);
+            } else {
+                contanier.children().eq(curIndex + 1).css(&quot;left&quot;, &quot;-100%&quot;);
+            }
+            curIndex = index;
+            contanier.children().eq(curIndex + 1).css(&quot;opacity&quot;, 1);
+            navContanier.children().eq(curIndex).addClass(curr.options.navActiveClass);
+        };
+
+        curr.startAuto = function () {
+            autoTimeout = setTimeout(() =&gt; {
+                curr.next();
+                curr.startAuto();
+            }, curr.options.intervals);
+        };
+
+        curr.stopAuto = function () {
+            clearTimeout(autoTimeout);
+        };
+
+        curr.init();
+    };
+
+    $.Carousel.defaultOptions = {
+        navActiveClass: &quot;active&quot;,
+        intervals: 2000,
+        auto: true
+    };
+
+    $.fn.Carousel = function (options) {
+        return this.each(function () {
+            (new $.Carousel(this, options));
+        });
+    };
+})();
 </code></pre>
 
-<p>在service层只要引用相对路径就行,注意prototype</p>
+<p>css:</p>
 
-<pre><code class="language-javascript">import { HttpService } from ''
-
-export class Service {
-    Interface(data) {
-        return HttpService.prototype.Get('/url', data);
-    }
+<pre><code class="language-javascript">* {
+    box-sizing: border-box;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+ul&gt;li {
+    list-style: none;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 1200px;
+    margin: auto;
+    height: 600px;
+}
+
+.carousel-list {
+    clear: both;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-container:hover .carousel-arrow {
+    visibility: visible;
+    opacity: 1;
+}
+
+.carousel-list&gt;li {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: left .3s ease-in-out, opacity .3s ease-in-out;
+    font-size: 72px;
+    color: #fff;
+    text-align: center;
+    line-height: 600px;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
+    z-index: 999;
+    padding: 5px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.carousel-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-arrow.left {
+    left: 20px;
+}
+
+.carousel-arrow.right {
+    right: 20px;
+}
+
+.carousel-nav {
+    clear: both;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+}
+
+.carousel-nav&gt;li {
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: background-color .3s ease-in-out;
+    cursor: pointer;
+}
+
+.carousel-nav&gt;li:hover {
+    background-color: #72c5ea;
+}
+
+.carousel-nav&gt;li.active {
+    background-color: #49b8ea;
+}
+
+.carousel-nav&gt;li+li {
+    margin-left: 10px;
+}  
 </code></pre>
 
-<p>组件内引用同样只需要相对路径,注意prototype,注意引用名字要与类名相同</p>
+<p>html:</p>
 
-<pre><code class="language-javascript">import { Service } from &quot;&quot;;
+<pre><code class="language-javascript">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
 
-Service.prototype.Interface(data).then(res =&gt; {});
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;./css/carousel.css&quot;&gt;
+    &lt;title&gt;轮播图&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div class=&quot;carousel-container mCarousel&quot;&gt;
+        &lt;ul class=&quot;carousel-list mCarouselContent&quot;&gt;&lt;/ul&gt;
+        &lt;div class=&quot;carousel-arrow left mPrevBtn&quot;&gt;
+            &lt;img src=&quot;./images/left.png&quot; alt=&quot;&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;carousel-arrow right mNextBtn&quot;&gt;
+            &lt;img src=&quot;./images/right.png&quot; alt=&quot;&quot;&gt;
+        &lt;/div&gt;
+        &lt;ul class=&quot;carousel-nav mCarouselNav&quot;&gt;&lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;script src=&quot;./js/jquery-3.3.1.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./js/carousel.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        $(&quot;.mCarousel&quot;).Carousel({
+            contanier: &quot;.mCarouselContent&quot;,
+            nav: &quot;.mCarouselNav&quot;,
+            prev: &quot;.mPrevBtn&quot;,
+            next: &quot;.mNextBtn&quot;,
+            navActiveClass: &quot;active&quot;,
+            images: [&quot;./images/img1.jpg&quot;, &quot;./images/img2.jpg&quot;, &quot;./images/img3.jpg&quot;],
+            intervals: 3000,
+            auto: true
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
 </code></pre>
               
             </div>
@@ -488,7 +534,9 @@ Service.prototype.Interface(data).then(res =&gt; {});
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/vue/">vue</a>
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/jquery/">jquery</a>
+
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/plugin/">plugin</a>
 
                   </div>
                 
@@ -501,7 +549,7 @@ Service.prototype.Interface(data).then(res =&gt; {});
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/" data-tooltip="如何比较两个对象是否相同">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -509,7 +557,7 @@ Service.prototype.Interface(data).then(res =&gt; {});
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E6%90%AD%E5%BB%BAvue%E8%84%9A%E6%89%8B%E6%9E%B6/" data-tooltip="搭建vue脚手架">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E5%BC%80%E5%8F%91webapp%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" data-tooltip="开发webApp时遇到的问题记录">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -569,7 +617,7 @@ Service.prototype.Interface(data).then(res =&gt; {});
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/" data-tooltip="如何比较两个对象是否相同">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -577,7 +625,7 @@ Service.prototype.Interface(data).then(res =&gt; {});
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E6%90%AD%E5%BB%BAvue%E8%84%9A%E6%89%8B%E6%9E%B6/" data-tooltip="搭建vue脚手架">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E5%BC%80%E5%8F%91webapp%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" data-tooltip="开发webApp时遇到的问题记录">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -821,9 +869,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/foxery.github.io\/2018\/02\/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB\/';
+          this.page.url = 'https:\/\/foxery.github.io\/2018\/03\/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6\/';
           
-            this.page.identifier = '\/2018\/02\/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB\/'
+            this.page.identifier = '\/2018\/03\/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6\/'
           
         };
         (function() {
