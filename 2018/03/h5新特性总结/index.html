@@ -20,9 +20,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.34 with theme Tranquilpeak 0.4.3-BETA">
-    <title>如何比较两个对象是否相同</title>
+    <title>H5新特性总结</title>
     <meta name="author" content="foxery">
-    <meta name="keywords" content="对象比较">
+    <meta name="keywords" content="h5新特性">
 
     <link rel="icon" href="https://foxery.github.io/favicon.png">
     
@@ -31,8 +31,8 @@
     <meta name="description" content="">
     <meta property="og:description" content="">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="如何比较两个对象是否相同">
-    <meta property="og:url" content="/2018/02/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/">
+    <meta property="og:title" content="H5新特性总结">
+    <meta property="og:url" content="/2018/03/h5%E6%96%B0%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/">
     <meta property="og:site_name" content="小狐狸水水的博客">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="小狐狸水水的博客">
@@ -48,7 +48,7 @@
     
 
     
-      <meta property="og:image" content="https://foxery.github.io/img/cover.jpg">
+      <meta property="og:image" content="https://foxery.github.io/img/workday.jpg">
     
     
     
@@ -193,19 +193,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      如何比较两个对象是否相同
+      H5新特性总结
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-02-09T16:12:34&#43;08:00">
+      <time itemprop="datePublished" datetime="2018-03-05T10:25:16&#43;08:00">
         
   
   
   
   
-    2018.02.9
+    2018.03.5
   
 
       </time>
@@ -217,7 +217,7 @@
     
       <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
     
-      <a class="category-link" href="https://foxery.github.io/categories/js">js</a>
+      <a class="category-link" href="https://foxery.github.io/categories/h5">h5</a>
     
   
 
@@ -229,35 +229,75 @@
             <div class="main-content-wrap">
               <p></p>
 
-<h3 id="1-比较对象">1. 比较对象</h3>
+<h3 id="1-新增标签">1.新增标签</h3>
 
-<p>两个js对象之间的比较,只能遍历其属性,一一对比。</p>
+<ul>
+<li>新文档节段和纲要<br />
+<code>&lt;section&gt;&lt;/section&gt;</code><br />
+<code>&lt;header&gt;&lt;/header&gt;</code><br />
+<code>&lt;hgroup&gt;&lt;/hgroup&gt;</code>,即将标题进行分组的元素<br />
+<code>&lt;footer&gt;&lt;/footer&gt;</code><br />
+<code>&lt;nav&gt;&lt;/nav&gt;</code><br />
+<code>&lt;article&gt;&lt;/article&gt;</code><br />
+<code>&lt;aside&gt;&lt;/aside&gt;</code>,包涵内容周围的相关内容<br /></li>
+<li>多媒体和绘图<br />
+<code>&lt;audio&gt;&lt;/audio&gt;</code><br />
+<code>&lt;video&gt;&lt;video&gt;</code><br />
+<code>&lt;source&gt;&lt;/source&gt;</code><br />
+<code>&lt;embed&gt;&lt;/embed&gt;</code><br />
+<code>&lt;track&gt;&lt;/track&gt;</code><br />
+<code>canvas,svg</code><br /></li>
+<li>新元素<br />
+<code>&lt;datalist&gt;</code>,数据列表，配合option使用，本身为不可见元素，为普通的input提供输入建议列表<br />
+<code>javascript
+&lt;datalist id=&quot;detail&quot;&gt;&lt;option&gt;XXX&lt;/option&gt;&lt;/datalist&gt;
+&lt;input type=&quot;text&quot; list=&quot;detail&quot;&gt;
+</code></li>
+</ul>
 
-<pre><code class="language-javascript">function CompareObjectEqual(a, b) {
-    if (!(a instanceof Object &amp;&amp; b instanceof Object)) {
-        return a === b;
-    }
+<p><code>&lt;output&gt;</code><br />
+<code>&lt;keygen&gt;</code><br />
+<code>&lt;figure&gt;</code>,包含图像、代码和其他内容对主要内容进行说明，删除不会影响主内容<br />
+<code>&lt;figcaption&gt;</code>,用于figure的标题<br />
+<code>&lt;mark&gt;</code>,突出显示以表示引用的内容,或者突出显示与用户当前活动相关的内容<br />
+<code>&lt;time&gt;</code>,可以包涵两个属性，一个datetime表示在元素中指定的确切日期和世家，pubdate表示文章或者整个文档发布时time元素所指定的日期和时间<br />
+<code>&lt;meter&gt;</code>,用于定义度量衡，规定最大最小宽高，通常要结合css</p>
 
-    var aProps = Object.getOwnPropertyNames(a);
-    var bProps = Object.getOwnPropertyNames(b);
+<pre><code class="language-javascript">&lt;meter min=&quot;最小可能值&quot; max=&quot;最大的可能值&quot; low=&quot;合理的下限&quot; high=&quot;合理的上限&quot; optimum=&quot;最优值&quot; value=&quot;实际值&quot;&gt;&lt;/meter&gt;
+</code></pre>
 
-    if (aProps.length != bProps.length) {
-        return false;
-    }
+<p><code>&lt;progress&gt;</code>,用于定义一个进度条，有max（完成值）和value（进度条当前值）两个属性<br />
+* 新input类型</p>
 
-    for (var i = 0; i &lt; aProps.length; i++) {
-        var propName = aProps[i];
-        if ((a[propName] instanceof Object) &amp;&amp; (b[propName] instanceof Object)) {
-            CompareObjectEqual(a[propName], b[propName]);
-        } else {
-            if (a[propName] !== b[propName]) {
-                return false;
-            }
-        }
-    }
+<h3 id="2-离线缓存-web-storage">2.离线缓存 Web Storage</h3>
 
-    return true;
-}
+<p>为HTML5开发移动应用提供了基础,由浏览器存储本地数据<br />
+与cookie的区别:<br />
+* cookie数据始终在同源的http请求中携带（即使不需要）,即cookie在浏览器和服务器间来回传递,cookie数据还有路径（path）的概念,可以限制cookie只属于某个路径下;localStorage不会自动把数据发给服务器,仅在本地保存,存数的数据是不能跨浏览器共用的，一个浏览器只能读取各自浏览器的数据<br />
+* cookie数据不能超过4k;localStorage可以达到5M或更大<br />
+* cookie只在设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭;localStorage始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据<br />
+* cookie的原生接口不友好，需要自己封装;localStorage支持事件通知机制，可以将数据更新的通知发送给监听者,api 接口使用更方便<br />
+    1).存储:<code>localStorage.setItem(key,value)</code>,如果key存在时，更新value<br />
+    2).获取:<code>localStorage.getItem(key)</code>,如果key不存在返回null<br />
+    3).删除:<code>localStorage.removeItem(key)</code>,一旦删除，key对应的数据将会全部删除<br />
+    4).全部清除:<code>localStorage.clear()</code>,清除所有localStorage对象保存的数据</p>
+
+<h3 id="3-获取地理位置信息">3.获取地理位置信息</h3>
+
+<p>新增Geolocation API，可以通过浏览器获取用户的地理位置</p>
+
+<h3 id="4-服务器推送技术">4.服务器推送技术</h3>
+
+<p><code>Server-Sent Event</code>和<code>WebSockets</code>就是其中的两个特性，这两个特性能够帮助我们实现服务器将数据“推送”到客户端的功能</p>
+
+<p>使用html5shiv可以解决ie低版本不兼容的问题，只需要在head中加上,当版本低于IE9时，浏览器会加载html5.js脚本，使得支持html5的新功能</p>
+
+<pre><code class="language-javascript">&lt;head&gt;
+  &lt;!--[if lt IE 9]&gt;
+  &lt;script src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'&gt;
+  &lt;/script&gt;
+  &lt;![endif]--&gt;
+&lt;/head&gt;
 </code></pre>
               
             </div>
@@ -270,7 +310,7 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/object/">object</a>
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/h5/">h5</a>
 
                   </div>
                 
@@ -283,7 +323,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E5%BC%80%E5%8F%91webapp%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" data-tooltip="开发webApp时遇到的问题记录">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -291,7 +331,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" data-tooltip="记录vue的踩坑之路以及经验分享">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/03/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6/" data-tooltip="轮播图插件">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -351,7 +391,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E5%BC%80%E5%8F%91webapp%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" data-tooltip="开发webApp时遇到的问题记录">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -359,7 +399,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" data-tooltip="记录vue的踩坑之路以及经验分享">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/03/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6/" data-tooltip="轮播图插件">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -620,9 +660,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/foxery.github.io\/2018\/02\/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C\/';
+          this.page.url = 'https:\/\/foxery.github.io\/2018\/03\/h5%E6%96%B0%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93\/';
           
-            this.page.identifier = '\/2018\/02\/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C\/'
+            this.page.identifier = '\/2018\/03\/h5%E6%96%B0%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93\/'
           
         };
         (function() {

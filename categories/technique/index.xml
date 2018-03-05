@@ -6,10 +6,19 @@
     <description>Recent content in Technique on 小狐狸水水的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 01 Mar 2018 08:43:12 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 05 Mar 2018 10:25:16 +0800</lastBuildDate>
     
 	<atom:link href="https://foxery.github.io/categories/technique/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>H5新特性总结</title>
+      <link>https://foxery.github.io/2018/03/h5%E6%96%B0%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Mon, 05 Mar 2018 10:25:16 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/2018/03/h5%E6%96%B0%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>轮播图插件</title>
