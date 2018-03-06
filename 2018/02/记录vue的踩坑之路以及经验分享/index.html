@@ -389,6 +389,29 @@ export default Toast
 
 <p>3).在组件内无需import,直接<code>this.$toast(&quot;&quot;)</code>即可</p>
 
+<ol>
+<li>只允许输入数字的组件<br /></li>
+</ol>
+
+<pre><code class="language-javascript"> &lt;input type=&quot;text&quot; v-number-only&gt;  
+
+ export default{
+    directives: {
+        numberOnly: {
+            bind: function(el) {
+                el.handler = function() {
+                el.value = el.value.replace(/\D+/, &quot;&quot;);
+                };
+                el.addEventListener(&quot;input&quot;, el.handler);
+            },
+            unbind: function(el) {
+                el.removeEventListener(&quot;input&quot;, el.handler);
+            }
+        }
+  }
+ }
+</code></pre>
+
 <h3 id="记录">记录</h3>
 
 <ol>
