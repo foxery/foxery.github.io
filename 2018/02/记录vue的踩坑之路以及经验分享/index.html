@@ -387,7 +387,11 @@ Toast.install = function (Vue) {
 export default Toast
 </code></pre>
 
-<p>3).在组件内无需import,直接<code>this.$toast(&quot;&quot;)</code>即可</p>
+<pre><code>3).在`main.js`文件内引用  
+   `import Toast from ''`  
+   `Vue.use(Toast)`
+4).在组件内无需import,直接`this.$toast(&quot;&quot;)`即可  
+</code></pre>
 
 <ol>
 <li>只允许输入数字的组件<br /></li>
@@ -415,8 +419,34 @@ export default Toast
 <h3 id="记录">记录</h3>
 
 <ol>
-<li>http请求</li>
+<li>http请求<br /></li>
 </ol>
+
+<p>配置路由文件<code>router/config.js</code></p>
+
+<pre><code class="language-javascript">import axios from 'axios'
+
+var pName = location.pathname.replace(/\/+/g, '/');
+var id = pName.slice(0, pName.indexOf(&quot;/&quot;, 2));
+axios.defaults.baseURL = id;
+axios.defaults.withCredentials = true;
+
+axios.interceptors.request.use(function (config) {
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});//请求拦截器
+
+axios.interceptors.response.use(response =&gt; {
+    // 请求成功返回
+    //your code
+    return response;
+}, (responseError) =&gt; {
+});//响应拦截器
+</code></pre>
+
+<p>在<code>main.js</code>文件中引入,<code>import config from './router/config'</code><br />
+发布时切换生产环境,<code>Vue.config.productionTip = false</code></p>
 
 <pre><code class="language-javascript">import axios from 'axios'
 import qs from 'qs'
