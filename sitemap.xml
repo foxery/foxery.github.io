@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://foxery.github.io/2018/03/%E8%A7%A3%E5%86%B3vue%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://foxery.github.io/2018/03/%E5%9C%A8vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8sass/</loc>
     <lastmod>2018-03-30T09:00:13+08:00</lastmod>
   </url>
@@ -65,6 +70,12 @@
   </url>
   
   <url>
+    <loc>https://foxery.github.io/tags/cross-domain/</loc>
+    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://foxery.github.io/categories/h5/</loc>
     <lastmod>2018-03-05T10:25:16+08:00</lastmod>
     <priority>0</priority>
@@ -114,7 +125,7 @@
   
   <url>
     <loc>https://foxery.github.io/post/</loc>
-    <lastmod>2018-03-30T09:00:13+08:00</lastmod>
+    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -126,25 +137,25 @@
   
   <url>
     <loc>https://foxery.github.io/tags/</loc>
-    <lastmod>2018-03-05T10:25:16+08:00</lastmod>
+    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://foxery.github.io/categories/technique/</loc>
-    <lastmod>2018-03-30T09:00:13+08:00</lastmod>
+    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://foxery.github.io/categories/vue/</loc>
-    <lastmod>2018-03-30T09:00:13+08:00</lastmod>
+    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://foxery.github.io/tags/vue/</loc>
-    <lastmod>2018-03-30T09:00:13+08:00</lastmod>
+    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -174,7 +185,7 @@
   
   <url>
     <loc>https://foxery.github.io/</loc>
-    <lastmod>2018-03-30T09:00:13+08:00</lastmod>
+    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   

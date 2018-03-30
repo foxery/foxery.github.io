@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 小狐狸水水的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 05 Mar 2018 10:25:16 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 30 Mar 2018 17:26:47 +0800</lastBuildDate>
     
 	<atom:link href="https://foxery.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cross Domain</title>
+      <link>https://foxery.github.io/tags/cross-domain/</link>
+      <pubDate>Fri, 30 Mar 2018 17:26:47 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/tags/cross-domain/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>H5</title>
@@ -68,7 +77,7 @@
     <item>
       <title>Vue</title>
       <link>https://foxery.github.io/tags/vue/</link>
-      <pubDate>Fri, 30 Mar 2018 09:00:13 +0800</pubDate>
+      <pubDate>Fri, 30 Mar 2018 17:26:47 +0800</pubDate>
       
       <guid>https://foxery.github.io/tags/vue/</guid>
       <description></description>
