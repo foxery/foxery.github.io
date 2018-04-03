@@ -229,25 +229,30 @@
             <div class="main-content-wrap">
               <p>
 前端本地开发，进行接口请求时，会遇到跨域问题，解决方法如下：<br />
-1. 打开<code>config/index.js</code>,在<code>proxyTable</code>中添写如下代码:<br />
-    <code>
-    proxyTable: {
-      '/apitest': {
-        target: 'https://cnodejs.org/api/v1', // 你接口的域名
-        secure: false,      // 如果是https接口，需要配置这个参数
-        changeOrigin: true,     // 如果接口跨域，需要进行这个参数配置
-        pathRewrite: { 
-          '^/apitest': '' //把域名换成target，代理域名为空
-          } 
-      }
-    }
-</code><br />
-    请注意，pathRewrite下的代理域名一定要设置为空，否则会出现请求接口404的问题<br />
-2. 请求接口时，可以这样写：<br />
-    ```
-    var prefix = &ldquo;/apitest&rdquo;;</p>
+1. 打开<code>config/index.js</code>,在<code>proxyTable</code>中添写如下代码:</p>
 
-<pre><code>export function GetTopices(page, tab, limit, mdrender) {
+<pre><code>```
+proxyTable: {
+  '/apitest': {
+    target: 'https://cnodejs.org/api/v1', // 你接口的域名
+    secure: false,      // 如果是https接口，需要配置这个参数
+    changeOrigin: true,     // 如果接口跨域，需要进行这个参数配置
+    pathRewrite: { 
+      '^/apitest': '' //把域名换成target，代理域名为空
+      } 
+  }
+}
+```  
+
+请注意，pathRewrite下的代理域名一定要设置为空，否则会出现请求接口404的问题  
+</code></pre>
+
+<ol>
+<li><p>请求接口时，可以这样写：</p>
+
+<pre><code>var prefix = &quot;/apitest&quot;;
+
+export function GetTopices(page, tab, limit, mdrender) {
     return Get(prefix + '/topics', {
         page: page,
         tab: tab,
@@ -255,12 +260,10 @@
         mdrender: mdrender
     });
 }
-```      
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>打包部署上线时，要把前缀换回来<br />
-<code>var prefix = &quot;https://cnodejs.org/api/v1&quot;;</code><br /></li>
+<li><p>打包部署上线时，要把前缀换回来<br />
+<code>var prefix = &quot;https://cnodejs.org/api/v1&quot;;</code></p></li>
 </ol>
               
             </div>
@@ -288,7 +291,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/" data-tooltip="单元测试入门">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -356,7 +359,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/" data-tooltip="单元测试入门">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -457,6 +460,23 @@
       <div class="no-result text-color-light text-center"></div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/">
+                <h3 class="media-heading">单元测试入门</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -611,23 +631,6 @@
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/02/hugo%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C/">
-                <h3 class="media-heading">Hugo博客的创建与运行</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -635,7 +638,7 @@
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         10 posts found
+         11 posts found
       </p>
     </div>
   </div>

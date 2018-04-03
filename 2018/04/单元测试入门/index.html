@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -16,25 +20,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>Blog</title>
+    <title>单元测试入门</title>
     <meta name="author" content="foxery">
-    <meta name="keywords" content="">
+    <meta name="keywords" content="unit test">
 
     <link rel="icon" href="https://foxery.github.io/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://foxery.github.io/categories/blog/index.xml">
-    
 
     
-    <meta name="description" content="思君如满月，夜夜减清辉">
-    <meta property="og:description" content="思君如满月，夜夜减清辉">
+    <meta name="description" content="">
+    <meta property="og:description" content="">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Blog">
-    <meta property="og:url" content="/categories/blog/">
+    <meta property="og:title" content="单元测试入门">
+    <meta property="og:url" content="/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/">
     <meta property="og:site_name" content="小狐狸水水的博客">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="小狐狸水水的博客">
-    <meta name="twitter:description" content="思君如满月，夜夜减清辉">
+    <meta name="twitter:description" content="">
     
     
 
@@ -45,6 +47,8 @@
       <meta property="og:image" content="https://foxery.github.io/img/avatar.jpg">
     
 
+    
+      <meta property="og:image" content="https://foxery.github.io/img/cover1.jpg">
     
     
     
@@ -69,7 +73,7 @@
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="https://foxery.github.io/">小狐狸水水的博客</a>
@@ -89,7 +93,7 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -178,44 +182,30 @@
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      单元测试入门
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://foxery.github.io/2018/02/hugo%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C/">
-          Hugo博客的创建与运行
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-02-07T10:10:49&#43;08:00">
+      <time itemprop="datePublished" datetime="2018-04-03T15:17:42&#43;08:00">
         
   
   
   
   
-    2018.02.7
+    2018.04.3
   
 
       </time>
@@ -227,35 +217,225 @@
     
       <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
     
-      <a class="category-link" href="https://foxery.github.io/categories/blog">blog</a>
+      <a class="category-link" href="https://foxery.github.io/categories/js">js</a>
     
   
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p></p>
-      <p>
-        <a href="https://foxery.github.io/2018/02/hugo%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C/" class="postShorten-excerpt_link link">阅读全文</a>
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p></p>
+
+<h3 id="安装mocha">安装Mocha</h3>
+
+<pre><code>`cnpm i mocha -g`  
+</code></pre>
+
+<h2 id="测试">测试</h2>
+
+<pre><code>在与项目文件夹的同级目录下，新建一个test文件夹，测试脚本与待测试的脚本同名，后缀名改为`.test.js`,结构如下：      
+
+.
++-- app
+|   +-- index.js
++-- test
+|   +-- index.test.js
+
+index.js 内容如下：  
+
+```js
+var calculate = {
+    add: function(a, b){
+        return a + b;
+    },
+    divide: function(a, b){
+        return a / b;
+    }
+}
+
+module.exports = calculate;
+```
+
+index.test.js 内容如下：  
+
+```js
+var calculate =  require('./../app/b');
+var expect = require('chai').expect;
+
+describe('Caculate', function() {
+    describe('cal', function() {
+        it('return add result', function() {
+            expect(calculate.add(1, 2)).equal(3);
+        });
+        it('return divide result', function() {
+            expect(calculate.divide(2, 2)).equal(1);
+        });
+    });
+});
+```
+
+脚本下包括一个或多个describe块，每个describe块包括一个或多个it块。
+
+describe块称为“测试套件”，表示一组相关的测试。它是一个函数，第一个参数是测试套件的名称，第二个参数是实际执行的函数。
+
+it块称为“测试用例”，表示一个单独的测试，是测试的最小单位。
+
+`expect(calculate.add(1, 2)).equal(3);`语句叫做断言。所谓断言就是判断源码的实际执行结果与预期是否一致，如果不一致就抛出一个错误。
+
+所有测试用例都应该含有一个或多个断言。断言功能由断言库来实现，Mocha本身并不带有断言库，所以必须先引入断言库。上面代码引入的断言库是chai，并且指定使用它的expect断言风格。expect断言的优点就是很接近自然语言。
+
+发现`expect(calculate.add(1, 2)).equal(3);`与`expect(calculate.add(1, 2)).to.be.equal(3);`都一样。  
+</code></pre>
+
+<h3 id="运行">运行</h3>
+
+<pre><code>用命令行工具运行`mocha`命令，会出现以下结果：  
+![](/img/mocha.png)      
+
+这样会默认运行test文件夹下的所有测试脚本，如果想单独运行，可以`$ mocha index.test.js`，也可以指定运行多个，如`mocha index.test.js b.test.js`。
+
+如果test文件夹下存在子目录，则需要执行`$ mocha --recursive`才能执行所有的测试脚本。
+</code></pre>
+
+<h3 id="异步测试">异步测试</h3>
+
+<pre><code>Mocha默认每个测试用例最多执行2000毫秒，如果到时没有得到结果，就报错。对于涉及异步操作的测试用例，这个时间往往是不够的，需要用`-t`或`--timeout`参数指定超时门槛。
+</code></pre>
+
+<ol>
+<li><p>延时</p>
+
+<pre><code class="language-js">it('测试应该5000毫秒后结束', function(done) {
+    var x = true;
+    var f = function() {
+        x = false;
+        expect(x).to.be.not.ok;
+        done(); // 通知Mocha测试结束
+    };
+    setTimeout(f, 4000);
+});
+</code></pre>
+
+<p>这需要运行<code>$ mocha -t 5000</code></p>
+
+<p>当测试结束的时候，必须显式调用<code>done()</code>函数，告诉Mocha测试结束了。否则，Mocha就无法知道，测试是否结束，会一直等到超时报错。</p></li>
+
+<li><p>异步请求</p>
+
+<pre><code class="language-js">var request = require('superagent');
+
+it('异步请求应该返回一个对象', function (done) {
+    request
+        .get('https://cnodejs.org/api/v1/topics')
+        .end(function (err, res) {
+            expect(res).to.be.an('object');
+            done();
+        });
+});
+</code></pre>
+
+<p>Mocha内置对Promise的支持，允许直接返回Promise，等到它的状态改变，再执行断言，而不用显式调用done方法。如下：</p>
+
+<pre><code class="language-js">var fetch = require('node-fetch');
+
+it('异步请求应该返回一个对象', function () {
+    return fetch('https://cnodejs.org/api/v1/topics')
+        .then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            expect(json).to.be.an('object');
+        });
+});
+</code></pre></li>
+</ol>
+
+<h3 id="文档">文档</h3>
+
+<p>更具体的，可参考:<br />
+<a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html">测试框架 Mocha 实例教程</a><br />
+<a href="https://www.jianshu.com/p/f200a75a15d2">Chai.js断言库API中文文档</a></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/unit-test/">unit test</a>
+
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/mocha/">mocha</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/03/%E8%A7%A3%E5%86%B3vue%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" data-tooltip="解决vue开发模式下的跨域问题">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
-      </p>
-    </div>
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-  
-    <a href="https://foxery.github.io/2018/02/hugo%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://foxery.github.io/img/cover1.jpg"/>
-      </div>
-    </a>
-  
-</article>
+
 
             
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
             
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2018 foxery. All Rights Reserved
@@ -263,6 +443,66 @@
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/03/%E8%A7%A3%E5%86%B3vue%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" data-tooltip="解决vue开发模式下的跨域问题">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -526,6 +766,32 @@ $(document).ready(function() {
 });
 </script>
 
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/foxery.github.io\/2018\/04\/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8\/';
+          
+            this.page.identifier = '\/2018\/04\/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 

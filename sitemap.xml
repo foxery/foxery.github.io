@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2018-04-03T15:17:42+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://foxery.github.io/2018/03/%E8%A7%A3%E5%86%B3vue%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2018-03-30T17:26:47+08:00</lastmod>
   </url>
@@ -76,13 +81,13 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/categories/h5/</loc>
+    <loc>https://foxery.github.io/tags/h5/</loc>
     <lastmod>2018-03-05T10:25:16+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://foxery.github.io/tags/h5/</loc>
+    <loc>https://foxery.github.io/categories/h5/</loc>
     <lastmod>2018-03-05T10:25:16+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -94,14 +99,20 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/categories/js/</loc>
+    <loc>https://foxery.github.io/tags/js/</loc>
     <lastmod>2018-03-07T10:18:33+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://foxery.github.io/tags/js/</loc>
-    <lastmod>2018-03-07T10:18:33+08:00</lastmod>
+    <loc>https://foxery.github.io/categories/js/</loc>
+    <lastmod>2018-04-03T15:17:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://foxery.github.io/tags/mocha/</loc>
+    <lastmod>2018-04-03T15:17:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -112,20 +123,20 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/categories/plugin/</loc>
-    <lastmod>2018-03-01T08:43:12+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://foxery.github.io/tags/plugin/</loc>
     <lastmod>2018-03-01T08:43:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://foxery.github.io/categories/plugin/</loc>
+    <lastmod>2018-03-01T08:43:12+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://foxery.github.io/post/</loc>
-    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
+    <lastmod>2018-04-03T15:17:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -143,6 +154,18 @@
   
   <url>
     <loc>https://foxery.github.io/categories/technique/</loc>
+    <lastmod>2018-04-03T15:17:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://foxery.github.io/tags/unit-test/</loc>
+    <lastmod>2018-04-03T15:17:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://foxery.github.io/tags/vue/</loc>
     <lastmod>2018-03-30T17:26:47+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -154,25 +177,19 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/tags/vue/</loc>
-    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://foxery.github.io/tags/vue-cli/</loc>
     <lastmod>2018-02-07T10:13:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://foxery.github.io/categories/webapp/</loc>
+    <loc>https://foxery.github.io/tags/webapp/</loc>
     <lastmod>2018-02-27T17:27:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://foxery.github.io/tags/webapp/</loc>
+    <loc>https://foxery.github.io/categories/webapp/</loc>
     <lastmod>2018-02-27T17:27:47+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -185,7 +202,7 @@
   
   <url>
     <loc>https://foxery.github.io/</loc>
-    <lastmod>2018-03-30T17:26:47+08:00</lastmod>
+    <lastmod>2018-04-03T15:17:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unit Test on 小狐狸水水的博客</title>
+    <link>https://foxery.github.io/tags/unit-test/</link>
+    <description>Recent content in Unit Test on 小狐狸水水的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 03 Apr 2018 15:17:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://foxery.github.io/tags/unit-test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>单元测试入门</title>
+      <link>https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Tue, 03 Apr 2018 15:17:42 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
