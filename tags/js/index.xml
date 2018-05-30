@@ -6,10 +6,19 @@
     <description>Recent content in Js on 小狐狸水水的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 07 Mar 2018 10:18:33 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 30 May 2018 15:30:50 +0800</lastBuildDate>
     
 	<atom:link href="https://foxery.github.io/tags/js/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>整合项目开发过程中遇到的各种小问题</title>
+      <link>https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Wed, 30 May 2018 15:30:50 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>创建对象的过程以及方法</title>

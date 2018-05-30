@@ -6,19 +6,10 @@
     <description>Recent content in Tags on 小狐狸水水的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 30 Mar 2018 17:26:47 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 05 Mar 2018 10:25:16 +0800</lastBuildDate>
     
 	<atom:link href="https://foxery.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Cross Domain</title>
-      <link>https://foxery.github.io/tags/cross-domain/</link>
-      <pubDate>Fri, 30 Mar 2018 17:26:47 +0800</pubDate>
-      
-      <guid>https://foxery.github.io/tags/cross-domain/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>H5</title>
@@ -41,7 +32,7 @@
     <item>
       <title>Js</title>
       <link>https://foxery.github.io/tags/js/</link>
-      <pubDate>Wed, 07 Mar 2018 10:18:33 +0800</pubDate>
+      <pubDate>Wed, 30 May 2018 15:30:50 +0800</pubDate>
       
       <guid>https://foxery.github.io/tags/js/</guid>
       <description></description>
@@ -75,11 +66,20 @@
     </item>
     
     <item>
-      <title>Sass</title>
-      <link>https://foxery.github.io/tags/sass/</link>
-      <pubDate>Fri, 30 Mar 2018 09:00:13 +0800</pubDate>
+      <title>Tag1</title>
+      <link>https://foxery.github.io/tags/tag1/</link>
+      <pubDate>Wed, 30 May 2018 13:47:25 +0800</pubDate>
       
-      <guid>https://foxery.github.io/tags/sass/</guid>
+      <guid>https://foxery.github.io/tags/tag1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tag2</title>
+      <link>https://foxery.github.io/tags/tag2/</link>
+      <pubDate>Wed, 30 May 2018 13:47:25 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/tags/tag2/</guid>
       <description></description>
     </item>
     
@@ -95,7 +95,7 @@
     <item>
       <title>Vue</title>
       <link>https://foxery.github.io/tags/vue/</link>
-      <pubDate>Fri, 30 Mar 2018 17:26:47 +0800</pubDate>
+      <pubDate>Wed, 07 Feb 2018 10:14:19 +0800</pubDate>
       
       <guid>https://foxery.github.io/tags/vue/</guid>
       <description></description>

@@ -229,137 +229,61 @@
             <div class="main-content-wrap">
               <p></p>
 
-<h3 id="坑">坑</h3>
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#1-关于路由模式问题">1.关于路由模式问题</a></li>
+<li><a href="#2-如何注册全局组件">2.如何注册全局组件</a></li>
+<li><a href="#3-局部注册只允许输入数字的组件">3.局部注册只允许输入数字的组件</a></li>
+<li><a href="#4-封装http请求">4.封装http请求</a></li>
+<li><a href="#5-如何使用sass">5.如何使用sass</a></li>
+<li><a href="#6-如何引用公共-scss文件">6.如何引用公共.scss文件</a></li>
+<li><a href="#7-如何解决vue开发模式下的跨域问题">7.如何解决vue开发模式下的跨域问题</a></li>
+<li><a href="#6-项目打包后的目录路径问题">6.项目打包后的目录路径问题</a></li>
+<li><a href="#7-解决在v-html时-里面的元素无法继承外部css的问题">7.解决在v-html时，里面的元素无法继承外部css的问题</a></li>
+<li><a href="#8-如何全局引入jquery">8.如何全局引入jquery</a></li>
+<li><a href="#9-父子组件之间如何相互通信">9.父子组件之间如何相互通信</a></li>
+<li><a href="#10-解决正常引入子组件报未注册组件错误的问题">10.解决正常引入子组件报未注册组件错误的问题</a></li>
+</ul>
+</nav>
 
-<ol>
-<li><p>路由去掉默认的#</p>
+<h1 id="1-关于路由模式问题">1.关于路由模式问题</h1>
 
-<pre><code>```js
-export default new Router({  
-mode: 'history',//去掉路由中默认的#/  
-routes: [
-    {
-    path: '/',
-    name: 'HelloWorld',
-    component: HelloWorld
-    }
-]
-});
-```
-</code></pre></li>
+<pre><code>默认是hash模式，此模式下的路由会带有#/的形式;  
+可将mode改成history，此时路由的#便会取消，但此模式需要后台配置  
+</code></pre>
 
-<li><p>组件中避免for循环时出现重复键报错,可在绑定key值时加一些字符区分</p>
+<h1 id="2-如何注册全局组件">2.如何注册全局组件</h1>
 
-<pre><code>```html
-&lt;template&gt;
-    &lt;div v-for=&quot;item in items&quot; :key=&quot;item.Id+'aabbcc'&quot;&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-```  
-</code></pre></li>
-</ol>
+<p>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
 
-<h3 id="组件">组件</h3>
 
-<ol>
-<li><p>简易下拉列表</p>
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>toast.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import Component from &#39;&#39;;
 
-<pre><code>```html
-&lt;template&gt;
-&lt;div&gt;
-    &lt;div class=&quot;dropdown-wrapper&quot;&gt;
-        &lt;div class=&quot;dropdown-selected&quot; :class=&quot;{ show: isActive }&quot; @click=&quot;SetActive&quot;&gt;{{selected.Name}}&lt;/div&gt;
-        &lt;ul class=&quot;dropdown-list&quot;&gt;
-            &lt;li v-for=&quot;item in items&quot; @click=&quot;SelectLi(item.Name)&quot; :key=&quot;item.Id&quot;&gt;{{item.Name}}&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/template&gt;
-```
-
-```js
-export default {
-name: &quot;&quot;,
-data() {
-    return {
-    isActive: false,
-    selected: {
-        Id: 0,
-        Name: this.items[0].Name
-    }
-    };
-},
-props: {
-    items: {
-    type: Array,
-    required: true
-    }
-},
-methods: {
-    SetActive: function(event) {
-    this.isActive = !this.isActive;
-    },
-    SelectLi: function(val) {
-    this.selected.Name = val;
-    this.SetActive();
-    }
-},
-mounted:function(){
-    document.addEventListener('click', (e) =&gt; {
-        console.log(this.$el);
-            if (!this.$el.contains(e.target)){
-                this.isActive = false
-            } 
-        });
-    }
-};
-
-```css
-.dropdown-wrapper {
-position: relative;
-display: inline-block;
-margin-top: 20px;
-margin-left: 20px;
-}
-.dropdown-selected {
-height: 36px;
-line-height: 34px;
-width: 120px;
-border: 1px solid #afafaf;
-padding-left: 10px;
-&amp;.show {
-    ~ .dropdown-list {
-    display: block;
-    }
-}
-}
-.dropdown-list {
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-background-color: #fff;
-z-index: 1;
-border: 1px solid #afafaf;
-display: none;
-&gt; li {
-    height: 36px;
-    line-height: 36px;
-    padding-left: 10px;
-}
-}
-```  
-</code></pre></li>
-
-<li><p>注册全局引用组件方法</p>
-
-<ol>
-<li>引入组件<br />
-    <code>import Component from ''</code><br /></li>
-
-<li><p>导出方法</p>
-
-<pre><code>```js  
 const Toast = {};
 
 // 注册Toast
@@ -372,7 +296,7 @@ Toast.install = function (Vue) {
 
     // 将这个实例挂载在新创建的div上
     // 并将此div加入全局挂载点内部
-    instance.$mount(document.createElement('div'))
+    instance.$mount(document.createElement(&#39;div&#39;))
     document.body.appendChild(instance.$el)
 
     // 通过Vue的原型注册一个方法
@@ -387,78 +311,139 @@ Toast.install = function (Vue) {
     }
 }
 
-export default Toast
-```  
-</code></pre></li>
+export default Toast;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
-<li><p>在<code>main.js</code>文件内引用<br />
-<code>import Toast from ''</code><br />
-<code>Vue.use(Toast)</code></p></li>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
 
-<li><p>在组件内无需import,直接<code>this.$toast(&quot;&quot;)</code>即可</p></li>
-</ol></li>
 
-<li><p>只允许输入数字的组件</p>
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>main.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import Toast from &#39;&#39;
+Vue.use(Toast)</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+在组件内<code>this.$toast(&quot;&quot;)</code>即可</p>
 
-<pre><code>```js
-&lt;input type=&quot;text&quot; v-number-only&gt;  
+<h1 id="3-局部注册只允许输入数字的组件">3.局部注册只允许输入数字的组件</h1>
 
-export default{
-    directives: {
-        numberOnly: {
-            bind: function(el) {
-                el.handler = function() {
-                el.value = el.value.replace(/\D+/, &quot;&quot;);
-                };
-                el.addEventListener(&quot;input&quot;, el.handler);
-            },
-            unbind: function(el) {
-                el.removeEventListener(&quot;input&quot;, el.handler);
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;div&gt;
+        &lt;input type=&#34;text&#34; v-number-only&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    export default{
+        directives: {
+            numberOnly: {
+                bind: function(el) {
+                    el.handler = function() {
+                    el.value = el.value.replace(/\D&#43;/, &#34;&#34;);
+                    };
+                    el.addEventListener(&#34;input&#34;, el.handler);
+                },
+                unbind: function(el) {
+                    el.removeEventListener(&#34;input&#34;, el.handler);
+                }
             }
         }
-}
-}
-```   
-</code></pre></li>
-</ol>
+    }
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
-<h3 id="记录">记录</h3>
+<h1 id="4-封装http请求">4.封装http请求</h1>
 
-<ol>
-<li><p>http请求</p>
+<p>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
 
-<p>配置路由文件<code>router/config.js</code><br />
-跨域情况下不写</p>
 
-<pre><code>```js
-import axios from 'axios'
-
-var pName = location.pathname.replace(/\/+/g, '/');
-var id = pName.slice(0, pName.indexOf(&quot;/&quot;, 2));
-axios.defaults.baseURL = id;
-axios.defaults.withCredentials = true;
-
-axios.interceptors.request.use(function (config) {
-    return config;
-}, function (error) {
-    return Promise.reject(error);
-});//请求拦截器
-
-axios.interceptors.response.use(response =&gt; {
-    // 请求成功返回
-    //your code
-    return response;
-}, (responseError) =&gt; {
-});//响应拦截器
-```  
-</code></pre>
-
-<p>在<code>main.js</code>文件中引入,<code>import config from './router/config'</code><br />
-   发布时切换生产环境,<code>Vue.config.productionTip = true</code></p>
-
-<pre><code>```js  
-import axios from 'axios'
-import qs from 'qs'
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>http.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import axios from &#39;axios&#39;
+import qs from &#39;qs&#39;
 
 export function Get(url, data) {
     return new Promise((resolve, reject) =&gt; {
@@ -482,8 +467,8 @@ export function Post(url, data) {
     return new Promise((resolve, reject) =&gt; {
         axios.post(url, qs.stringify(data), {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json'
+                &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;,
+                &#39;Accept&#39;: &#39;application/json&#39;
             }
         }).then((res) =&gt; {
             if (res) {
@@ -516,26 +501,764 @@ export function PostFlie(url, data) {
             reject(error);
         })
     })
-}
-```
-在service层只要引用相对路径就行
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
-```js  
-import { Get, Post } from './http'
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>service.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import { Get, Post,PostFlie } from &#39;./http&#39;
 
 export function Interface(data) {
-    return Get('/url', data);
-}
-```
-组件内引用同样只需要相对路径
+    return Get(&#39;/url&#39;, data);
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
-```js
-import { Interface } from &quot;&quot;;
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
 
-Interface(data).then(res =&gt; {});
-```
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import { Interface } from &#34;&#34;;
+
+export default{
+    mounted(){
+        Interface(data).then(res =&gt; {});
+    }
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h1 id="5-如何使用sass">5.如何使用sass</h1>
+
+<ol>
+<li><p>安装sass的依赖包</p>
+
+<pre><code># 使用save会在package.json中自动添加  
+cnpm i node-sass --save-dev
+cnpm i sass-loader --save-dev  
+</code></pre></li>
+
+<li><p>添加配置<br />
+    
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>build/webpack.base.conf.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">module: {
+        rules: [
+            //...默认及其他
+            {
+                test: /\.scss$/,
+                loaders: [&#34;style&#34;, &#34;css&#34;, &#34;sass&#34;]
+            }
+        ]
+    }
+        </code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p></li>
+
+<li><p>使用</p>
+
+<pre><code> &lt;style lang=&quot;scss&quot;&gt;
+ &lt;/style&gt;  
 </code></pre></li>
 </ol>
+
+<h1 id="6-如何引用公共-scss文件">6.如何引用公共.scss文件</h1>
+
+<p>在<code>app.vue</code>中<code>@import ''</code>即可</p>
+
+<h1 id="7-如何解决vue开发模式下的跨域问题">7.如何解决vue开发模式下的跨域问题</h1>
+
+<table>
+<thead>
+<tr>
+<th>接口请求地址</th>
+<th>前端页面地址</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="https://cnodejs.org/api/v1">https://cnodejs.org/api/v1</a></td>
+<td><a href="http://localhost:8080">http://localhost:8080</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>如上，在请求上，我们的开发环境不仅仅面临要把接口的全路径写全的问题，还包括跨域问题等等。</p>
+
+<p>所以要将接口地址通过代理的方式映射到本地，让我们的本地开发也可以使用相对根目录的方式请求接口。</p>
+
+<p>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>config/index.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">proxyTable: {
+      &#39;/apitest&#39;: { //跨域接口请求标记
+        target: &#39;https://cnodejs.org/api/v1&#39;, // 需要跨域请求接口的域名
+        secure: false,      // 如果是https接口，需要配置这个参数
+        changeOrigin: true,     // 如果接口跨域，需要进行这个参数配置
+        pathRewrite: { 
+          &#39;^/apitest&#39;: &#39;&#39; //把域名换成target，代理域名为空，请注意，pathRewrite下的代理域名一定要设置为空，否则会出现请求接口404的问题
+          } 
+      }
+    }</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>build/webpack.dev.conf.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">plugins: [
+    new webpack.DefinePlugin({
+      API_HOST:&#39;&#34;/apitest&#34;&#39; //设置全局变量 注意单双引号
+    })
+]</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>build/webpack.prod.conf.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">plugins: [
+    new webpack.DefinePlugin({
+      API_HOST:&#39;&#34;https://cnodejs.org/api/v1&#34;&#39; //设置全局变量
+    })
+]</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>build/webpack.dev.build.conf.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">plugins: [
+    new webpack.DefinePlugin({
+      API_HOST:&#39;&#34;https://cnodejs.org/api/v1&#34;&#39; //设置全局变量
+    })
+]</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>service.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">export function Interface(data) {
+    return Get(API_HOST &#43; &#39;/topics&#39;, data);
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h1 id="6-项目打包后的目录路径问题">6.项目打包后的目录路径问题</h1>
+
+<p>默认配置下，我们的项目只能在根目录下运行，将配置修改成以下这样就可以实现将项目打包到子目录了<br />
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>config/index.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">assetsPublicPath: &#39;./&#39;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h1 id="7-解决在v-html时-里面的元素无法继承外部css的问题">7.解决在v-html时，里面的元素无法继承外部css的问题</h1>
+
+<p>v-html渲染的内容可以理解为其子组件内容，当style加上<code>scoped</code>属性时，就无法作用于v-html内绑定的内容。</p>
+
+<pre><code>    方法一：直接去除scoped属性  
+    方法二：在update()的生命周期内，通过js改变其css
+</code></pre>
+
+<h1 id="8-如何全局引入jquery">8.如何全局引入jquery</h1>
+
+<ol>
+<li><p><code>$ cnpm install jquery --save</code></p></li>
+
+<li>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>build/webpack.base.conf.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">var webpack = require(&#34;webpack&#34;)
+ //在module.exports的最后加入
+plugins: [
+    new webpack.optimize.CommonsChunkPlugin(&#39;common.js&#39;),
+    new webpack.ProvidePlugin({
+        jQuery: &#34;jquery&#34;,
+        $: &#34;jquery&#34;
+    })
+   ]</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+
+<li><p>重启 <code>npm run dev</code></p></li>
+
+<li>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>main.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import $ from &#39;jquery&#39;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+</ol>
+
+<h1 id="9-父子组件之间如何相互通信">9.父子组件之间如何相互通信</h1>
+
+<ol>
+<li>父组件调用子组件的方法
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>parent.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;我是父组件&lt;/h1&gt;
+        &lt;!-- 注意这里的ref --&gt;
+        &lt;child ref=&#34;child&#34;&gt;&lt;/child&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    import child from &#39;./child&#39;
+
+    export default{
+        components:{ child },//别忘了components
+        methods:{
+            parent(){
+                this.$refs.child.childFn()
+            }
+        }
+    }
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>child.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;div&gt;
+       &lt;h2&gt;我是子组件&lt;/h2&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    export default{
+        methods:{
+            childFn(){
+                alert(&#39;父组件调用了我&#39;)
+            }
+        }
+    }
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure><br /></li>
+<li>子组件调用父组件的方法
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>parent.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;我是父组件&lt;/h1&gt;
+        &lt;child @parentFn=&#34;parent&#34;&gt;&lt;/child&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    import child from &#39;./child&#39;
+
+    export default{
+        components:{ child },
+        methods:{
+            parent(){
+                //something
+            }
+        }
+    }
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>child.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;div&gt;
+       &lt;h2&gt;我是子组件&lt;/h2&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    export default{
+        methods:{
+            childFn(){
+                this.$emit(&#34;parentFn&#34;);
+            }
+        }
+    }
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+</ol>
+
+<h1 id="10-解决正常引入子组件报未注册组件错误的问题">10.解决正常引入子组件报未注册组件错误的问题</h1>
+
+<p>如下引入子组件：
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;confirm-dialog&gt;&lt;/confirm-dialog&gt;
+&lt;/template&gt;
+
+import { ConfirmDialog } from &#39;./dialogs&#39;;
+export default {
+    components: {
+    &#39;confirm-dialog&#39;: ConfirmDialog,
+    },
+    ...
+};</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure><br />
+会报如下的组件未注册的错误：</p>
+
+<pre><code>[Vue warn]: Unknown custom element: &lt;modal-dialog&gt; - did you register the component correctly? For recursive components, make sure to provide the &quot;name&quot; option.(found in &lt;ConfirmDialog&gt; at ...\src\components\global\dialogs\ConfirmDialog.vue)  
+</code></pre>
+
+<p>解决方法是：<br />
+<code>import ConfirmDialog from './dialogs';</code><br />
+去掉花括号即可</p>
               
             </div>
           </div>
@@ -595,7 +1318,7 @@ Interface(data).then(res =&gt; {});
       
       <li class="post-action">
         
-          <a class="post-action-btn btn btn--default" href="#">
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
         
           <i class="fa fa-list"></i>
         </a>
@@ -663,7 +1386,7 @@ Interface(data).then(res =&gt; {});
       
       <li class="post-action">
         
-          <a class="post-action-btn btn btn--default" href="#">
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
         
           <i class="fa fa-list"></i>
         </a>
@@ -733,12 +1456,12 @@ Interface(data).then(res =&gt; {});
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/">
-                <h3 class="media-heading">单元测试入门</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">整合项目开发过程中遇到的各种小问题</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Apr 4, 2018
+                  May 5, 2018
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><p></p></div>
@@ -750,15 +1473,15 @@ Interface(data).then(res =&gt; {});
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/03/%E8%A7%A3%E5%86%B3vue%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
-                <h3 class="media-heading">解决vue开发模式下的跨域问题</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/test/">
+                <h3 class="media-heading">Test</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Mar 3, 2018
+                  May 5, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"></div>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -767,12 +1490,12 @@ Interface(data).then(res =&gt; {});
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/03/%E5%9C%A8vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8sass/">
-                <h3 class="media-heading">在vue项目中使用sass</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/">
+                <h3 class="media-heading">单元测试入门</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Mar 3, 2018
+                  Apr 4, 2018
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><p></p></div>
