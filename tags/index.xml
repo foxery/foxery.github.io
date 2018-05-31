@@ -66,24 +66,6 @@
     </item>
     
     <item>
-      <title>Tag1</title>
-      <link>https://foxery.github.io/tags/tag1/</link>
-      <pubDate>Wed, 30 May 2018 13:47:25 +0800</pubDate>
-      
-      <guid>https://foxery.github.io/tags/tag1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tag2</title>
-      <link>https://foxery.github.io/tags/tag2/</link>
-      <pubDate>Wed, 30 May 2018 13:47:25 +0800</pubDate>
-      
-      <guid>https://foxery.github.io/tags/tag2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Unit Test</title>
       <link>https://foxery.github.io/tags/unit-test/</link>
       <pubDate>Tue, 03 Apr 2018 15:17:42 +0800</pubDate>
@@ -95,7 +77,7 @@
     <item>
       <title>Vue</title>
       <link>https://foxery.github.io/tags/vue/</link>
-      <pubDate>Wed, 07 Feb 2018 10:14:19 +0800</pubDate>
+      <pubDate>Thu, 31 May 2018 17:37:21 +0800</pubDate>
       
       <guid>https://foxery.github.io/tags/vue/</guid>
       <description></description>
@@ -111,11 +93,20 @@
     </item>
     
     <item>
-      <title>Webapp</title>
-      <link>https://foxery.github.io/tags/webapp/</link>
-      <pubDate>Tue, 27 Feb 2018 17:27:47 +0800</pubDate>
+      <title>Webview</title>
+      <link>https://foxery.github.io/tags/webview/</link>
+      <pubDate>Thu, 31 May 2018 17:06:06 +0800</pubDate>
       
-      <guid>https://foxery.github.io/tags/webapp/</guid>
+      <guid>https://foxery.github.io/tags/webview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wechat</title>
+      <link>https://foxery.github.io/tags/wechat/</link>
+      <pubDate>Thu, 31 May 2018 17:37:21 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/tags/wechat/</guid>
       <description></description>
     </item>
     

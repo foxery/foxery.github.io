@@ -3,13 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2018-05-30T15:30:50+08:00</lastmod>
+    <loc>https://foxery.github.io/2018/05/%E5%9C%A8vue%E6%A1%86%E6%9E%B6%E4%B8%AD%E8%BF%9B%E8%A1%8C%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2018-05-31T17:37:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://foxery.github.io/2018/05/test/</loc>
-    <lastmod>2018-05-30T13:47:25+08:00</lastmod>
+    <loc>https://foxery.github.io/2018/05/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95app-webview/</loc>
+    <lastmod>2018-05-31T17:06:06+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2018-05-30T15:30:50+08:00</lastmod>
   </url>
   
   <url>
@@ -33,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/2018/02/%E5%BC%80%E5%8F%91webapp%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2018-02-27T17:27:47+08:00</lastmod>
   </url>
   
@@ -75,12 +80,6 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/categories/category/</loc>
-    <lastmod>2018-05-30T13:47:25+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://foxery.github.io/tags/h5/</loc>
     <lastmod>2018-03-05T10:25:16+08:00</lastmod>
     <priority>0</priority>
@@ -106,7 +105,7 @@
   
   <url>
     <loc>https://foxery.github.io/categories/js/</loc>
-    <lastmod>2018-05-30T15:30:50+08:00</lastmod>
+    <lastmod>2018-05-31T17:37:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -136,25 +135,7 @@
   
   <url>
     <loc>https://foxery.github.io/post/</loc>
-    <lastmod>2018-05-30T15:30:50+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/categories/subcategory/</loc>
-    <lastmod>2018-05-30T13:47:25+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/tags/tag1/</loc>
-    <lastmod>2018-05-30T13:47:25+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://foxery.github.io/tags/tag2/</loc>
-    <lastmod>2018-05-30T13:47:25+08:00</lastmod>
+    <lastmod>2018-05-31T17:37:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -166,7 +147,7 @@
   
   <url>
     <loc>https://foxery.github.io/categories/technique/</loc>
-    <lastmod>2018-05-30T15:30:50+08:00</lastmod>
+    <lastmod>2018-05-31T17:37:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -178,7 +159,7 @@
   
   <url>
     <loc>https://foxery.github.io/tags/vue/</loc>
-    <lastmod>2018-02-07T10:14:19+08:00</lastmod>
+    <lastmod>2018-05-31T17:37:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -195,14 +176,20 @@
   </url>
   
   <url>
-    <loc>https://foxery.github.io/tags/webapp/</loc>
-    <lastmod>2018-02-27T17:27:47+08:00</lastmod>
+    <loc>https://foxery.github.io/tags/webview/</loc>
+    <lastmod>2018-05-31T17:06:06+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://foxery.github.io/categories/webapp/</loc>
-    <lastmod>2018-02-27T17:27:47+08:00</lastmod>
+    <loc>https://foxery.github.io/categories/webview/</loc>
+    <lastmod>2018-05-31T17:06:06+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://foxery.github.io/tags/wechat/</loc>
+    <lastmod>2018-05-31T17:37:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -214,7 +201,7 @@
   
   <url>
     <loc>https://foxery.github.io/</loc>
-    <lastmod>2018-05-30T15:30:50+08:00</lastmod>
+    <lastmod>2018-05-31T17:37:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   

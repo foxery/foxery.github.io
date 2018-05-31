@@ -238,11 +238,13 @@
 <li><a href="#5-如何使用sass">5.如何使用sass</a></li>
 <li><a href="#6-如何引用公共-scss文件">6.如何引用公共.scss文件</a></li>
 <li><a href="#7-如何解决vue开发模式下的跨域问题">7.如何解决vue开发模式下的跨域问题</a></li>
-<li><a href="#6-项目打包后的目录路径问题">6.项目打包后的目录路径问题</a></li>
+<li><a href="#6-项目打包后部署到服务器上打开一片空白-发现是文件引用路径错误问题">6.项目打包后部署到服务器上打开一片空白,发现是文件引用路径错误问题</a></li>
 <li><a href="#7-解决在v-html时-里面的元素无法继承外部css的问题">7.解决在v-html时，里面的元素无法继承外部css的问题</a></li>
 <li><a href="#8-如何全局引入jquery">8.如何全局引入jquery</a></li>
 <li><a href="#9-父子组件之间如何相互通信">9.父子组件之间如何相互通信</a></li>
 <li><a href="#10-解决正常引入子组件报未注册组件错误的问题">10.解决正常引入子组件报未注册组件错误的问题</a></li>
+<li><a href="#11-如何在js文件内使用vue-router进行路由跳转">11.如何在js文件内使用vue-router进行路由跳转</a></li>
+<li><a href="#12-绑定事件中如何获取this-即触发事件的元素本身">12.绑定事件中如何获取this（即触发事件的元素本身）</a></li>
 </ul>
 </nav>
 
@@ -868,9 +870,13 @@ cnpm i sass-loader --save-dev
   </table>
 </figure></p>
 
-<h1 id="6-项目打包后的目录路径问题">6.项目打包后的目录路径问题</h1>
+<h1 id="6-项目打包后部署到服务器上打开一片空白-发现是文件引用路径错误问题">6.项目打包后部署到服务器上打开一片空白,发现是文件引用路径错误问题</h1>
 
-<p>默认配置下，我们的项目只能在根目录下运行，将配置修改成以下这样就可以实现将项目打包到子目录了<br />
+<p>默认配置下，通过webpack+vuecli默认打包的css、js等资源，路径都是绝对的。
+但当部署到带有文件夹的项目中，这种绝对路径就会出现问题，因为把配置的static文件夹当成了根路径，那么要解决这种问题，就得引用相对路径。</p>
+
+<ol>
+<li>资源相对引用路径
 
   
     
@@ -904,7 +910,48 @@ cnpm i sass-loader --save-dev
       </tr>
     </tbody>
   </table>
-</figure></p>
+</figure></li>
+<li>背景图片的引用问题
+上面虽然解决了资源路径的引用问题，但是资源里面的背景图片，不像index.html中加载资源一样，通过./static/js/app.js引用可以正常加载，图片资源是通过css加载的，如<code>background: url(&quot;../../assets/images/logo.png&quot;);</code>被相对打包后变成了<code>url(static/img/logo.2f00bf2.png)</code>所以我们要保留css引用图片的正常路径，即<code>url(../../static/img/logo-.2f00bf2.png)</code>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>build/utils.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">return ExtractTextPlugin.extract({
+    use: loaders,
+    fallback: &#39;vue-style-loader&#39;,
+    publicPath:&#39;../../&#39; //&lt;--注意此处路径
+})</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+</ol>
 
 <h1 id="7-解决在v-html时-里面的元素无法继承外部css的问题">7.解决在v-html时，里面的元素无法继承外部css的问题</h1>
 
@@ -1259,6 +1306,197 @@ export default {
 <p>解决方法是：<br />
 <code>import ConfirmDialog from './dialogs';</code><br />
 去掉花括号即可</p>
+
+<h1 id="11-如何在js文件内使用vue-router进行路由跳转">11.如何在js文件内使用vue-router进行路由跳转</h1>
+
+<ol>
+<li>以下是路由文件的内容
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>router/index.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import Vue from &#39;vue&#39;;
+import Router from &#39;vue-router&#39;;
+
+Vue.use(Router);
+
+export default new Router({
+  routes: [
+    /* ... */
+  ],
+});</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+<li>把该路由文件引入到你的目标js文件中,你就可以使用路由了
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import router from &#34;../router&#34;
+
+function GoToPage(){
+    router.push(&#34;/&#34;);// &lt;--- router
+}
+
+export default GoToPage</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+</ol>
+
+<h1 id="12-绑定事件中如何获取this-即触发事件的元素本身">12.绑定事件中如何获取this（即触发事件的元素本身）</h1>
+
+<ol>
+<li>只获取当前事件元素，不包括其子元素
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;div&gt;
+        &lt;button @click=&#34;change($event)&#34;&gt;点击事件&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    export default{
+        methods:{
+            change(event){
+                console.log(event.target);
+            }
+        }
+    }
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+<li>只获取当前事件元素，且包括其子元素
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;div&gt;
+        &lt;button @click=&#34;change($event)&#34;&gt;点击事件&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    export default{
+        methods:{
+            change(event){
+                console.log(event.currentTarget);
+            }
+        }
+    }
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+</ol>
               
             </div>
           </div>
@@ -1456,8 +1694,8 @@ export default {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/">
-                <h3 class="media-heading">整合项目开发过程中遇到的各种小问题</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%9C%A8vue%E6%A1%86%E6%9E%B6%E4%B8%AD%E8%BF%9B%E8%A1%8C%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/">
+                <h3 class="media-heading">在vue框架中进行微信公众号开发</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -1473,8 +1711,25 @@ export default {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/05/test/">
-                <h3 class="media-heading">Test</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95app-webview/">
+                <h3 class="media-heading">如何调试app webview</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">整合项目开发过程中遇到的各种小问题</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -1558,8 +1813,8 @@ export default {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/02/%E5%BC%80%E5%8F%91webapp%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">
-                <h3 class="media-heading">开发webApp时遇到的问题记录</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">记录开发app webview时遇到的问题</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -1583,7 +1838,7 @@ export default {
                   Feb 2, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
+              <div class="media-content hide-xs font-merryweather"></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -1606,23 +1861,6 @@ export default {
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/02/%E6%90%AD%E5%BB%BAvue%E8%84%9A%E6%89%8B%E6%9E%B6/">
-                <h3 class="media-heading">搭建vue脚手架</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1630,7 +1868,7 @@ export default {
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         11 posts found
+         12 posts found
       </p>
     </div>
   </div>

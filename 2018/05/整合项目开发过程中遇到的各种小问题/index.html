@@ -48,6 +48,8 @@
     
 
     
+      <meta property="og:image" content="https://foxery.github.io/img/profile.jpg">
+    
     
     
 
@@ -231,6 +233,7 @@
 <ul>
 <li><a href="#1-只针对打印模式修改css">1.只针对打印模式修改css</a></li>
 <li><a href="#2-css实现单行-多行文本溢出显示省略号">2.CSS实现单行、多行文本溢出显示省略号</a></li>
+<li><a href="#3-js判断浏览类型-以及是否为手机端">3.js判断浏览类型，以及是否为手机端</a></li>
 </ul>
 </nav>
 
@@ -324,6 +327,65 @@
     </tbody>
   </table>
 </figure></p>
+
+<h1 id="3-js判断浏览类型-以及是否为手机端">3.js判断浏览类型，以及是否为手机端</h1>
+
+<p>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">var browser={
+    versions:function(){
+    var u = window.navigator.userAgent;
+    return {
+        trident: u.indexOf(&#39;Trident&#39;) &gt; -1, //IE内核
+        presto: u.indexOf(&#39;Presto&#39;) &gt; -1, //opera内核
+        webKit: u.indexOf(&#39;AppleWebKit&#39;) &gt; -1, //苹果、谷歌内核
+        gecko: u.indexOf(&#39;Gecko&#39;) &gt; -1 &amp;&amp; u.indexOf(&#39;KHTML&#39;) == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/)||!!u.match(/AppleWebKit/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]&#43;;( U;)? CPU.&#43;Mac OS X/), //ios终端
+        android: u.indexOf(&#39;Android&#39;) &gt; -1 || u.indexOf(&#39;Linux&#39;) &gt; -1, //android终端或者uc浏览器
+        iPhone: u.indexOf(&#39;iPhone&#39;) &gt; -1 || u.indexOf(&#39;Mac&#39;) &gt; -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf(&#39;iPad&#39;) &gt; -1, //是否为iPad
+        webApp: u.indexOf(&#39;Safari&#39;) == -1 ,//是否为web应用程序，没有头部与底部
+        weixin: u.indexOf(&#39;MicroMessenger&#39;) &gt; -1 //是否为微信浏览器
+        };
+    }()
+}
+console.log(&#34; 是否为移动终端: &#34;&#43;browser.versions.mobile);
+console.log(&#34; ios终端: &#34;&#43;browser.versions.ios);
+console.log(&#34; android终端: &#34;&#43;browser.versions.android);
+console.log(&#34; 是否为iPhone: &#34;&#43;browser.versions.iPhone);
+console.log(&#34; 是否iPad: &#34;&#43;browser.versions.iPad);</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
               
             </div>
           </div>
@@ -348,7 +410,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/05/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95app-webview/" data-tooltip="如何调试app webview">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -356,7 +418,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/05/test/" data-tooltip="Test">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/" data-tooltip="单元测试入门">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -416,7 +478,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/05/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95app-webview/" data-tooltip="如何调试app webview">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -424,7 +486,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/05/test/" data-tooltip="Test">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/04/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/" data-tooltip="单元测试入门">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -521,8 +583,8 @@
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/">
-                <h3 class="media-heading">整合项目开发过程中遇到的各种小问题</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%9C%A8vue%E6%A1%86%E6%9E%B6%E4%B8%AD%E8%BF%9B%E8%A1%8C%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/">
+                <h3 class="media-heading">在vue框架中进行微信公众号开发</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -538,8 +600,25 @@
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/05/test/">
-                <h3 class="media-heading">Test</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95app-webview/">
+                <h3 class="media-heading">如何调试app webview</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E6%95%B4%E5%90%88%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E5%B0%8F%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">整合项目开发过程中遇到的各种小问题</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -623,8 +702,8 @@
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/02/%E5%BC%80%E5%8F%91webapp%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">
-                <h3 class="media-heading">开发webApp时遇到的问题记录</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">记录开发app webview时遇到的问题</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -648,7 +727,7 @@
                   Feb 2, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
+              <div class="media-content hide-xs font-merryweather"></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -671,23 +750,6 @@
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/02/%E6%90%AD%E5%BB%BAvue%E8%84%9A%E6%89%8B%E6%9E%B6/">
-                <h3 class="media-heading">搭建vue脚手架</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -695,7 +757,7 @@
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         11 posts found
+         12 posts found
       </p>
     </div>
   </div>

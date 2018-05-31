@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>Category</title>
-      <link>https://foxery.github.io/categories/category/</link>
-      <pubDate>Wed, 30 May 2018 13:47:25 +0800</pubDate>
-      
-      <guid>https://foxery.github.io/categories/category/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>H5</title>
       <link>https://foxery.github.io/categories/h5/</link>
       <pubDate>Mon, 05 Mar 2018 10:25:16 +0800</pubDate>
@@ -41,7 +32,7 @@
     <item>
       <title>Js</title>
       <link>https://foxery.github.io/categories/js/</link>
-      <pubDate>Wed, 30 May 2018 15:30:50 +0800</pubDate>
+      <pubDate>Thu, 31 May 2018 17:37:21 +0800</pubDate>
       
       <guid>https://foxery.github.io/categories/js/</guid>
       <description></description>
@@ -57,18 +48,9 @@
     </item>
     
     <item>
-      <title>Subcategory</title>
-      <link>https://foxery.github.io/categories/subcategory/</link>
-      <pubDate>Wed, 30 May 2018 13:47:25 +0800</pubDate>
-      
-      <guid>https://foxery.github.io/categories/subcategory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Technique</title>
       <link>https://foxery.github.io/categories/technique/</link>
-      <pubDate>Wed, 30 May 2018 15:30:50 +0800</pubDate>
+      <pubDate>Thu, 31 May 2018 17:37:21 +0800</pubDate>
       
       <guid>https://foxery.github.io/categories/technique/</guid>
       <description></description>
@@ -84,11 +66,11 @@
     </item>
     
     <item>
-      <title>Webapp</title>
-      <link>https://foxery.github.io/categories/webapp/</link>
-      <pubDate>Tue, 27 Feb 2018 17:27:47 +0800</pubDate>
+      <title>Webview</title>
+      <link>https://foxery.github.io/categories/webview/</link>
+      <pubDate>Thu, 31 May 2018 17:06:06 +0800</pubDate>
       
-      <guid>https://foxery.github.io/categories/webapp/</guid>
+      <guid>https://foxery.github.io/categories/webview/</guid>
       <description></description>
     </item>
     
