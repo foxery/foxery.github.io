@@ -233,7 +233,8 @@
 <ul>
 <li><a href="#1-只针对打印模式修改css">1.只针对打印模式修改css</a></li>
 <li><a href="#2-css实现单行-多行文本溢出显示省略号">2.CSS实现单行、多行文本溢出显示省略号</a></li>
-<li><a href="#3-js判断浏览类型-以及是否为手机端">3.js判断浏览类型，以及是否为手机端</a></li>
+<li><a href="#3-js判断浏览器类型-以及是否为手机端">3.js判断浏览器类型，以及是否为手机端</a></li>
+<li><a href="#4-对接支付宝支付接口">4.对接支付宝支付接口</a></li>
 </ul>
 </nav>
 
@@ -328,7 +329,7 @@
   </table>
 </figure></p>
 
-<h1 id="3-js判断浏览类型-以及是否为手机端">3.js判断浏览类型，以及是否为手机端</h1>
+<h1 id="3-js判断浏览器类型-以及是否为手机端">3.js判断浏览器类型，以及是否为手机端</h1>
 
 <p>
   
@@ -381,6 +382,62 @@ console.log(&#34; ios终端: &#34;&#43;browser.versions.ios);
 console.log(&#34; android终端: &#34;&#43;browser.versions.android);
 console.log(&#34; 是否为iPhone: &#34;&#43;browser.versions.iPhone);
 console.log(&#34; 是否iPad: &#34;&#43;browser.versions.iPad);</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h1 id="4-对接支付宝支付接口">4.对接支付宝支付接口</h1>
+
+<p>通过后台接口返回一串字符串形式的html表单，将它渲染到页面上，由于是异步渲染的表单，所以需要手动触发submit事件
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;template&gt;
+    &lt;div v-html=&#34;ZFBForm&#34;&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+    export default {
+        data() {
+            return {
+                ZFBForm: null
+            };
+        },
+        mounted(){
+            this.ZFBForm = res;
+            this.$nextTick(() =&gt; {
+                document.forms[&#34;alipaysubmit&#34;].submit();
+            });
+        }
+    }
+&lt;/script&gt;</code></pre>
         </td>
       </tr>
     </tbody>

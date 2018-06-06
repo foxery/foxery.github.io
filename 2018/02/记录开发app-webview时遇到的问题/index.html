@@ -240,8 +240,34 @@
 
 <h1 id="1-区分安卓与ios">1.区分安卓与ios</h1>
 
-<pre><code>window.android //安卓
-</code></pre>
+<ol>
+<li><p>增加一个交互接口</p>
+
+<pre><code>window.android //需要安卓通过addJavascriptInterface定义一个接口，然后将name命名成android
+</code></pre></li>
+
+<li><p>通过userAgent判断</p>
+
+<pre><code>const browser = {
+    versions: function () {
+        var u = window.navigator.userAgent;
+        return {
+            trident: u.indexOf('Trident') &gt; -1, //IE内核
+            presto: u.indexOf('Presto') &gt; -1, //opera内核
+            webKit: u.indexOf('AppleWebKit') &gt; -1, //苹果、谷歌内核
+            gecko: u.indexOf('Gecko') &gt; -1 &amp;&amp; u.indexOf('KHTML') == -1, //火狐内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            android: u.indexOf('Android') &gt; -1 || u.indexOf('Linux') &gt; -1, //android终端或者uc浏览器
+            iPhone: u.indexOf('iPhone') &gt; -1 || u.indexOf('Mac') &gt; -1, //是否为iPhone或者安卓QQ浏览器
+            iPad: u.indexOf('iPad') &gt; -1, //是否为iPad
+            webApp: u.indexOf('Safari') == -1,//是否为web应用程序，没有头部与底部
+            weixin: u.indexOf('MicroMessenger') &gt; -1 //是否为微信浏览器
+        };
+    }()
+}        
+</code></pre></li>
+</ol>
 
 <h1 id="2-长按功能的实现">2.长按功能的实现</h1>
 
@@ -295,7 +321,7 @@ $.on(&#34;touchend&#34;, function () {
 
 <h1 id="4-ios-触摸滑动卡顿问题">4.ios 触摸滑动卡顿问题</h1>
 
-<p>
+
   
     
   
@@ -330,7 +356,7 @@ $.on(&#34;touchend&#34;, function () {
       </tr>
     </tbody>
   </table>
-</figure></p>
+</figure>
               
             </div>
           </div>
