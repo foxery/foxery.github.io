@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 小狐狸水水的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 05 Mar 2018 10:25:16 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 11 Oct 2018 15:24:52 +0800</lastBuildDate>
     
 	<atom:link href="https://foxery.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Arry</title>
+      <link>https://foxery.github.io/tags/arry/</link>
+      <pubDate>Thu, 11 Oct 2018 15:24:52 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/tags/arry/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>H5</title>
@@ -89,6 +98,15 @@
       <pubDate>Wed, 07 Feb 2018 10:13:59 +0800</pubDate>
       
       <guid>https://foxery.github.io/tags/vue-cli/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue Router</title>
+      <link>https://foxery.github.io/tags/vue-router/</link>
+      <pubDate>Thu, 07 Jun 2018 11:45:40 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/tags/vue-router/</guid>
       <description></description>
     </item>
     
