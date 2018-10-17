@@ -20,9 +20,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>轮播图插件</title>
+    <title>vue单页应用首屏加载优化</title>
     <meta name="author" content="foxery">
-    <meta name="keywords" content="carousel">
+    <meta name="keywords" content="首屏优化">
 
     <link rel="icon" href="https://foxery.github.io/favicon.png">
     
@@ -31,8 +31,8 @@
     <meta name="description" content="">
     <meta property="og:description" content="">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="轮播图插件">
-    <meta property="og:url" content="/2018/03/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6/">
+    <meta property="og:title" content="vue单页应用首屏加载优化">
+    <meta property="og:url" content="/2018/10/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96/">
     <meta property="og:site_name" content="小狐狸水水的博客">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="小狐狸水水的博客">
@@ -48,7 +48,7 @@
     
 
     
-      <meta property="og:image" content="https://foxery.github.io/img/carousel.png">
+      <meta property="og:image" content="https://foxery.github.io/img/cover2.jpg">
     
     
     
@@ -193,19 +193,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      轮播图插件
+      vue单页应用首屏加载优化
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-01T08:43:12&#43;08:00">
+      <time itemprop="datePublished" datetime="2018-10-17T10:10:17&#43;08:00">
         
   
   
   
   
-    2018.03.1
+    2018.10.17
   
 
       </time>
@@ -217,7 +217,7 @@
     
       <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
     
-      <a class="category-link" href="https://foxery.github.io/categories/plugin">plugin</a>
+      <a class="category-link" href="https://foxery.github.io/categories/vue">vue</a>
     
   
 
@@ -227,10 +227,24 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p><br />
-<img src="https://foxery.github.io/img/carousel.png" alt="" /></p>
+              <p></p>
 
-<p>心血来潮,写了一个简单的轮播图插件,带有左右切换功能、底部导航功能、自动循环功能。代码如下:</p>
+<p>vue单页应用打包之后，渲染加载时由于是一次性加载整个应用，所以首次加载会特别慢，会出现长时间的白屏，极大影响用户体验，因此，我尝试了多种优化方法。
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#1-按需加载">1.按需加载</a></li>
+<li><a href="#2-异步组件">2.异步组件</a></li>
+<li><a href="#3-使用cdn">3.使用CDN</a></li>
+<li><a href="#4-在index-html页面加上loading-避免出现长时间的白屏状态">4.在index.html页面加上loading，避免出现长时间的白屏状态</a></li>
+<li><a href="#5-开启gzip">5.开启Gzip</a></li>
+</ul>
+</nav></p>
+
+<h1 id="1-按需加载">1.按需加载</h1>
+
+<p>MintUI、ElementUI等UI框架都支持按需加载，直接在main.js内将需要用到的组件一一注册，或者只在需要用到的页面局部引用。</p>
+
+<p>修改前：</p>
 
 
   
@@ -250,154 +264,29 @@
 <figure class="highlight js language-js">
   <figcaption>
     
-      <span>carousel.js</span>
+      <span>main.js</span>
     
   </figcaption>
   <table>
     <tbody>
       <tr>
         <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre>
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-js"><code class="js">(function () {
-    $.Carousel = function (elem, options) {
-        var curr = this;
-        var contanier, navContanier, prevElem, nextElem, imgArry;
-        var curIndex = 0;
-        var autoTimeout = 0;
+          <pre class="code-highlight language-js"><code class="js">import MintUI from &#39;mint-ui&#39;
+import &#39;mint-ui/lib/style.css&#39;
 
-        curr.init = function () {
-            curr.options = $.extend({}, $.Carousel.defaultOptions, options);
-            contanier = $(curr.options.contanier);
-            navContanier = $(curr.options.nav);
-            prevElem = $(curr.options.prev);
-            nextElem = $(curr.options.next);
-            imgArry = curr.options.images;
-
-            if (imgArry.length != 0) {
-                var imgHtml = &#34;&#34;, navHtml = &#34;&#34;;
-                //为解决收尾图片衔接问题,故在首尾两侧克隆一份首尾的图片以做过渡
-                imgHtml &#43;= &#39;&lt;li class=&#34;mLastClone&#34; style=&#34;background-image:url(&#39; &#43; imgArry[imgArry.length - 1] &#43; &#39;);opacity:0;&#34;&gt;&lt;/li&gt;&#39;;
-                for (var i = 0; i &lt; imgArry.length; i&#43;&#43;) {
-                    imgHtml &#43;= &#39;&lt;li style=&#34;background-image:url(&#39; &#43; imgArry[i] &#43; &#39;);opacity:0;&#34;&gt;&lt;/li&gt;&#39;;
-                    navHtml &#43;= &#39;&lt;li&gt;&lt;/li&gt;&#39;;
-                }
-                imgHtml &#43;= &#39;&lt;li class=&#34;mFirstClone&#34; style=&#34;background-image:url(&#39; &#43; imgArry[0] &#43; &#39;);opacity:0;&#34;&gt;&lt;/li&gt;&#39;;
-                contanier.html(imgHtml);
-                navContanier.html(navHtml);
-
-                // 默认显示第一张图
-                contanier.children().eq(curIndex &#43; 1).css(&#34;opacity&#34;, 1);
-                navContanier.children().removeClass(curr.options.navActiveClass);
-                navContanier.children().eq(curIndex).addClass(curr.options.navActiveClass);
-
-                // 默认自动播放
-                if (curr.options.auto) {
-                    curr.startAuto();
-                    //鼠标进入容器时停止自动播放,离开时继续自动播放
-                    $(curr.options.contanier &#43; &#34;,&#34; &#43; curr.options.nav &#43; &#34;,&#34; &#43; curr.options.prev &#43; &#34;,&#34; &#43; curr.options.next).hover(function () {
-                        curr.stopAuto();
-                    }, function () {
-                        curr.startAuto();
-                    });
-                }
-
-            }
-
-            // 下一张
-            nextElem.click(function () {
-                curr.next();
-            });
-
-            // 上一张
-            prevElem.click(function () {
-                curr.prev();
-            });
-
-            // 跳转
-            navContanier.children().click(function () {
-                if ($(this).hasClass(curr.options.navActiveClass)) {
-                    return;
-                }
-                curr.index($(this).index());
-            });
-
-        };
-
-        curr.reset = function () {
-            contanier.children().css(&#34;opacity&#34;, 0);
-            contanier.children().css(&#34;left&#34;, 0);
-            navContanier.children().removeClass(curr.options.navActiveClass);
-        };
-
-        curr.next = function () {
-            curr.reset();
-            contanier.children().eq(curIndex &#43; 1).css(&#34;left&#34;, &#34;-100%&#34;);
-            curIndex&#43;&#43;;
-            if (curIndex == imgArry.length) {
-                curIndex = 0;
-            }
-            contanier.children().eq(curIndex &#43; 1).css(&#34;opacity&#34;, 1);
-            navContanier.children().eq(curIndex).addClass(curr.options.navActiveClass);
-        };
-
-        curr.prev = function () {
-            curr.reset();
-            contanier.children().eq(curIndex &#43; 1).css(&#34;left&#34;, &#34;100%&#34;);
-            if (curIndex == 0) {
-                curIndex = imgArry.length;
-            }
-            curIndex--;
-            contanier.children().eq(curIndex &#43; 1).css(&#34;opacity&#34;, 1);
-            navContanier.children().eq(curIndex).addClass(curr.options.navActiveClass);
-        };
-
-        curr.index = function (index) {
-            curr.reset();
-            if (curIndex &gt; index) {
-                contanier.children().eq(curIndex &#43; 1).css(&#34;left&#34;, &#34;100%&#34;);
-            } else {
-                contanier.children().eq(curIndex &#43; 1).css(&#34;left&#34;, &#34;-100%&#34;);
-            }
-            curIndex = index;
-            contanier.children().eq(curIndex &#43; 1).css(&#34;opacity&#34;, 1);
-            navContanier.children().eq(curIndex).addClass(curr.options.navActiveClass);
-        };
-
-        curr.startAuto = function () {
-            autoTimeout = setTimeout(() =&gt; {
-                curr.next();
-                curr.startAuto();
-            }, curr.options.intervals);
-        };
-
-        curr.stopAuto = function () {
-            clearTimeout(autoTimeout);
-        };
-
-        curr.init();
-    };
-
-    $.Carousel.defaultOptions = {
-        navActiveClass: &#34;active&#34;,
-        intervals: 2000,
-        auto: true
-    };
-
-    $.fn.Carousel = function (options) {
-        return this.each(function () {
-            (new $.Carousel(this, options));
-        });
-    };
-})();</code></pre>
+Vue.use(MintUI)</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
 </figure>
 
-<p>
+<p>修改后：</p>
+
+
   
     
   
@@ -412,207 +301,394 @@
   
 
 
-<figure class="highlight css language-css">
+<figure class="highlight js language-js">
   <figcaption>
     
-      <span>carousel.css</span>
+      <span>main.js</span>
     
   </figcaption>
   <table>
     <tbody>
       <tr>
         <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre>
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-css"><code class="css">* {
-    box-sizing: border-box;
-}
+          <pre class="code-highlight language-js"><code class="js">import { Popup, Picker, Spinner, Swipe, SwipeItem, Lazyload } from &#39;mint-ui&#39;
 
-body {
-    margin: 0;
-    padding: 0;
-}
-
-ul {
-    padding: 0;
-    margin: 0;
-}
-
-ul&gt;li {
-    list-style: none;
-}
-
-.carousel-container {
-    position: relative;
-    overflow: hidden;
-    width: 1200px;
-    margin: auto;
-    height: 600px;
-}
-
-.carousel-list {
-    clear: both;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.carousel-container:hover .carousel-arrow {
-    visibility: visible;
-    opacity: 1;
-}
-
-.carousel-list&gt;li {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    transition: left .3s ease-in-out, opacity .3s ease-in-out;
-    font-size: 72px;
-    color: #fff;
-    text-align: center;
-    line-height: 600px;
-}
-
-.carousel-arrow {
-    position: absolute;
-    top: 50%;
-    cursor: pointer;
-    transform: translateY(-50%);
-    transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
-    z-index: 999;
-    padding: 5px;
-    visibility: hidden;
-    opacity: 0;
-}
-
-.carousel-arrow:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.carousel-arrow.left {
-    left: 20px;
-}
-
-.carousel-arrow.right {
-    right: 20px;
-}
-
-.carousel-nav {
-    clear: both;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-}
-
-.carousel-nav&gt;li {
-    float: left;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #fff;
-    transition: background-color .3s ease-in-out;
-    cursor: pointer;
-}
-
-.carousel-nav&gt;li:hover {
-    background-color: #72c5ea;
-}
-
-.carousel-nav&gt;li.active {
-    background-color: #49b8ea;
-}
-
-.carousel-nav&gt;li&#43;li {
-    margin-left: 10px;
-}  </code></pre>
+Vue.use(Lazyload);
+Vue.component(Popup.name, Popup);
+Vue.component(Picker.name, Picker);
+Vue.component(Spinner.name, Spinner);
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
-</figure></p>
+</figure>
 
-<p>
-  
-    
-  
-  
-    
-  
-  
-    
-  
-  
-    
-  
+<h1 id="2-异步组件">2.异步组件</h1>
+
+<p>在路由定义中，将应用拆分为多个小模块，动态解析组件。</p>
+
+<p>修改前：</p>
 
 
-<figure class="highlight xml language-xml">
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
   <figcaption>
     
-      <span>carousel.html</span>
+      <span>router/index.js</span>
     
   </figcaption>
   <table>
     <tbody>
       <tr>
         <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre>
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-xml"><code class="xml">&lt;!DOCTYPE html&gt;
-&lt;html lang=&#34;en&#34;&gt;
+          <pre class="code-highlight language-js"><code class="js">import Index from &#39;../views/index&#39;
 
-&lt;head&gt;
-    &lt;meta charset=&#34;UTF-8&#34;&gt;
-    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;
-    &lt;meta http-equiv=&#34;X-UA-Compatible&#34; content=&#34;ie=edge&#34;&gt;
-    &lt;link rel=&#34;stylesheet&#34; href=&#34;./css/carousel.css&#34;&gt;
-    &lt;title&gt;轮播图&lt;/title&gt;
-&lt;/head&gt;
+...
+{
+    path: &#39;/index&#39;,
+    name: &#39;Index&#39;,
+    component: Index
+}
+...</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
-&lt;body&gt;
-    &lt;div class=&#34;carousel-container mCarousel&#34;&gt;
-        &lt;ul class=&#34;carousel-list mCarouselContent&#34;&gt;&lt;/ul&gt;
-        &lt;div class=&#34;carousel-arrow left mPrevBtn&#34;&gt;
-            &lt;img src=&#34;./images/left.png&#34; alt=&#34;&#34;&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;carousel-arrow right mNextBtn&#34;&gt;
-            &lt;img src=&#34;./images/right.png&#34; alt=&#34;&#34;&gt;
-        &lt;/div&gt;
-        &lt;ul class=&#34;carousel-nav mCarouselNav&#34;&gt;&lt;/ul&gt;
-    &lt;/div&gt;
+<p>修改后：</p>
 
-    &lt;script src=&#34;./js/jquery-3.3.1.js&#34;&gt;&lt;/script&gt;
-    &lt;script src=&#34;./js/carousel.js&#34;&gt;&lt;/script&gt;
-    &lt;script&gt;
-        $(&#34;.mCarousel&#34;).Carousel({
-            contanier: &#34;.mCarouselContent&#34;,
-            nav: &#34;.mCarouselNav&#34;,
-            prev: &#34;.mPrevBtn&#34;,
-            next: &#34;.mNextBtn&#34;,
-            navActiveClass: &#34;active&#34;,
-            images: [&#34;./images/img1.jpg&#34;, &#34;./images/img2.jpg&#34;, &#34;./images/img3.jpg&#34;],
-            intervals: 3000,
-            auto: true
-        });
-    &lt;/script&gt;
-&lt;/body&gt;
 
-&lt;/html&gt;</code></pre>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>router/index.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">const Index = r =&gt; require.ensure([], () =&gt; r(require(&#39;../views/index&#39;)), &#39;Index&#39;)
+
+...
+{
+    path: &#39;/index&#39;,
+    name: &#39;Index&#39;,
+    component: Index
+}
+...</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h1 id="3-使用cdn">3.使用CDN</h1>
+
+<p>打包时，把vue、vuex、vue-router、axios等，换用国内的bootcdn 直接引入到根目录的index.html中。</p>
+
+<p>在webpack设置中添加externals，忽略不需要打包的库。</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>build/webpack.prod.conf.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">...
+externals: {
+    &#39;vue&#39;: &#39;Vue&#39;,
+    &#39;vuex&#39;: &#39;Vuex&#39;,
+    &#39;vue-router&#39;: &#39;VueRouter&#39;,
+    &#39;axios&#39;: &#39;axios&#39;
+  }
+...</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight html language-html">
+  <figcaption>
+    
+      <span>index.html</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-html"><code class="html">&lt;script src=&#34;//cdn.bootcss.com/vue/2.2.5/vue.min.js&#34;&gt;&lt;/script&gt;  
+&lt;script src=&#34;//cdn.bootcss.com/vue-router/2.3.0/vue-router.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;//cdn.bootcss.com/vuex/2.2.1/vuex.min.js&#34;&gt;&lt;/script&gt;  
+&lt;script src=&#34;//cdn.bootcss.com/axios/0.15.3/axios.min.js&#34;&gt;&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<p>相应的，也就不需要import引用了，不然据说还是会打包进去（？这个没有深入研究对比过）</p>
+
+<p>修改前：<br />
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>store/index.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import Vue from &#39;vue&#39;;
+import Vuex from &#39;vuex&#39;;
+
+Vue.use(Vuex)
+
+//router/index.js
+import Router from &#39;vue-router&#39;
+Vue.use(Router)</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
 </figure></p>
+
+<p>修改后：<br />
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>store/index.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">//import Vue from &#39;vue&#39;;
+//import Vuex from &#39;vuex&#39;;
+
+//Vue.use(Vuex)
+
+//router/index.js
+//import Router from &#39;vue-router&#39;
+//Vue.use(Router)</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h1 id="4-在index-html页面加上loading-避免出现长时间的白屏状态">4.在index.html页面加上loading，避免出现长时间的白屏状态</h1>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight html language-html">
+  <figcaption>
+    
+      <span>index.html</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-html"><code class="html">...
+&lt;div id=&#34;app&#34;&gt;
+//loading
+&lt;/div&gt;
+...</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<p>当然，能实现骨架屏最好，还可以用SSR服务端渲染，但是挺复杂的，我没能实现</p>
+
+<h1 id="5-开启gzip">5.开启Gzip</h1>
+
+<p>gzip大约能减少20%的大小，不过需要服务端配合开启，服务端若开启了gzip，在<code>Response Headers</code>里可以看到<code>Content-Encoding:gzip</code></p>
+
+<p>在开启vue的gzip之前，需要先安装依赖<code>compression-webpack-plugin</code>，但是注意，默认的安装版本是2.0，可能是版本太高了，最后build的时候会报错，所以安装低版本的就可以了，即运行<code>npm install --save-dev compression-webpack-plugin@1.1.11</code></p>
+
+<p>然后
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>config/index.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">...
+build:{
+    ...
+    productionGzip: true,
+    productionGzipExtensions: [&#39;js&#39;, &#39;css&#39;],
+    ...
+}
+...</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<p>以上就是我优化首屏加载速度的全部内容。</p>
               
             </div>
           </div>
@@ -624,9 +700,9 @@ ul&gt;li {
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/jquery/">jquery</a>
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/vue/">vue</a>
 
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/plugin/">plugin</a>
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/optimization/">optimization</a>
 
                   </div>
                 
@@ -639,7 +715,7 @@ ul&gt;li {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/03/h5%E6%96%B0%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/" data-tooltip="H5新特性总结">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -647,7 +723,7 @@ ul&gt;li {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="记录开发app webview时遇到的问题">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/10/%E6%AF%94%E8%BE%83%E6%95%B0%E7%BB%84%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" data-tooltip="比较数组是否相同以及如何排列组合多维数组">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -674,7 +750,7 @@ ul&gt;li {
       
       <li class="post-action">
         
-          <a class="post-action-btn btn btn--default" href="#">
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
         
           <i class="fa fa-list"></i>
         </a>
@@ -707,7 +783,7 @@ ul&gt;li {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/03/h5%E6%96%B0%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/" data-tooltip="H5新特性总结">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -715,7 +791,7 @@ ul&gt;li {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="记录开发app webview时遇到的问题">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/10/%E6%AF%94%E8%BE%83%E6%95%B0%E7%BB%84%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" data-tooltip="比较数组是否相同以及如何排列组合多维数组">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -742,7 +818,7 @@ ul&gt;li {
       
       <li class="post-action">
         
-          <a class="post-action-btn btn btn--default" href="#">
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
         
           <i class="fa fa-list"></i>
         </a>
@@ -1027,9 +1103,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/foxery.github.io\/2018\/03\/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6\/';
+          this.page.url = 'https:\/\/foxery.github.io\/2018\/10\/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96\/';
           
-            this.page.identifier = '\/2018\/03\/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6\/'
+            this.page.identifier = '\/2018\/10\/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96\/'
           
         };
         (function() {
