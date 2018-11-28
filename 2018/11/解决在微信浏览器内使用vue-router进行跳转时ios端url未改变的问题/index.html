@@ -20,9 +20,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>如何比较两个对象是否相同</title>
+    <title>解决在微信浏览器内使用vue Router进行跳转时ios端url未改变的问题</title>
     <meta name="author" content="foxery">
-    <meta name="keywords" content="对象比较">
+    <meta name="keywords" content="路由跳转">
 
     <link rel="icon" href="https://foxery.github.io/favicon.png">
     
@@ -31,8 +31,8 @@
     <meta name="description" content="">
     <meta property="og:description" content="">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="如何比较两个对象是否相同">
-    <meta property="og:url" content="/2018/02/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/">
+    <meta property="og:title" content="解决在微信浏览器内使用vue Router进行跳转时ios端url未改变的问题">
+    <meta property="og:url" content="/2018/11/%E8%A7%A3%E5%86%B3%E5%9C%A8%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E4%BD%BF%E7%94%A8vue-router%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC%E6%97%B6ios%E7%AB%AFurl%E6%9C%AA%E6%94%B9%E5%8F%98%E7%9A%84%E9%97%AE%E9%A2%98/">
     <meta property="og:site_name" content="小狐狸水水的博客">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="小狐狸水水的博客">
@@ -47,8 +47,6 @@
       <meta property="og:image" content="https://foxery.github.io/img/avatar.jpg">
     
 
-    
-      <meta property="og:image" content="https://foxery.github.io/img/cover.jpg">
     
     
     
@@ -193,19 +191,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      如何比较两个对象是否相同
+      解决在微信浏览器内使用vue Router进行跳转时ios端url未改变的问题
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-02-09T16:12:34&#43;08:00">
+      <time itemprop="datePublished" datetime="2018-11-27T17:05:19&#43;08:00">
         
   
   
   
   
-    2018.02.9
+    2018.11.27
   
 
       </time>
@@ -217,7 +215,7 @@
     
       <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
     
-      <a class="category-link" href="https://foxery.github.io/categories/js">js</a>
+      <a class="category-link" href="https://foxery.github.io/categories/vue">vue</a>
     
   
 
@@ -228,11 +226,17 @@
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>
-我们都知道object是引用类型，无法用常规方式去比较。</p>
+背景：<br />
+在微信公众号开发中，新增一个支付宝支付的需求，当选择支付宝支付时，需要跳转到一个支付宝支付说明页，在这个页面引导用户通过微信菜单栏从浏览器内打开该页面。但是发现，浏览器内打开的地址一直是项目最初的访问地址，导致无法调起支付宝支付。</p>
 
-<p>写这个主要是因为有这么一个需求：当某个接口被连续请求多次的时候，去判断前后两次请求的参数是否是一致的，如果一致，则忽略第二次请求，直至第一次请求成功返回。</p>
+<p>问题描述：<br />
+在微信浏览器内，ios手机端，使用vue-router进行页面跳转，跳转后的页面通过微信菜单复制链接，复制出来的链接仍是没有跳转之前的链接，但是通过程序输出的链接是跳转后的正确链接。</p>
 
-<h3 id="1-遍历其属性-一一对比">1. 遍历其属性,一一对比。</h3>
+<p>问题原因：<br />
+猜测大概是ios手机端，在微信浏览器内，无法识别#号键后面的url的更改。</p>
+
+<p>解决思路：<br />
+判断如果是ios手机端，则进行<code>window.location.herf</code>的跳转，否则仍使用<code>router.push()</code>进行跳转。</p>
 
 
   
@@ -249,86 +253,54 @@
   
 
 
-<figure class="highlight js language-js">
+<figure class="highlight vue language-vue">
   <figcaption>
     
-      <span>demo.js</span>
+      <span>test.vue</span>
     
   </figcaption>
   <table>
     <tbody>
       <tr>
         <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-js"><code class="js">function CompareObjectEqual(a, b) {
-    if (!(a instanceof Object &amp;&amp; b instanceof Object)) {
-        return a === b;
-    }
+          <pre class="code-highlight language-vue"><code class="vue">const browser = {
+    versions: function () {
+        var u = window.navigator.userAgent;
+        return {
+            trident: u.indexOf(&#39;Trident&#39;) &gt; -1, //IE内核
+            presto: u.indexOf(&#39;Presto&#39;) &gt; -1, //opera内核
+            webKit: u.indexOf(&#39;AppleWebKit&#39;) &gt; -1, //苹果、谷歌内核
+            gecko: u.indexOf(&#39;Gecko&#39;) &gt; -1 &amp;&amp; u.indexOf(&#39;KHTML&#39;) == -1, //火狐内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+            ios: !!u.match(/\(i[^;]&#43;;( U;)? CPU.&#43;Mac OS X/), //ios终端
+            android: u.indexOf(&#39;Android&#39;) &gt; -1 || u.indexOf(&#39;Linux&#39;) &gt; -1, //android终端或者uc浏览器
+            iPhone: u.indexOf(&#39;iPhone&#39;) &gt; -1 || u.indexOf(&#39;Mac&#39;) &gt; -1, //是否为iPhone或者安卓QQ浏览器
+            iPad: u.indexOf(&#39;iPad&#39;) &gt; -1, //是否为iPad
+            webApp: u.indexOf(&#39;Safari&#39;) == -1,//是否为web应用程序，没有头部与底部
+            weixin: u.indexOf(&#39;MicroMessenger&#39;) &gt; -1 //是否为微信浏览器
+        };
+    }()
+}
 
-    var aProps = Object.getOwnPropertyNames(a);
-    var bProps = Object.getOwnPropertyNames(b);
-
-    if (aProps.length != bProps.length) {
-        return false;
-    }
-
-    for (var i = 0; i &lt; aProps.length; i&#43;&#43;) {
-        var propName = aProps[i];
-        if ((a[propName] instanceof Object) &amp;&amp; (b[propName] instanceof Object)) {
-            CompareObjectEqual(a[propName], b[propName]);
+...  
+methods:{
+    ...
+    if (browser.versions.ios) {
+        window.location.href = ``;
         } else {
-            if (a[propName] !== b[propName]) {
-                return false;
-            }
+        this.$router.push({});
         }
-    }
-
-    return true;
-}</code></pre>
+    ...
+}
+</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
 </figure>
-
-<h3 id="2-转换成字符串">2. 转换成字符串</h3>
-
-<p>
-  
-    
-  
-  
-    
-  
-  
-    
-  
-  
-    
-  
-
-
-<figure class="highlight js language-js">
-  <figcaption>
-    
-      <span>demo.js</span>
-    
-  </figcaption>
-  <table>
-    <tbody>
-      <tr>
-        <td class="gutter">
-          <pre><span class="line">1</span><br></pre>
-        </td>
-        <td class="code">
-          <pre class="code-highlight language-js"><code class="js">JSON.stringify(a)===JSON.stringify(b);</code></pre>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</figure></p>
               
             </div>
           </div>
@@ -340,7 +312,9 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/object/">object</a>
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/vue-router/">vue-router</a>
+
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/wechat/">wechat</a>
 
                   </div>
                 
@@ -353,7 +327,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="记录开发app webview时遇到的问题">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -361,7 +335,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" data-tooltip="记录vue的踩坑之路以及经验分享">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E7%A7%BB%E5%8A%A8%E7%AB%AFios%E6%BB%9A%E5%8A%A8%E7%A9%BF%E9%80%8F%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="解决移动端ios滚动穿透的问题">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -421,7 +395,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="记录开发app webview时遇到的问题">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -429,7 +403,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" data-tooltip="记录vue的踩坑之路以及经验分享">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E7%A7%BB%E5%8A%A8%E7%AB%AFios%E6%BB%9A%E5%8A%A8%E7%A9%BF%E9%80%8F%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="解决移动端ios滚动穿透的问题">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -741,9 +715,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/foxery.github.io\/2018\/02\/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C\/';
+          this.page.url = 'https:\/\/foxery.github.io\/2018\/11\/%E8%A7%A3%E5%86%B3%E5%9C%A8%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E4%BD%BF%E7%94%A8vue-router%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC%E6%97%B6ios%E7%AB%AFurl%E6%9C%AA%E6%94%B9%E5%8F%98%E7%9A%84%E9%97%AE%E9%A2%98\/';
           
-            this.page.identifier = '\/2018\/02\/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C\/'
+            this.page.identifier = '\/2018\/11\/%E8%A7%A3%E5%86%B3%E5%9C%A8%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E4%BD%BF%E7%94%A8vue-router%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC%E6%97%B6ios%E7%AB%AFurl%E6%9C%AA%E6%94%B9%E5%8F%98%E7%9A%84%E9%97%AE%E9%A2%98\/'
           
         };
         (function() {

@@ -20,9 +20,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>如何比较两个对象是否相同</title>
+    <title>解决移动端ios滚动穿透的问题</title>
     <meta name="author" content="foxery">
-    <meta name="keywords" content="对象比较">
+    <meta name="keywords" content="滚动穿透">
 
     <link rel="icon" href="https://foxery.github.io/favicon.png">
     
@@ -31,8 +31,8 @@
     <meta name="description" content="">
     <meta property="og:description" content="">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="如何比较两个对象是否相同">
-    <meta property="og:url" content="/2018/02/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/">
+    <meta property="og:title" content="解决移动端ios滚动穿透的问题">
+    <meta property="og:url" content="/2018/11/%E8%A7%A3%E5%86%B3%E7%A7%BB%E5%8A%A8%E7%AB%AFios%E6%BB%9A%E5%8A%A8%E7%A9%BF%E9%80%8F%E7%9A%84%E9%97%AE%E9%A2%98/">
     <meta property="og:site_name" content="小狐狸水水的博客">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="小狐狸水水的博客">
@@ -47,8 +47,6 @@
       <meta property="og:image" content="https://foxery.github.io/img/avatar.jpg">
     
 
-    
-      <meta property="og:image" content="https://foxery.github.io/img/cover.jpg">
     
     
     
@@ -193,19 +191,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      如何比较两个对象是否相同
+      解决移动端ios滚动穿透的问题
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-02-09T16:12:34&#43;08:00">
+      <time itemprop="datePublished" datetime="2018-11-27T15:25:26&#43;08:00">
         
   
   
   
   
-    2018.02.9
+    2018.11.27
   
 
       </time>
@@ -217,7 +215,7 @@
     
       <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
     
-      <a class="category-link" href="https://foxery.github.io/categories/js">js</a>
+      <a class="category-link" href="https://foxery.github.io/categories/vue">vue</a>
     
   
 
@@ -227,12 +225,16 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>
-我们都知道object是引用类型，无法用常规方式去比较。</p>
+              <p></p>
 
-<p>写这个主要是因为有这么一个需求：当某个接口被连续请求多次的时候，去判断前后两次请求的参数是否是一致的，如果一致，则忽略第二次请求，直至第一次请求成功返回。</p>
+<p>问题描述：<br />
+在ios端，当页面可以滚动，并且弹出的弹窗也可以滚动时，在弹窗区域滚动时底部的被遮盖区域也在滚动。</p>
 
-<h3 id="1-遍历其属性-一一对比">1. 遍历其属性,一一对比。</h3>
+<p>问题原因：<br />
+滚动穿透。</p>
+
+<p>解决思路：<br />
+弹窗显示时禁止body的滚动事件，弹窗关闭时恢复body的滚动事件。</p>
 
 
   
@@ -249,43 +251,33 @@
   
 
 
-<figure class="highlight js language-js">
+<figure class="highlight vue language-vue">
   <figcaption>
     
-      <span>demo.js</span>
+      <span>test.vue</span>
     
   </figcaption>
   <table>
     <tbody>
       <tr>
         <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-js"><code class="js">function CompareObjectEqual(a, b) {
-    if (!(a instanceof Object &amp;&amp; b instanceof Object)) {
-        return a === b;
+          <pre class="code-highlight language-vue"><code class="vue">methods:{
+    handler: function(e) {
+      e.preventDefault();
+    },
+    closeTouch() {
+      document
+        .getElementsByTagName(&#34;body&#34;)[0]
+        .addEventListener(&#34;touchmove&#34;, this.handler, { passive: false }); //阻止默认事件
+    },
+    openTouch() {
+      document
+        .getElementsByTagName(&#34;body&#34;)[0]
+        .removeEventListener(&#34;touchmove&#34;, this.handler, { passive: false }); //打开默认事件
     }
-
-    var aProps = Object.getOwnPropertyNames(a);
-    var bProps = Object.getOwnPropertyNames(b);
-
-    if (aProps.length != bProps.length) {
-        return false;
-    }
-
-    for (var i = 0; i &lt; aProps.length; i&#43;&#43;) {
-        var propName = aProps[i];
-        if ((a[propName] instanceof Object) &amp;&amp; (b[propName] instanceof Object)) {
-            CompareObjectEqual(a[propName], b[propName]);
-        } else {
-            if (a[propName] !== b[propName]) {
-                return false;
-            }
-        }
-    }
-
-    return true;
 }</code></pre>
         </td>
       </tr>
@@ -293,9 +285,57 @@
   </table>
 </figure>
 
-<h3 id="2-转换成字符串">2. 转换成字符串</h3>
+<p>在显示弹窗的事件内调用<code>closeTouch()</code>，在隐藏弹窗的事件内调用<code>openTouch()</code>即可</p>
 
-<p>
+<p>若使用UI框架，如<code>mint-ui</code>时，关闭弹窗时没有回调事件，则监听弹窗的model即可</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>test.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue">watch: {
+    visible: function(news, olds) {
+      if (news) {
+        this.closeTouch();
+      } else {
+        this.openTouch();
+      }
+    }
+  }</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<p>另外，注意一下<code>passive: false</code>。为什么要加这句呢？</p>
+
+<p>如果没有这句的话，控制台大概会有如下提示：<br />
+
   
     
   
@@ -313,7 +353,7 @@
 <figure class="highlight js language-js">
   <figcaption>
     
-      <span>demo.js</span>
+      <span>console.js</span>
     
   </figcaption>
   <table>
@@ -323,12 +363,28 @@
           <pre><span class="line">1</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-js"><code class="js">JSON.stringify(a)===JSON.stringify(b);</code></pre>
+          <pre class="code-highlight language-js"><code class="js">Unable to preventDefault inside passive event listener due to target being treated as passive. See https://www.chromestatus.com/features/5093566007214080</code></pre>
         </td>
       </tr>
     </tbody>
   </table>
 </figure></p>
+
+<p>由于浏览器必须要在执行事件处理函数之后，才能知道有没有调用过<code>preventDefault()</code>，这就导致了浏览器不能及时响应滚动，略有延迟。</p>
+
+<p>所以为了让页面滚动的效果如丝般顺滑，从 chrome56 开始，在<code>window</code>、<code>document</code> 和 <code>body</code> 上注册的 <code>touchstart</code> 和 <code>touchmove</code> 事件处理函数，会默认为是 <code>passive: true</code>。浏览器忽略 <code>preventDefault()</code> 就可以第一时间滚动了。</p>
+
+<p>举例：
+<code>wnidow.addEventListener('touchmove', func)</code> 效果和下面一句一样
+<code>wnidow.addEventListener('touchmove', func, { passive: true })</code></p>
+
+<p>这就导致了一个问题:<br />
+如果在以上这 3 个元素的 <code>touchstart</code> 和 <code>touchmove</code> 事件处理函数中调用 <code>e.preventDefault()</code> ，会被浏览器忽略掉，并不会阻止默认行为。</p>
+
+<p>因此，要加上<code>passive: false</code>，明确声明为不是被动的。</p>
+
+<p>另外，还有一种方法：<br />
+应用 CSS 属性 <code>touch-action: none;</code> 这样任何触摸事件都不会产生默认行为，但是 touch 事件照样触发。关于<a href="https://w3c.github.io/pointerevents/#the-touch-action-css-property">touch-action</a></p>
               
             </div>
           </div>
@@ -340,7 +396,9 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/object/">object</a>
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/vue/">vue</a>
+
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/ios/">ios</a>
 
                   </div>
                 
@@ -353,7 +411,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="记录开发app webview时遇到的问题">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E5%9C%A8%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E4%BD%BF%E7%94%A8vue-router%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC%E6%97%B6ios%E7%AB%AFurl%E6%9C%AA%E6%94%B9%E5%8F%98%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="解决在微信浏览器内使用vue Router进行跳转时ios端url未改变的问题">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -361,7 +419,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" data-tooltip="记录vue的踩坑之路以及经验分享">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/10/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96/" data-tooltip="vue单页应用首屏加载优化">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -421,7 +479,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="记录开发app webview时遇到的问题">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E5%9C%A8%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E4%BD%BF%E7%94%A8vue-router%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC%E6%97%B6ios%E7%AB%AFurl%E6%9C%AA%E6%94%B9%E5%8F%98%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="解决在微信浏览器内使用vue Router进行跳转时ios端url未改变的问题">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -429,7 +487,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" data-tooltip="记录vue的踩坑之路以及经验分享">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/10/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96/" data-tooltip="vue单页应用首屏加载优化">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -741,9 +799,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/foxery.github.io\/2018\/02\/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C\/';
+          this.page.url = 'https:\/\/foxery.github.io\/2018\/11\/%E8%A7%A3%E5%86%B3%E7%A7%BB%E5%8A%A8%E7%AB%AFios%E6%BB%9A%E5%8A%A8%E7%A9%BF%E9%80%8F%E7%9A%84%E9%97%AE%E9%A2%98\/';
           
-            this.page.identifier = '\/2018\/02\/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C\/'
+            this.page.identifier = '\/2018\/11\/%E8%A7%A3%E5%86%B3%E7%A7%BB%E5%8A%A8%E7%AB%AFios%E6%BB%9A%E5%8A%A8%E7%A9%BF%E9%80%8F%E7%9A%84%E9%97%AE%E9%A2%98\/'
           
         };
         (function() {

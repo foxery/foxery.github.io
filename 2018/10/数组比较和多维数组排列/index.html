@@ -20,9 +20,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>如何比较两个对象是否相同</title>
+    <title>数组比较和多维数组排列</title>
     <meta name="author" content="foxery">
-    <meta name="keywords" content="对象比较">
+    <meta name="keywords" content="相同数组, 多维数组组合排序">
 
     <link rel="icon" href="https://foxery.github.io/favicon.png">
     
@@ -31,8 +31,8 @@
     <meta name="description" content="">
     <meta property="og:description" content="">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="如何比较两个对象是否相同">
-    <meta property="og:url" content="/2018/02/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C/">
+    <meta property="og:title" content="数组比较和多维数组排列">
+    <meta property="og:url" content="/2018/10/%E6%95%B0%E7%BB%84%E6%AF%94%E8%BE%83%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E6%8E%92%E5%88%97/">
     <meta property="og:site_name" content="小狐狸水水的博客">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="小狐狸水水的博客">
@@ -193,19 +193,19 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      如何比较两个对象是否相同
+      数组比较和多维数组排列
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-02-09T16:12:34&#43;08:00">
+      <time itemprop="datePublished" datetime="2018-10-11T15:24:52&#43;08:00">
         
   
   
   
   
-    2018.02.9
+    2018.10.11
   
 
       </time>
@@ -227,75 +227,19 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>
-我们都知道object是引用类型，无法用常规方式去比较。</p>
+              <p></p>
 
-<p>写这个主要是因为有这么一个需求：当某个接口被连续请求多次的时候，去判断前后两次请求的参数是否是一致的，如果一致，则忽略第二次请求，直至第一次请求成功返回。</p>
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#1-比较两个数组是否相同">1.比较两个数组是否相同</a></li>
+<li><a href="#2-多维数组排列组合-两两组合成新数组">2.多维数组排列组合，两两组合成新数组</a></li>
+</ul>
+</nav>
 
-<h3 id="1-遍历其属性-一一对比">1. 遍历其属性,一一对比。</h3>
+<h1 id="1-比较两个数组是否相同">1.比较两个数组是否相同</h1>
 
+<p>Javascript不能直接用==或者===来判断两个数组是否相等，因此需要将数组转换成字符串再做比较，但是数组内各元素的顺序不一定一致，所以只要排序后再转换即可。<br />
 
-  
-    
-  
-  
-    
-  
-  
-    
-  
-  
-    
-  
-
-
-<figure class="highlight js language-js">
-  <figcaption>
-    
-      <span>demo.js</span>
-    
-  </figcaption>
-  <table>
-    <tbody>
-      <tr>
-        <td class="gutter">
-          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
-        </td>
-        <td class="code">
-          <pre class="code-highlight language-js"><code class="js">function CompareObjectEqual(a, b) {
-    if (!(a instanceof Object &amp;&amp; b instanceof Object)) {
-        return a === b;
-    }
-
-    var aProps = Object.getOwnPropertyNames(a);
-    var bProps = Object.getOwnPropertyNames(b);
-
-    if (aProps.length != bProps.length) {
-        return false;
-    }
-
-    for (var i = 0; i &lt; aProps.length; i&#43;&#43;) {
-        var propName = aProps[i];
-        if ((a[propName] instanceof Object) &amp;&amp; (b[propName] instanceof Object)) {
-            CompareObjectEqual(a[propName], b[propName]);
-        } else {
-            if (a[propName] !== b[propName]) {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}</code></pre>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-
-<h3 id="2-转换成字符串">2. 转换成字符串</h3>
-
-<p>
   
     
   
@@ -323,7 +267,212 @@
           <pre><span class="line">1</span><br></pre>
         </td>
         <td class="code">
-          <pre class="code-highlight language-js"><code class="js">JSON.stringify(a)===JSON.stringify(b);</code></pre>
+          <pre class="code-highlight language-js"><code class="js">[1,2,3].sort().toString()== [3,2,1].sort().toString() //true</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h1 id="2-多维数组排列组合-两两组合成新数组">2.多维数组排列组合，两两组合成新数组</h1>
+
+<p>项目中有遇到一个需求：现在有一批手机，其中颜色有［&rsquo;白色&rsquo;,&lsquo;黑色&rsquo;,&lsquo;金色&rsquo;,&lsquo;粉红色&rsquo;］；内存大小有［&rsquo;16G&rsquo;,&lsquo;32G&rsquo;,&lsquo;64G&rsquo;,&lsquo;128G&rsquo;］，版本有［&rsquo;移动&rsquo;,&lsquo;联通&rsquo;,&lsquo;电信&rsquo;］，要求写一个算法，实现［&rsquo;白色,16G,移动&rsquo;, &lsquo;白色,16G,联通&rsquo; &hellip;］这样的组合，允许后期再新增属性数组，例如再加一个［&rsquo;国行&rsquo;,&lsquo;港版&rsquo;,&lsquo;美版&rsquo;］。<br />
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">function permutations(arr) {
+      var len = arr.length;
+      // 当数组大于等于2个的时候
+      if (len &gt;= 2) {
+        // 第一个数组的长度
+        var len1 = arr[0].length;
+        // 第二个数组的长度
+        var len2 = arr[1].length;
+        // 2个数组产生的组合数
+        var lenBoth = len1 * len2;
+        //  申明一个新数组,做数据暂存
+        var items = new Array(lenBoth);
+        // 申明新数组的索引
+        var index = 0;
+        // 2层嵌套循环,将组合放到新数组中
+        for (var i = 0; i &lt; len1; i&#43;&#43;) {
+          for (var j = 0; j &lt; len2; j&#43;&#43;) {
+            items[index] = arr[0][i] &#43; &#34;,&#34; &#43; arr[1][j];
+            index&#43;&#43;;
+          }
+        }
+        // 将新组合的数组并到原数组中
+        var newArr = new Array(len - 1);
+        for (var i = 2; i &lt; arr.length; i&#43;&#43;) {
+          newArr[i - 1] = arr[i];
+        }
+        newArr[0] = items;
+        // 执行回调
+        return permutations(newArr);
+      } else {
+        return arr[0];
+      }
+    }
+
+    var arr = [[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;,&#39;d&#39;], [1, 2, 3,4], [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;],[&#39;魅族手机&#39;]];
+    console.log(permutations(arr));
+    // [&#34;a,1,x,魅族手机&#34;, &#34;a,1,y,魅族手机&#34;, &#34;a,1,z,魅族手机&#34;, &#34;a,2,x,魅族手机&#34;, &#34;a,2,y,魅族手机&#34;, &#34;a,2,z,魅族手机&#34;, &#34;a,3,x,魅族手机&#34;, &#34;a,3,y,魅族手机&#34;, &#34;a,3,z,魅族手机&#34;, &#34;a,4,x,魅族手机&#34;, &#34;a,4,y,魅族手机&#34;, &#34;a,4,z,魅族手机&#34;, &#34;b,1,x,魅族手机&#34;, &#34;b,1,y,魅族手机&#34;, &#34;b,1,z,魅族手机&#34;, &#34;b,2,x,魅族手机&#34;, &#34;b,2,y,魅族手机&#34;, &#34;b,2,z,魅族手机&#34;, &#34;b,3,x,魅族手机&#34;, &#34;b,3,y,魅族手机&#34;, &#34;b,3,z,魅族手机&#34;, &#34;b,4,x,魅族手机&#34;, &#34;b,4,y,魅族手机&#34;, &#34;b,4,z,魅族手机&#34;, &#34;c,1,x,魅族手机&#34;, &#34;c,1,y,魅族手机&#34;, &#34;c,1,z,魅族手机&#34;, &#34;c,2,x,魅族手机&#34;, &#34;c,2,y,魅族手机&#34;, &#34;c,2,z,魅族手机&#34;, &#34;c,3,x,魅族手机&#34;, &#34;c,3,y,魅族手机&#34;, &#34;c,3,z,魅族手机&#34;, &#34;c,4,x,魅族手机&#34;, &#34;c,4,y,魅族手机&#34;, &#34;c,4,z,魅族手机&#34;, &#34;d,1,x,魅族手机&#34;, &#34;d,1,y,魅族手机&#34;, &#34;d,1,z,魅族手机&#34;, &#34;d,2,x,魅族手机&#34;, &#34;d,2,y,魅族手机&#34;, &#34;d,2,z,魅族手机&#34;, &#34;d,3,x,魅族手机&#34;, &#34;d,3,y,魅族手机&#34;, &#34;d,3,z,魅族手机&#34;, &#34;d,4,x,魅族手机&#34;, &#34;d,4,y,魅族手机&#34;, &#34;d,4,z,魅族手机&#34;]</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<p>此外，我还搜索到其他几种方法：
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">function doExchange(arr, depth){
+    for (var i = 0; i &lt; arr[depth].length; i&#43;&#43;) {
+        result[depth] = arr[depth][i]
+        if (depth != arr.length - 1) {
+            doExchange(arr, depth &#43; 1)
+        } else {
+            results.push(result.join(&#39;,&#39;))
+        }
+    }
+}
+
+function test(arr){
+    results = [];
+    result = [];
+    doExchange(arr, 0);
+}
+
+var garr = [
+        [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;],
+        [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;],
+        [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;],
+    ];
+test(garr);
+
+console.log(results);
+//[&#34;a,1,x&#34;, &#34;a,1,y&#34;, &#34;a,1,z&#34;, &#34;a,2,x&#34;, &#34;a,2,y&#34;, &#34;a,2,z&#34;, &#34;a,3,x&#34;, &#34;a,3,y&#34;, &#34;a,3,z&#34;, &#34;b,1,x&#34;, &#34;b,1,y&#34;, &#34;b,1,z&#34;, &#34;b,2,x&#34;, &#34;b,2,y&#34;, &#34;b,2,z&#34;, &#34;b,3,x&#34;, &#34;b,3,y&#34;, &#34;b,3,z&#34;, &#34;c,1,x&#34;, &#34;c,1,y&#34;, &#34;c,1,z&#34;, &#34;c,2,x&#34;, &#34;c,2,y&#34;, &#34;c,2,z&#34;, &#34;c,3,x&#34;, &#34;c,3,y&#34;, &#34;c,3,z&#34;]</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">function doExchange(arr){
+        var len = arr.length;
+        // 当数组大于等于2个的时候
+        if(len &gt;= 2){
+            // 第一个数组的长度
+            var len1 = arr[0].length;
+            // 第二个数组的长度
+            var len2 = arr[1].length;
+            // 2个数组产生的组合数
+            var lenBoth = len1 * len2;
+            //  申明一个新数组,做数据暂存
+            var items = new Array(lenBoth);
+            // 申明新数组的索引
+            var index = 0;
+            // 2层嵌套循环,将组合放到新数组中
+            for(var i=0; i&lt;len1; i&#43;&#43;){
+                for(var j=0; j&lt;len2; j&#43;&#43;){
+                    items[index] = arr[0][i] &#43;&#34;,&#34;&#43; arr[1][j];
+                    index&#43;&#43;;
+                }
+            }
+            // 将新组合的数组并到原数组中
+            var newArr = new Array(len -1);
+            for(var i=2;i&lt;arr.length;i&#43;&#43;){
+                newArr[i-1] = arr[i];
+            }
+            newArr[0] = items;
+            // 执行回调
+            return doExchange(newArr);
+        }else{
+            return arr[0];
+        }
+    }
+
+    var array = [[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], [1, 2, 3], [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;]];
+    doExchange(array);
+    //[&#34;a,1,x&#34;, &#34;a,1,y&#34;, &#34;a,1,z&#34;, &#34;a,2,x&#34;, &#34;a,2,y&#34;, &#34;a,2,z&#34;, &#34;a,3,x&#34;, &#34;a,3,y&#34;, &#34;a,3,z&#34;, &#34;b,1,x&#34;, &#34;b,1,y&#34;, &#34;b,1,z&#34;, &#34;b,2,x&#34;, &#34;b,2,y&#34;, &#34;b,2,z&#34;, &#34;b,3,x&#34;, &#34;b,3,y&#34;, &#34;b,3,z&#34;, &#34;c,1,x&#34;, &#34;c,1,y&#34;, &#34;c,1,z&#34;, &#34;c,2,x&#34;, &#34;c,2,y&#34;, &#34;c,2,z&#34;, &#34;c,3,x&#34;, &#34;c,3,y&#34;, &#34;c,3,z&#34;]</code></pre>
         </td>
       </tr>
     </tbody>
@@ -340,7 +489,7 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/object/">object</a>
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/arry/">arry</a>
 
                   </div>
                 
@@ -353,7 +502,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="记录开发app webview时遇到的问题">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/10/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96/" data-tooltip="vue单页应用首屏加载优化">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -361,7 +510,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" data-tooltip="记录vue的踩坑之路以及经验分享">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/06/%E5%85%B3%E4%BA%8Evue-router%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/" data-tooltip="关于vue-router的一些使用心得">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -388,7 +537,7 @@
       
       <li class="post-action">
         
-          <a class="post-action-btn btn btn--default" href="#">
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
         
           <i class="fa fa-list"></i>
         </a>
@@ -421,7 +570,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95%E5%BC%80%E5%8F%91app-webview%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-tooltip="记录开发app webview时遇到的问题">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/10/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96/" data-tooltip="vue单页应用首屏加载优化">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -429,7 +578,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/02/%E8%AE%B0%E5%BD%95vue%E7%9A%84%E8%B8%A9%E5%9D%91%E4%B9%8B%E8%B7%AF%E4%BB%A5%E5%8F%8A%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" data-tooltip="记录vue的踩坑之路以及经验分享">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/06/%E5%85%B3%E4%BA%8Evue-router%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/" data-tooltip="关于vue-router的一些使用心得">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -456,7 +605,7 @@
       
       <li class="post-action">
         
-          <a class="post-action-btn btn btn--default" href="#">
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
         
           <i class="fa fa-list"></i>
         </a>
@@ -741,9 +890,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/foxery.github.io\/2018\/02\/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C\/';
+          this.page.url = 'https:\/\/foxery.github.io\/2018\/10\/%E6%95%B0%E7%BB%84%E6%AF%94%E8%BE%83%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E6%8E%92%E5%88%97\/';
           
-            this.page.identifier = '\/2018\/02\/%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C\/'
+            this.page.identifier = '\/2018\/10\/%E6%95%B0%E7%BB%84%E6%AF%94%E8%BE%83%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E6%8E%92%E5%88%97\/'
           
         };
         (function() {
