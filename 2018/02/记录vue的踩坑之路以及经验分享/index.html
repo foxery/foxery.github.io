@@ -238,16 +238,16 @@
 <li><a href="#5-如何使用sass">5.如何使用sass</a></li>
 <li><a href="#6-如何引用公共-scss文件">6.如何引用公共.scss文件</a></li>
 <li><a href="#7-如何解决vue开发模式下的跨域问题">7.如何解决vue开发模式下的跨域问题</a></li>
-<li><a href="#6-项目打包后部署到服务器上打开一片空白-发现是文件引用路径错误问题">6.项目打包后部署到服务器上打开一片空白,发现是文件引用路径错误问题</a></li>
-<li><a href="#7-解决在v-html时-里面的元素无法继承外部css的问题">7.解决在v-html时，里面的元素无法继承外部css的问题</a></li>
-<li><a href="#8-如何全局引入jquery">8.如何全局引入jquery</a></li>
-<li><a href="#9-父子组件之间如何相互通信">9.父子组件之间如何相互通信</a></li>
-<li><a href="#10-解决正常引入子组件报未注册组件错误的问题">10.解决正常引入子组件报未注册组件错误的问题</a></li>
-<li><a href="#11-如何在js文件内使用vue-router进行路由跳转">11.如何在js文件内使用vue-router进行路由跳转</a></li>
-<li><a href="#12-绑定事件中如何获取this-即触发事件的元素本身">12.绑定事件中如何获取this（即触发事件的元素本身）</a></li>
-<li><a href="#13-使用axios拦截器统一处理所有的http请求和响应">13.使用axios拦截器统一处理所有的http请求和响应</a></li>
-<li><a href="#14-使用路由回退时判断有没有上一个路由">14.使用路由回退时判断有没有上一个路由</a></li>
-<li><a href="#15-解决element-ui中upload组件使用多个时无法绑定对应的元素">15.解决element-ui中upload组件使用多个时无法绑定对应的元素</a></li>
+<li><a href="#8-项目打包后部署到服务器上打开一片空白-发现是文件引用路径错误问题">8.项目打包后部署到服务器上打开一片空白,发现是文件引用路径错误问题</a></li>
+<li><a href="#9-解决在v-html时-里面的元素无法继承外部css的问题">9.解决在v-html时，里面的元素无法继承外部css的问题</a></li>
+<li><a href="#10-如何全局引入jquery">10.如何全局引入jquery</a></li>
+<li><a href="#11-父子组件之间如何相互通信">11.父子组件之间如何相互通信</a></li>
+<li><a href="#12-解决正常引入子组件报未注册组件错误的问题">12.解决正常引入子组件报未注册组件错误的问题</a></li>
+<li><a href="#13-如何在js文件内使用vue-router进行路由跳转">13.如何在js文件内使用vue-router进行路由跳转</a></li>
+<li><a href="#14-绑定事件中如何获取this-即触发事件的元素本身">14.绑定事件中如何获取this（即触发事件的元素本身）</a></li>
+<li><a href="#15-使用axios拦截器统一处理所有的http请求和响应">15.使用axios拦截器统一处理所有的http请求和响应</a></li>
+<li><a href="#16-使用路由回退时判断有没有上一个路由">16.使用路由回退时判断有没有上一个路由</a></li>
+<li><a href="#17-解决element-ui中upload组件使用多个时无法绑定对应的元素">17.解决element-ui中upload组件使用多个时无法绑定对应的元素</a></li>
 </ul>
 </nav>
 
@@ -873,7 +873,7 @@ cnpm i sass-loader --save-dev
   </table>
 </figure></p>
 
-<h1 id="6-项目打包后部署到服务器上打开一片空白-发现是文件引用路径错误问题">6.项目打包后部署到服务器上打开一片空白,发现是文件引用路径错误问题</h1>
+<h1 id="8-项目打包后部署到服务器上打开一片空白-发现是文件引用路径错误问题">8.项目打包后部署到服务器上打开一片空白,发现是文件引用路径错误问题</h1>
 
 <p>默认配置下，通过webpack+vuecli默认打包的css、js等资源，路径都是绝对的。
 但当部署到带有文件夹的项目中，这种绝对路径就会出现问题，因为把配置的static文件夹当成了根路径，那么要解决这种问题，就得引用相对路径。</p>
@@ -956,7 +956,7 @@ cnpm i sass-loader --save-dev
 </figure></li>
 </ol>
 
-<h1 id="7-解决在v-html时-里面的元素无法继承外部css的问题">7.解决在v-html时，里面的元素无法继承外部css的问题</h1>
+<h1 id="9-解决在v-html时-里面的元素无法继承外部css的问题">9.解决在v-html时，里面的元素无法继承外部css的问题</h1>
 
 <p>v-html渲染的内容可以理解为其子组件内容，当style加上<code>scoped</code>属性时，就无法作用于v-html内绑定的内容。</p>
 
@@ -964,7 +964,7 @@ cnpm i sass-loader --save-dev
     方法二：在update()的生命周期内，通过js改变其css
 </code></pre>
 
-<h1 id="8-如何全局引入jquery">8.如何全局引入jquery</h1>
+<h1 id="10-如何全局引入jquery">10.如何全局引入jquery</h1>
 
 <ol>
 <li><p><code>$ cnpm install jquery --save</code></p></li>
@@ -1050,7 +1050,7 @@ plugins: [
 </figure></li>
 </ol>
 
-<h1 id="9-父子组件之间如何相互通信">9.父子组件之间如何相互通信</h1>
+<h1 id="11-父子组件之间如何相互通信">11.父子组件之间如何相互通信</h1>
 
 <ol>
 <li>父组件调用子组件的方法
@@ -1254,7 +1254,7 @@ plugins: [
 </figure></li>
 </ol>
 
-<h1 id="10-解决正常引入子组件报未注册组件错误的问题">10.解决正常引入子组件报未注册组件错误的问题</h1>
+<h1 id="12-解决正常引入子组件报未注册组件错误的问题">12.解决正常引入子组件报未注册组件错误的问题</h1>
 
 <p>如下引入子组件：
 
@@ -1310,7 +1310,7 @@ export default {
 <code>import ConfirmDialog from './dialogs';</code><br />
 去掉花括号即可</p>
 
-<h1 id="11-如何在js文件内使用vue-router进行路由跳转">11.如何在js文件内使用vue-router进行路由跳转</h1>
+<h1 id="13-如何在js文件内使用vue-router进行路由跳转">13.如何在js文件内使用vue-router进行路由跳转</h1>
 
 <ol>
 <li>以下是路由文件的内容
@@ -1400,7 +1400,7 @@ export default GoToPage</code></pre>
 </figure></li>
 </ol>
 
-<h1 id="12-绑定事件中如何获取this-即触发事件的元素本身">12.绑定事件中如何获取this（即触发事件的元素本身）</h1>
+<h1 id="14-绑定事件中如何获取this-即触发事件的元素本身">14.绑定事件中如何获取this（即触发事件的元素本身）</h1>
 
 <ol>
 <li>只获取当前事件元素，不包括其子元素
@@ -1501,7 +1501,7 @@ export default GoToPage</code></pre>
 </figure></li>
 </ol>
 
-<h1 id="13-使用axios拦截器统一处理所有的http请求和响应">13.使用axios拦截器统一处理所有的http请求和响应</h1>
+<h1 id="15-使用axios拦截器统一处理所有的http请求和响应">15.使用axios拦截器统一处理所有的http请求和响应</h1>
 
 
   
@@ -1546,7 +1546,7 @@ axios.interceptors.request.use((config) =&gt; {
   </table>
 </figure>
 
-<h1 id="14-使用路由回退时判断有没有上一个路由">14.使用路由回退时判断有没有上一个路由</h1>
+<h1 id="16-使用路由回退时判断有没有上一个路由">16.使用路由回退时判断有没有上一个路由</h1>
 
 <p>使用vue-router的<code>this.$router.go(-1)</code>可以返回到上一个路由</p>
 
@@ -1613,7 +1613,7 @@ axios.interceptors.request.use((config) =&gt; {
   </table>
 </figure></p>
 
-<h1 id="15-解决element-ui中upload组件使用多个时无法绑定对应的元素">15.解决element-ui中upload组件使用多个时无法绑定对应的元素</h1>
+<h1 id="17-解决element-ui中upload组件使用多个时无法绑定对应的元素">17.解决element-ui中upload组件使用多个时无法绑定对应的元素</h1>
 
 <p>当只需要上传一次上传单张图片时，按照文档来基本没什么问题，但当需要以列表形式上传多张图片时，上传的图片控件就只对第一个有效了。如图所示：<br />
 <img src="https://foxery.github.io/img/elementui_upload.png" alt="" /><br />
@@ -1877,6 +1877,23 @@ export default {
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/12/%E6%90%AD%E5%BB%BAvue%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/">
+                <h3 class="media-heading">搭建vue项目的基本架构</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E5%9C%A8%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E4%BD%BF%E7%94%A8vue-router%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC%E6%97%B6ios%E7%AB%AFurl%E6%9C%AA%E6%94%B9%E5%8F%98%E7%9A%84%E9%97%AE%E9%A2%98/">
                 <h3 class="media-heading">解决在微信浏览器内使用vue Router进行跳转时ios端url未改变的问题</h3>
               </a>
@@ -2027,23 +2044,6 @@ export default {
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/03/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%BF%87%E7%A8%8B%E4%BB%A5%E5%8F%8A%E6%96%B9%E6%B3%95/">
-                <h3 class="media-heading">创建对象的过程以及方法</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -2051,7 +2051,7 @@ export default {
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         17 posts found
+         18 posts found
       </p>
     </div>
   </div>
