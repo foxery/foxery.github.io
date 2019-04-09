@@ -1,0 +1,983 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
+    <title>微信小程序开发</title>
+    <meta name="author" content="foxery">
+    <meta name="keywords" content="微信小程序">
+
+    <link rel="icon" href="https://foxery.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="微信小程序开发">
+    <meta property="og:url" content="/2019/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">
+    <meta property="og:site_name" content="小狐狸水水的博客">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="小狐狸水水的博客">
+    <meta name="twitter:description" content="">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://foxery.github.io/img/avatar.jpg">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://foxery.github.io/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://foxery.github.io/">小狐狸水水的博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://foxery.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://foxery.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">foxery</h4>
+        
+          <h5 class="sidebar-profile-bio">只是一想到你，世界在明亮的光晕里倒退</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/foxery" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      微信小程序开发
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-04-01T16:15:09&#43;08:00">
+        
+  
+  
+  
+  
+    2019.04.1
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
+    
+      <a class="category-link" href="https://foxery.github.io/categories/wx">wx</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p></p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#1-微信小程序项目构建">1.微信小程序项目构建</a></li>
+<li><a href="#2-项目结构">2.项目结构</a></li>
+<li><a href="#3-内容重置">3.内容重置</a></li>
+<li><a href="#4-安装sass">4.安装sass</a></li>
+<li><a href="#5-项目结构解析">5.项目结构解析</a></li>
+</ul>
+</nav>
+
+<h1 id="1-微信小程序项目构建">1.微信小程序项目构建</h1>
+
+<ol>
+<li><code>vue init mpvue/mpvue-quickstart wxprogram</code></li>
+<li><code>cd wxprogram</code>,<code>npm install</code></li>
+
+<li><p>要看到小程序的运行结果，需要借助微信开发者工具</p>
+
+<p>需要注意的是，需要运行<code>npm run dev</code>的同时，点击开发者工具上的编译，项目才会更新，偶尔开发者工具上编译出来的dist文件会与编辑器上的不一致，这时候只能手动删除dist文件重新编译一次；
+并且每新增一个小程序页面，需要重启<code>npm run dev</code>，否则开发者工具上的小程序不会出现新页面</p></li>
+
+<li><p>项目上线时，运行<code>npm run build</code>即可，再通过开发者工具点击上传按钮，配合微信管理后台发布</p></li>
+</ol>
+
+<h1 id="2-项目结构">2.项目结构</h1>
+
+<pre><code>+-- package.json
++-- project.config.json
++-- src
+|   +-- components
+|   +-- pages
+|   +-- sass
+|   +-- utils
+|   +-- App.vue
+|   +-- app.json
+|   +-- main.js
++-- static
+|   +-- js
+|   +-- img
++-- config
+|   +-- index.js
+|   +-- dev.env.js
+|   +-- prod.env.js
++-- build
+</code></pre>
+
+<h1 id="3-内容重置">3.内容重置</h1>
+
+<ol>
+<li>删掉<code>src/components</code>、<code>src/pages</code>、<code>src/utils</code>三个目录下的所有代码文件</li>
+
+<li><p>内容重置<br />
+· 将<code>src/App.vue</code>文件中的内容重置成：<br />
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>src/App.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue">&lt;script&gt;
+export default {}
+&lt;/script&gt;
+
+&lt;style&gt;
+&lt;/style&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<p>· 将<code>src/main.js</code>文件中的内容重置成：
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>src/main.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import Vue from &#39;vue&#39;
+    import App from &#39;./App&#39;
+
+    Vue.config.productionTip = false
+    App.mpType = &#39;app&#39;
+
+    const app = new Vue(App)
+    app.$mount()
+
+    export default {
+      config: {
+        pages: [],
+        window: {
+          backgroundTextStyle: &#39;light&#39;,
+          navigationBarBackgroundColor: &#39;#fff&#39;,
+          navigationBarTitleText: &#39;小程序标题名称&#39;,
+          navigationBarTextStyle: &#39;black&#39;
+        }
+      }
+    }</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p></li>
+</ol>
+
+<h1 id="4-安装sass">4.安装sass</h1>
+
+<p>· <code>npm install -D node-sass sass-loader</code></p>
+
+<p>· 指定css语言
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue">&lt;style scoped lang=&#34;scss&#34;&gt;&lt;/style&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<p>· 微信小程序中有自己的单位<code>rpx</code>，一般375px宽的设计稿，1px就对应2rpx。所以可以写一个函数：<br />
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight scss language-scss">
+  <figcaption>
+    
+      <span>src/sass/function.scss</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-scss"><code class="scss">@function rpx($px){
+    @return $px * 2rpx; 
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<p>在引用时，可以直接<code>@import &quot;../../sass/function.scss&quot;;</code></p>
+
+<h1 id="5-项目结构解析">5.项目结构解析</h1>
+
+<p>· <code>App.vue</code>组件被<code>src/main.js</code>引入并被设置了一个<code>mpType</code>的属性值，其值为<code>app</code>。这个值是为了与小程序页面组件所区分开来，因为小程序页面组件和这个<code>App.vue</code>组件的写法和引入方式是一致的，为了区分两者，需要设置<code>mpType</code>值。引入这个<code>App.vue</code>组件后，会用它作为参数来创建一个<code>Vue</code>的实例，并调用<code>$mount()</code>方法加载。</p>
+
+<p>· 每个页面单独建一个文件夹，并在文件夹下新建2个文件：一个用于实现页面主体功能的<code>index.vue</code>组件，另一个则用于将这个页面组件生成Vue实例并加载的<code>main.js</code>。如果需要对页面单独设置标题等属性，可再新建一个<code>main.json</code>。</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>src/page/user/main.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import Vue from &#39;vue&#39;
+import App from &#39;./index&#39;
+
+const app = new Vue(App)
+app.$mount()</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight json language-json">
+  <figcaption>
+    
+      <span>src/page/user/main.json</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-json"><code class="json">{
+  &#34;navigationBarTitleText&#34;: &#34;单独设置页面标题&#34;
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<p>· 每次新建一个页面文件时，需要在<code>app.json</code>文件内将路径添加进<code>pages</code>里，例如<code>&quot;pages&quot;:[&quot;pages/user/main&quot;]</code>,然后重新运行<code>npm run dev</code>。这时才能在开发者工具里看到新的页面。</p>
+
+<p>· <code>app.json</code>配置文件中pages数组里的第一个page路径会被当做是首页。或者在路径前加上<code>^</code>符号，就可以指定首页路径。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E9%97%AE%E9%A2%98/" data-tooltip="混合开发中与app的交互问题">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 foxery. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E9%97%AE%E9%A2%98/" data-tooltip="混合开发中与app的交互问题">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">foxery</h4>
+    
+      <div id="about-card-bio">只是一想到你，世界在明亮的光晕里倒退</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        个人博客
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        France
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="搜索" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">
+                <h3 class="media-heading">微信小程序开发</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">混合开发中与app的交互问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/12/%E6%90%AD%E5%BB%BAvue%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/">
+                <h3 class="media-heading">搭建vue项目的基本架构</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E5%9C%A8%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E4%BD%BF%E7%94%A8vue-router%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC%E6%97%B6ios%E7%AB%AFurl%E6%9C%AA%E6%94%B9%E5%8F%98%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">解决在微信浏览器内使用vue Router进行跳转时ios端url未改变的问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E7%A7%BB%E5%8A%A8%E7%AB%AFios%E6%BB%9A%E5%8A%A8%E7%A9%BF%E9%80%8F%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">解决移动端ios滚动穿透的问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/10/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96/">
+                <h3 class="media-heading">vue单页应用首屏加载优化</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/10/%E6%95%B0%E7%BB%84%E6%AF%94%E8%BE%83%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E6%8E%92%E5%88%97/">
+                <h3 class="media-heading">数组比较和多维数组排列</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/06/%E5%85%B3%E4%BA%8Evue-router%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/">
+                <h3 class="media-heading">关于vue-router的一些使用心得</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%9C%A8vue%E6%A1%86%E6%9E%B6%E4%B8%AD%E8%BF%9B%E8%A1%8C%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/">
+                <h3 class="media-heading">在vue框架中进行微信公众号开发</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95app-webview/">
+                <h3 class="media-heading">如何调试app webview</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         20 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://foxery.github.io/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://foxery.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/foxery.github.io\/2019\/04\/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91\/';
+          
+            this.page.identifier = '\/2019\/04\/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+
