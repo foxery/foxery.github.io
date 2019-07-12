@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Build</title>
+      <link>https://foxery.github.io/categories/build/</link>
+      <pubDate>Mon, 01 Apr 2019 16:15:09 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/categories/build/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>H5</title>
       <link>https://foxery.github.io/categories/h5/</link>
       <pubDate>Mon, 05 Mar 2018 10:25:16 +0800</pubDate>
@@ -32,9 +41,27 @@
     <item>
       <title>Js</title>
       <link>https://foxery.github.io/categories/js/</link>
-      <pubDate>Thu, 11 Oct 2018 15:24:52 +0800</pubDate>
+      <pubDate>Mon, 01 Jul 2019 15:24:49 +0800</pubDate>
       
       <guid>https://foxery.github.io/categories/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mocha</title>
+      <link>https://foxery.github.io/categories/mocha/</link>
+      <pubDate>Tue, 03 Apr 2018 15:17:42 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/categories/mocha/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mpvue</title>
+      <link>https://foxery.github.io/categories/mpvue/</link>
+      <pubDate>Thu, 20 Jun 2019 14:31:47 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/categories/mpvue/</guid>
       <description></description>
     </item>
     
@@ -48,18 +75,36 @@
     </item>
     
     <item>
-      <title>Technique</title>
-      <link>https://foxery.github.io/categories/technique/</link>
-      <pubDate>Mon, 01 Apr 2019 16:15:09 +0800</pubDate>
+      <title>Problem</title>
+      <link>https://foxery.github.io/categories/problem/</link>
+      <pubDate>Wed, 26 Jun 2019 10:19:17 +0800</pubDate>
       
-      <guid>https://foxery.github.io/categories/technique/</guid>
+      <guid>https://foxery.github.io/categories/problem/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Program</title>
+      <link>https://foxery.github.io/categories/program/</link>
+      <pubDate>Mon, 01 Jul 2019 15:24:49 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/categories/program/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>React</title>
+      <link>https://foxery.github.io/categories/react/</link>
+      <pubDate>Wed, 26 Jun 2019 10:19:17 +0800</pubDate>
+      
+      <guid>https://foxery.github.io/categories/react/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vue</title>
       <link>https://foxery.github.io/categories/vue/</link>
-      <pubDate>Thu, 06 Dec 2018 14:36:33 +0800</pubDate>
+      <pubDate>Thu, 20 Jun 2019 13:51:41 +0800</pubDate>
       
       <guid>https://foxery.github.io/categories/vue/</guid>
       <description></description>
@@ -68,18 +113,9 @@
     <item>
       <title>Webview</title>
       <link>https://foxery.github.io/categories/webview/</link>
-      <pubDate>Thu, 21 Feb 2019 10:25:24 +0800</pubDate>
+      <pubDate>Thu, 31 May 2018 17:06:06 +0800</pubDate>
       
       <guid>https://foxery.github.io/categories/webview/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Wx</title>
-      <link>https://foxery.github.io/categories/wx/</link>
-      <pubDate>Mon, 01 Apr 2019 16:15:09 +0800</pubDate>
-      
-      <guid>https://foxery.github.io/categories/wx/</guid>
       <description></description>
     </item>
     

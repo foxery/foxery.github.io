@@ -1,0 +1,1001 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
+    <title>混合开发中与app的交互方案</title>
+    <meta name="author" content="foxery">
+    <meta name="keywords" content="WebViewJavascriptBridge">
+
+    <link rel="icon" href="https://foxery.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="混合开发中与app的交互方案">
+    <meta property="og:url" content="/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E6%96%B9%E6%A1%88/">
+    <meta property="og:site_name" content="小狐狸水水的博客">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="小狐狸水水的博客">
+    <meta name="twitter:description" content="">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://foxery.github.io/img/avatar.jpg">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://foxery.github.io/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://foxery.github.io/">小狐狸水水的博客</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://foxery.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://foxery.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">foxery</h4>
+        
+          <h5 class="sidebar-profile-bio">只是一想到你，世界在明亮的光晕里倒退</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://foxery.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/foxery" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      混合开发中与app的交互方案
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-02-21T10:25:24&#43;08:00">
+        
+  
+  
+  
+  
+    2019.02.21
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://foxery.github.io/categories/program">program</a>, 
+    
+      <a class="category-link" href="https://foxery.github.io/categories/vue">vue</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p></p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#1-js调用app-无返回值">1.js调用app，无返回值</a></li>
+<li><a href="#2-使用-webviewjavascriptbridge-有返回值">2.使用 WebViewJavascriptBridge,有返回值</a></li>
+<li><a href="#3-客户端调用前端js方法">3.客户端调用前端js方法</a></li>
+<li><a href="#4-native注入js方法-有返回值">4.native注入js方法，有返回值</a></li>
+<li><a href="#5-js调用native-传参">5.js调用native，传参</a></li>
+</ul>
+</nav>
+
+<h1 id="1-js调用app-无返回值">1.js调用app，无返回值</h1>
+
+<p>这里Android和iOS的方式是一样的，都是使用很简单的schema 的方式。</p>
+
+<p>具体步骤如下：</p>
+
+<pre><code>1. 前端与客户端约定好一个 schema 的名称，比如返回就叫做 goback
+2. 前端通过 location.href=&quot;goback://&quot; 或 iframe.src=&quot;goback://&quot; 的方式发起请求
+3. 客户端拦截 goback 这个 schema，执行返回逻辑
+4. 如果需要向客户端传递参数，直接在该 goback:// 后面拼接参数即可，客户端可以进行解析
+</code></pre>
+
+<h1 id="2-使用-webviewjavascriptbridge-有返回值">2.使用 WebViewJavascriptBridge,有返回值</h1>
+
+<p>iOS客户端与前端进行交互时，如果前端需要获取iOS端传回的返回值，或者iOS端需要调用前端的js方法，就可以通过<code>WebViewJavascriptBridge</code>来实现。</p>
+
+<p>具体以vue为例：</p>
+
+<ol>
+<li><p>创建 src/util/bridge.js 文件，用于封装 WebViewJavascriptBridge
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>src/util/bridge.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">function setupWebViewJavascriptBridge(callback) {
+	  if (window.WebViewJavascriptBridge) {
+	    return callback(window.WebViewJavascriptBridge)
+	  }
+	  if (window.WVJBCallbacks) {
+	    return window.WVJBCallbacks.push(callback)
+	  }
+	  window.WVJBCallbacks = [callback]
+	  let WVJBIframe = document.createElement(&#39;iframe&#39;);
+	  WVJBIframe.style.display = &#39;none&#39;
+	  WVJBIframe.src = &#39;https://__bridge_loaded__&#39;
+	  document.documentElement.appendChild(WVJBIframe);
+	  setTimeout(() =&gt; {
+	    document.documentElement.removeChild(WVJBIframe)
+	  }, 0)
+	}
+	export default {
+	  callhandler(name, data, callback) {
+	    setupWebViewJavascriptBridge(function (bridge) {
+	      bridge.callHandler(name, data, callback)
+	    })
+	  },
+	  registerhandler(name, callback) {
+	    setupWebViewJavascriptBridge(function (bridge) {
+	      bridge.registerHandler(name, function (data, responseCallback) {
+	        callback(data, responseCallback)
+	      })
+	    })
+	  }
+	}
+    </code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p></li>
+
+<li><p>在 main.js 中引入该文件
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>main.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">import Bridge from &#39;./util/bridge.js&#39;
+Vue.prototype.$bridge = Bridge</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p></li>
+</ol>
+
+<p>3.在组件内调用</p>
+
+<ol>
+<li>前端调用iOS端方法（第一个参数为前端和iOS端约定好的方法名，第二个参数为前端传给iOS端的参数，第三个参数为iOS端返回的数据）
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue">this.$bridge.callhandler(&#39;JSCallApp&#39;,params, (data) =&gt; {
+    alert(&#39;JSCallApp:&#39;, data);
+});</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+<li>iOS端调用前端js方法
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue">this.$bridge.registerhandler(&#39;AppCallJs&#39;, (data, responseCallback) =&gt; {
+    alert(&#39;AppCallJs:&#39;, data)
+    responseCallback(data)
+});</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+</ol>
+
+<h1 id="3-客户端调用前端js方法">3.客户端调用前端js方法</h1>
+
+<p>Android和iOS有一个简单的调用方法，就是前端只要在js文件里定义好一个函数，客户端就可以调用</p>
+
+<p>具体步骤如下：</p>
+
+<ol>
+<li><p>新建一个 share.js 文件，代码如下（其中）：</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>share.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">var share_obj = {
+	&#34;img_url&#34;: &#34;&#34;,//分享图标
+	&#34;title&#34;: &#34;&#34;,//分享标题
+	&#34;page_type&#34;: &#34;&#34;,//分享内容
+	&#34;share_url&#34;: &#34;&#34;,//分享链接
+	&#34;sms_text&#34;: &#34;&#34;//短信发送文本
+};
+
+//分享对象-安卓
+function share_android() {
+	var param = share_param();
+	param.title = param.title ? param.title : &#39;&#39;;
+	param.page_type = param.page_type ? param.page_type : &#39;&#39;;
+	param.share_url = param.share_url ? param.share_url : &#39;&#39;;
+	param.img_url = param.img_url ? param.img_url : &#39;&#39;;
+	param.sms_text = param.sms_text ? param.sms_text : &#39;&#39;;
+	window.webView.info(param.title, param.page_type, param.share_url, param.img_url, param.sms_text);
+}
+
+//分享对象-ios
+function share_ios() {
+	var param = share_param(),
+	str = &#39;&#39;;
+	if (typeof param.share_url === &#39;undefined&#39;) {
+		str = str &#43; param.title &#43; &#39;#&#39; &#43; param.img_url;
+	} else {
+		str = str &#43; param.title &#43; &#39;#&#39; &#43; param.img_url &#43; &#39;#&#39; &#43; param.share_url;
+	}
+
+	if (typeof param.page_type != &#39;undefined&#39;) {
+		str = str &#43; &#39;#&#39; &#43; param.page_type;
+	}
+	if (param.sms_text) {
+		str &#43;= &#39;#&#39; &#43; param.sms_text;
+	}
+	return str;
+}
+
+function share_param() {
+	//提前将分享信息存储于localStorage中
+	var shareInfo = JSON.parse(localStorage.getItem(&#34;share&#34;));
+	share_obj.title = shareInfo.title;
+	share_obj.share_url = shareInfo.share_url;
+	share_obj.img_url = shareInfo.img_url;
+	share_obj.page_type = shareInfo.page_type;
+	share_obj.sms_text = shareInfo.sms_text;
+	return share_obj;
+}
+	</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></li>
+
+<li><p>ios端调用<code>share_ios()</code>,android端调用<code>share_android</code>即可</p></li>
+</ol>
+
+<h1 id="4-native注入js方法-有返回值">4.native注入js方法，有返回值</h1>
+
+<p>1.ios端可以通过提前注入的方式，将信息注入到webview中,web前端可以通过约定好的方法获取到需要的信息</p>
+
+<pre><code>    1.ios端与web前端定义好一个方法名,如 `getInfo`
+    2.ios端将信息注入
+    3.前端调用时，直接`window.getInfo`即可，或者`window.getInfo()`,返回值约定json格式或者object格式都行,怎么调用，返回值是什么，都由和ios的约定决定
+</code></pre>
+
+<p>2.android原理相似，调用方式也类似</p>
+
+<h1 id="5-js调用native-传参">5.js调用native，传参</h1>
+
+<p>当前端与客户端进行交互且需要前端传递数据给客户端时，方法3比较被动，且数据不好维护跟踪，因此可以使用这种方法</p>
+
+<p>1.ios端调用方法<br />
+        <code>window.webkit.messageHandlers.方法名.postMessage(传递参数)</code><br />
+        例如:<code>window.webkit.messageHandlers.share.postMessage(JSON.stringify(shareInfo))</code></p>
+
+<p>2.android<br />
+        <code>let jsonTemp = JSON.stringify(shareInfo);window.webView.share(jsonTemp);</code><br />
+        <code>这里需要注意下，android端必须先转换成json格式再赋值，否则android端接收到的参数会是undefined</code></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/">混合开发</a>
+
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/%E4%BA%A4%E4%BA%92/">交互</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2019/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" data-tooltip="微信小程序开发">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/12/%E6%90%AD%E5%BB%BAvue%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/" data-tooltip="搭建vue项目的基本架构">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 foxery. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2019/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/" data-tooltip="微信小程序开发">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://foxery.github.io/2018/12/%E6%90%AD%E5%BB%BAvue%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/" data-tooltip="搭建vue项目的基本架构">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://foxery.github.io/img/avatar.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">foxery</h4>
+    
+      <div id="about-card-bio">只是一想到你，世界在明亮的光晕里倒退</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        个人博客
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        France
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="搜索" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/07/%E6%88%91%E6%B2%A1%E6%9C%89%E6%B3%A8%E6%84%8F%E8%BF%87%E7%9A%84js/">
+                <h3 class="media-heading">我没有注意过的js</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/react%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86/">
+                <h3 class="media-heading">React开发遇到的问题合集</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/mpvue%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">mpvue开发微信小程序时遇到的问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/vue-errorlisten-eaddrinuse-8080-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+                <h3 class="media-heading">[vue error]listen EADDRINUSE :::8080 解决方案</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">
+                <h3 class="media-heading">微信小程序开发</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E6%96%B9%E6%A1%88/">
+                <h3 class="media-heading">混合开发中与app的交互方案</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/12/%E6%90%AD%E5%BB%BAvue%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/">
+                <h3 class="media-heading">搭建vue项目的基本架构</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E5%9C%A8%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E4%BD%BF%E7%94%A8vue-router%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC%E6%97%B6ios%E7%AB%AFurl%E6%9C%AA%E6%94%B9%E5%8F%98%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">解决在微信浏览器内使用vue Router进行跳转时ios端url未改变的问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/11/%E8%A7%A3%E5%86%B3%E7%A7%BB%E5%8A%A8%E7%AB%AFios%E6%BB%9A%E5%8A%A8%E7%A9%BF%E9%80%8F%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">解决移动端ios滚动穿透的问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2018/10/vue%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%8C%96/">
+                <h3 class="media-heading">vue单页应用首屏加载优化</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         24 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://foxery.github.io/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://foxery.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/foxery.github.io\/2019\/02\/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E6%96%B9%E6%A1%88\/';
+          
+            this.page.identifier = '\/2019\/02\/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E6%96%B9%E6%A1%88\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

@@ -22,7 +22,7 @@
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
     <title>在vue框架中进行微信公众号开发</title>
     <meta name="author" content="foxery">
-    <meta name="keywords" content="wechat">
+    <meta name="keywords" content="微信配置, 签名出错, 音频播放">
 
     <link rel="icon" href="https://foxery.github.io/favicon.png">
     
@@ -215,9 +215,9 @@
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
+      <a class="category-link" href="https://foxery.github.io/categories/problem">problem</a>, 
     
-      <a class="category-link" href="https://foxery.github.io/categories/js">js</a>
+      <a class="category-link" href="https://foxery.github.io/categories/vue">vue</a>
     
   
 
@@ -234,6 +234,12 @@
 <li><a href="#1-引入微信jssdk">1.引入微信JSSDK</a></li>
 <li><a href="#2-微信配置">2.微信配置</a></li>
 <li><a href="#3-微信接口">3.微信接口</a></li>
+<li><a href="#4-开发过程中遇到的问题">4. 开发过程中遇到的问题</a>
+<ul>
+<li><a href="#1-微信jssdk签名出错">1. 微信JSSDK签名出错</a></li>
+<li><a href="#2-微信环境下音频自动播放">2. 微信环境下音频自动播放</a></li>
+<li><a href="#3-音频预加载">3.音频预加载</a></li>
+</ul></li>
 </ul>
 </nav>
 
@@ -425,8 +431,245 @@ wx.error(function(res) {
 <p>后台会通过接口返回给你一串url，只要将这串url拼接下，后面加上支付成功后你希望回跳的地址，然后直接访问该地址即可</p>
 
 <pre><code>var url=res +&quot;&amp;redirect_url=&quot; +encodeURIComponent(payUrl);
-window.location.href = url;   
+window.location.href = url;     
 </code></pre>
+
+<h1 id="4-开发过程中遇到的问题">4. 开发过程中遇到的问题</h1>
+
+<h2 id="1-微信jssdk签名出错">1. 微信JSSDK签名出错</h2>
+
+<p><code>所有需要使用JS-SDK的页面必须先注入配置信息，否则将无法调用（同一个url仅需调用一次，对于变化url的SPA的web app可在每次url变化时进行调用,目前Android微信客户端不支持pushState的H5新特性，所以使用pushState来实现web app的页面会导致签名失败，此问题会在Android6.2中修复）</code></p>
+
+<p>也就是说，android下的微信客户端里，不支持vue-router的history模式。</p>
+
+<p>解决方案：</p>
+
+<blockquote>
+<ul>
+<li>vue-router使用<code>hash</code>模式</li>
+<li>每次url更改的时候，重新调用JSSDK的<code>config</code>接口</li>
+<li>微信支付的url需要进行<code>encodeURIComponent</code></li>
+</ul>
+</blockquote>
+
+<p>在ios端，第一次访问的url地址都会出现签名失败的问题，但是第二次访问时就可以了，至今原因不明，暂时的解决方案是：<br />
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue">wx.error(function(res) {
+    window.location.reload();
+});</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
+
+<h2 id="2-微信环境下音频自动播放">2. 微信环境下音频自动播放</h2>
+
+<p>IOS设备系统是不允许视频音频自动播放的，需要用户明确指定播放（通过一定的交互动作），相关的音频或视频才能被加载。</p>
+
+<p>解决方案：</p>
+
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">// 引入sdk
+&lt;script src=&#34;https://res.wx.qq.com/open/js/jweixin-1.0.0.js&#34;&gt;&lt;/script&gt;
+
+var audio = (function(){
+  var _audio = new Audio();
+  _audio.src = &#39;xxx&#39;;
+  _audio.load();
+  return _audio;
+})()
+
+// 微信配置信息（即使不正确也没问题
+wx.config({
+  debug: false,
+  appId: &#39;&#39;,
+  timestamp: 1,
+  nonceStr: &#39;&#39;,
+  signature: &#39;&#39;,
+  jsApiList: []
+});
+// 在ready时触发相关事件
+wx.ready(function() {
+  // 触发一下play事件
+  audio.play();
+});</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<h2 id="3-音频预加载">3.音频预加载</h2>
+
+<p><code>audio</code>标签属性<code>preload</code>兼容性不太好，推荐使用<code>createjs</code>里的<code>preloadjs</code>，但还需要配合<code>soundjs</code>使用。</p>
+
+<ol>
+<li><p>preloadjs + soundjs
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>demo.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue">var queue = new createjs.LoadQueue();
+
+// 添加声音支持
+queue.installPlugin(createjs.Sound)
+
+queue.addEventListener(&#34;fileload&#34;, handleFileLoad);
+queue.addEventListener(&#39;progress&#39;, handleLoading)
+queue.addEventListener(&#34;complete&#34;, handleComplete);
+ 
+queue.loadFile({id:&#34;bgm&#34;, src:&#34;assets/bgm.mp3&#34;});
+// OR
+queue.loadManifest([
+  {id:&#34;bgm&#34;, src:&#34;assets/bgm.mp3&#34;},
+  {id:&#34;myImage2&#34;, src:&#34;assets/image2.jpg&#34;}
+]);
+
+// 资源全部加载完成时触发
+var handleComplete = function () {
+  // 在次调用weixinReady事件，让浏览器获得音频对象
+  /*
+     注意：音频实例为 var bgmInstance = createjs.Sound.play(&#34;bgm&#34;)
+     然后可以通过控制 bgmInstance.play() OR bgmInstance.stop() 播放暂停音效
+  */
+  wx.config({
+    debug: false,
+    appId: &#39;&#39;,
+    timestamp: 1,
+    nonceStr: &#39;&#39;,
+    signature: &#39;&#39;,
+    jsApiList: []
+  });
+  wx.ready(function() {
+    musicControlData[&#39;bgm&#39;].instance = createjs.Sound.play(&#39;bgm&#39;);
+    musicControlData[&#39;bgm&#39;].instance.stop();
+  });
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p></li>
+
+<li><p>仅使用soundjs
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">// createjs.Sound.alternateExtensions = [&#34;mp3&#34;]; 控制音频类型
+createjs.Sound.registerSound({id:&#34;bgm&#34;, src:&#34;assets/bgm.mp3&#34;});
+createjs.Sound.play(&#34;bgm&#34;);</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p></li>
+</ol>
+
+<p>使用<code>preloadjs</code>会在预加载时调用<code>createjs.Sound.registerSound</code>事件注册声音，所以无需显示调用。</p>
               
             </div>
           </div>
@@ -438,9 +681,7 @@ window.location.href = url;
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/vue/">vue</a>
-
-  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/wechat/">wechat</a>
+  <a class="tag tag--primary tag--small" href="https://foxery.github.io/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/">微信公众号</a>
 
                   </div>
                 
@@ -626,6 +867,74 @@ window.location.href = url;
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/07/%E6%88%91%E6%B2%A1%E6%9C%89%E6%B3%A8%E6%84%8F%E8%BF%87%E7%9A%84js/">
+                <h3 class="media-heading">我没有注意过的js</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/react%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86/">
+                <h3 class="media-heading">React开发遇到的问题合集</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/mpvue%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">mpvue开发微信小程序时遇到的问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/vue-errorlisten-eaddrinuse-8080-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+                <h3 class="media-heading">[vue error]listen EADDRINUSE :::8080 解决方案</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://foxery.github.io/2019/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">
                 <h3 class="media-heading">微信小程序开发</h3>
               </a>
@@ -643,8 +952,8 @@ window.location.href = url;
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E9%97%AE%E9%A2%98/">
-                <h3 class="media-heading">混合开发中与app的交互问题</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E6%96%B9%E6%A1%88/">
+                <h3 class="media-heading">混合开发中与app的交互方案</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -725,74 +1034,6 @@ window.location.href = url;
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/10/%E6%95%B0%E7%BB%84%E6%AF%94%E8%BE%83%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E6%8E%92%E5%88%97/">
-                <h3 class="media-heading">数组比较和多维数组排列</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/06/%E5%85%B3%E4%BA%8Evue-router%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/">
-                <h3 class="media-heading">关于vue-router的一些使用心得</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%9C%A8vue%E6%A1%86%E6%9E%B6%E4%B8%AD%E8%BF%9B%E8%A1%8C%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/">
-                <h3 class="media-heading">在vue框架中进行微信公众号开发</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95app-webview/">
-                <h3 class="media-heading">如何调试app webview</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -800,7 +1041,7 @@ window.location.href = url;
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         20 posts found
+         24 posts found
       </p>
     </div>
   </div>

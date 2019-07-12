@@ -215,7 +215,7 @@
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://foxery.github.io/categories/technique">technique</a>, 
+      <a class="category-link" href="https://foxery.github.io/categories/problem">problem</a>, 
     
       <a class="category-link" href="https://foxery.github.io/categories/vue">vue</a>
     
@@ -241,13 +241,20 @@
 <li><a href="#8-项目打包后部署到服务器上打开一片空白-发现是文件引用路径错误问题">8.项目打包后部署到服务器上打开一片空白,发现是文件引用路径错误问题</a></li>
 <li><a href="#9-解决在v-html时-里面的元素无法继承外部css的问题">9.解决在v-html时，里面的元素无法继承外部css的问题</a></li>
 <li><a href="#10-如何全局引入jquery">10.如何全局引入jquery</a></li>
-<li><a href="#11-父子组件之间如何相互通信">11.父子组件之间如何相互通信</a></li>
+<li><a href="#11-父子组件之间如何相互通信">11.父子组件之间如何相互通信</a>
+<ul>
+<li><a href="#1-父组件直接调用子组件的方法">1. 父组件直接调用子组件的方法</a></li>
+<li><a href="#2-子组件直接调用父组件的方法">2. 子组件直接调用父组件的方法</a></li>
+<li><a href="#3-多级父子组件通信">3. 多级父子组件通信</a></li>
+</ul></li>
 <li><a href="#12-解决正常引入子组件报未注册组件错误的问题">12.解决正常引入子组件报未注册组件错误的问题</a></li>
 <li><a href="#13-如何在js文件内使用vue-router进行路由跳转">13.如何在js文件内使用vue-router进行路由跳转</a></li>
 <li><a href="#14-绑定事件中如何获取this-即触发事件的元素本身">14.绑定事件中如何获取this（即触发事件的元素本身）</a></li>
 <li><a href="#15-使用axios拦截器统一处理所有的http请求和响应">15.使用axios拦截器统一处理所有的http请求和响应</a></li>
 <li><a href="#16-使用路由回退时判断有没有上一个路由">16.使用路由回退时判断有没有上一个路由</a></li>
 <li><a href="#17-解决element-ui中upload组件使用多个时无法绑定对应的元素">17.解决element-ui中upload组件使用多个时无法绑定对应的元素</a></li>
+<li><a href="#18-在data-中如何引用本地静态图片">18.在data()中如何引用本地静态图片</a></li>
+<li><a href="#19-添加-修改数组-对象的属性值-没有触发视图更新的问题">19.添加/修改数组/对象的属性值，没有触发视图更新的问题</a></li>
 </ul>
 </nav>
 
@@ -960,9 +967,89 @@ cnpm i sass-loader --save-dev
 
 <p>v-html渲染的内容可以理解为其子组件内容，当style加上<code>scoped</code>属性时，就无法作用于v-html内绑定的内容。</p>
 
-<pre><code>    方法一：直接去除scoped属性  
-    方法二：在update()的生命周期内，通过js改变其css
-</code></pre>
+<ol>
+<li>方法一：直接去除scoped属性<br /></li>
+<li>方法二：在update()的生命周期内，通过js改变其css<br /></li>
+<li>方法三：如果不想去掉scoped属性，可以使用<code>&gt;&gt;&gt;</code>操作符(深度作用选择器)，顾名思义，它可以深度影响子组件的样式。例如：<br /></li>
+</ol>
+
+<p>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight css language-css">
+  <figcaption>
+    
+      <span>demo.css</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-css"><code class="css">.demo-tabs-style2&gt;&gt;&gt;.ivu-tabs.ivu-tabs-card &gt; .ivu-tabs-bar .ivu-tabs-tab{
+    border-radius: 0;
+    background: #eeee00;
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure><br />
+ 4. 在sass之类的预处理器内，则使用<code>/deep/</code>操作符取而代之。例如：
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight css language-css">
+  <figcaption>
+    
+      <span>demo.scss</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-css"><code class="css">.demo-tabs-style2 {
+  /deep/ .ivu-tabs.ivu-tabs-card {
+    border-radius: 0;
+    background: #eeee00;
+  }
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
 
 <h1 id="10-如何全局引入jquery">10.如何全局引入jquery</h1>
 
@@ -1052,9 +1139,9 @@ plugins: [
 
 <h1 id="11-父子组件之间如何相互通信">11.父子组件之间如何相互通信</h1>
 
-<ol>
-<li>父组件调用子组件的方法
+<h2 id="1-父组件直接调用子组件的方法">1. 父组件直接调用子组件的方法</h2>
 
+<p>
   
     
   
@@ -1152,9 +1239,11 @@ plugins: [
       </tr>
     </tbody>
   </table>
-</figure><br /></li>
-<li>子组件调用父组件的方法
+</figure></p>
 
+<h2 id="2-子组件直接调用父组件的方法">2. 子组件直接调用父组件的方法</h2>
+
+<p>
   
     
   
@@ -1251,8 +1340,221 @@ plugins: [
       </tr>
     </tbody>
   </table>
-</figure></li>
-</ol>
+</figure></p>
+
+<h2 id="3-多级父子组件通信">3. 多级父子组件通信</h2>
+
+<p>多层级父子组件之间通信，一级一级向上传递参数太繁琐，这时可以通过<code>while</code>等循环，不断向上遍历，直到找到目标父组件，就在对应的组件上触发事件。<br />
+1.<br />
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>src/mixins/emitter.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">function broadcast(componentName, eventName, params) {
+  this.$children.forEach(child =&gt; {
+    var name = child.$options.componentName;
+
+    if (name === componentName) {
+      child.$emit.apply(child, [eventName].concat(params));
+    } else {
+      broadcast.apply(child, [componentName, eventName].concat([params]));
+    }
+  });
+}
+export default {
+  methods: {
+    dispatch(componentName, eventName, params) {
+      var parent = this.$parent || this.$root;
+      var name = parent.$options.componentName;
+
+      while (parent &amp;&amp; (!name || name !== componentName)) {
+        parent = parent.$parent;
+
+        if (parent) {
+          name = parent.$options.componentName;
+        }
+      }
+      if (parent) {
+        parent.$emit.apply(parent, [eventName].concat(params));
+      }
+    },
+    broadcast(componentName, eventName, params) {
+      broadcast.call(this, componentName, eventName, params);
+    }
+  }
+};</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure><br />
+2. 定义两个嵌套的组件 f1.vue 和 c1.vue 、c2.vue
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>child.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js"> &lt;f1&gt;
+   &lt;c1&gt;
+    &lt;c2&gt;&lt;/c2&gt;
+   &lt;/c1&gt;
+ &lt;/f1&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>c2.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue"> &lt;template&gt;
+     &lt;section&gt;
+     &lt;button type=&#34;button&#34; name=&#34;button&#34; @click=&#34;dispatchTest&#34;&gt;点击一下，就可以&lt;/button&gt;
+   &lt;/section&gt;
+ &lt;/template&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;
+    import Emitter from &#34;../mixins/emitter&#34;;
+    export default {
+        name: &#34;c2&#34;,
+        mixins: [Emitter],
+        componentName:&#39;c2&#39;,
+        methods: {
+        dispatchTest() {
+            this.dispatch(&#39;f1&#39;, &#39;listenerToC1&#39;, false);
+            }
+        }
+    }
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight vue language-vue">
+  <figcaption>
+    
+      <span>f1.vue</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-vue"><code class="vue">&lt;template type=&#34;html&#34;&gt;
+  &lt;div class=&#34;outBox-class&#34;&gt;
+    &lt;slot&gt;
+    &lt;/slot&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script type=&#34;text/javascript&#34;&gt;
+import Emitter from &#34;../mixins/emitter&#34;;
+export default {
+    name: &#34;f1&#34;,
+    mixins: [Emitter],
+    componentName: &#39;f1&#39;,
+    mounted() {
+        this.$on(&#34;listenerToC1&#34;, (value) =&gt; {
+            alert(value);
+        })
+    }
+}
+&lt;/script&gt;</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure></p>
 
 <h1 id="12-解决正常引入子组件报未注册组件错误的问题">12.解决正常引入子组件报未注册组件错误的问题</h1>
 
@@ -1680,6 +1982,58 @@ export default {
     </tbody>
   </table>
 </figure></p>
+
+<h1 id="18-在data-中如何引用本地静态图片">18.在data()中如何引用本地静态图片</h1>
+
+<p>当需要在vue的data()中引用本地静态图片时，项目结构如下图所示：
+<img src="https://foxery.github.io/img/vue_img_import.jpg" alt="" /></p>
+
+<p>
+  
+    
+  
+  
+    
+  
+  
+    
+  
+  
+    
+  
+
+
+<figure class="highlight js language-js">
+  <figcaption>
+    
+      <span>demo.js</span>
+    
+  </figcaption>
+  <table>
+    <tbody>
+      <tr>
+        <td class="gutter">
+          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+        </td>
+        <td class="code">
+          <pre class="code-highlight language-js"><code class="js">&lt;img :src=&#34;item.url&#34; v-for=&#34;item in list&#34;/&gt;  
+data(){
+    list:[
+        {
+            url: require(&#34;../../../static/app/img/activity/doctor_img_01.jpg&#34;)
+        }
+    ]
+}</code></pre>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure><br />
+在<code>css</code>中的<code>background-image</code>属性引用背景图片时也一样</p>
+
+<h1 id="19-添加-修改数组-对象的属性值-没有触发视图更新的问题">19.添加/修改数组/对象的属性值，没有触发视图更新的问题</h1>
+
+<p>使用<code>this.$set(object, &quot;属性值&quot;, 赋值内容);</code>即可</p>
               
             </div>
           </div>
@@ -1877,6 +2231,74 @@ export default {
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/07/%E6%88%91%E6%B2%A1%E6%9C%89%E6%B3%A8%E6%84%8F%E8%BF%87%E7%9A%84js/">
+                <h3 class="media-heading">我没有注意过的js</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/react%E5%BC%80%E5%8F%91%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86/">
+                <h3 class="media-heading">React开发遇到的问题合集</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/mpvue%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <h3 class="media-heading">mpvue开发微信小程序时遇到的问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://foxery.github.io/2019/06/vue-errorlisten-eaddrinuse-8080-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+                <h3 class="media-heading">[vue error]listen EADDRINUSE :::8080 解决方案</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://foxery.github.io/2019/04/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/">
                 <h3 class="media-heading">微信小程序开发</h3>
               </a>
@@ -1894,8 +2316,8 @@ export default {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E9%97%AE%E9%A2%98/">
-                <h3 class="media-heading">混合开发中与app的交互问题</h3>
+              <a class="link-unstyled" href="https://foxery.github.io/2019/02/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91%E4%B8%AD%E4%B8%8Eapp%E7%9A%84%E4%BA%A4%E4%BA%92%E6%96%B9%E6%A1%88/">
+                <h3 class="media-heading">混合开发中与app的交互方案</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -1976,74 +2398,6 @@ export default {
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/10/%E6%95%B0%E7%BB%84%E6%AF%94%E8%BE%83%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E6%8E%92%E5%88%97/">
-                <h3 class="media-heading">数组比较和多维数组排列</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/06/%E5%85%B3%E4%BA%8Evue-router%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/">
-                <h3 class="media-heading">关于vue-router的一些使用心得</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%9C%A8vue%E6%A1%86%E6%9E%B6%E4%B8%AD%E8%BF%9B%E8%A1%8C%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/">
-                <h3 class="media-heading">在vue框架中进行微信公众号开发</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://foxery.github.io/2018/05/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95app-webview/">
-                <h3 class="media-heading">如何调试app webview</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -2051,7 +2405,7 @@ export default {
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         20 posts found
+         24 posts found
       </p>
     </div>
   </div>
